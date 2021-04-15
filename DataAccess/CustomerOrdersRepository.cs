@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PetsAndPajamas.DataAccess
 {
-    public class CustomerOrderRepository
+    public class CustomerOrdersRepository
     {
     }
 }

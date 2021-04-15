@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PetsAndPajamas.DataAccess
 {
-    public class PaymentTypeRepository
+    public class PaymentTypesRepository
     {
     }
 }
