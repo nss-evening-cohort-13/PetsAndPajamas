@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PetsAndPajamas.DataAccess;
 
 namespace PetsAndPajamas
 {
@@ -26,6 +27,13 @@ namespace PetsAndPajamas
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton(Configuration);
+            services.AddTransient<CustomerOrdersRepository>();
+            services.AddTransient<CustomersRepository>();
+            services.AddTransient<PajamasRepository>();
+            services.AddTransient<PajamaTypesRepository>();
+            services.AddTransient<PaymentTypesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
