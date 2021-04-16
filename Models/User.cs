@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PetsAndPajamas.Models
 {
-    public class Customer
+    public class User
     {
     }
 }

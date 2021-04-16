@@ -9,7 +9,7 @@ namespace PetsAndPajamas.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class UsersController : ControllerBase
     {
     }
 }
