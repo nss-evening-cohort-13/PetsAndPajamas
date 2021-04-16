@@ -7,5 +7,7 @@ namespace PetsAndPajamas.DataAccess
 {
     public class UsersRepository
     {
+        const string ConnectionString = "Server=localhost;Database=LoafAndStranger;Trusted_Connection=True;";
+
     }
 }
