@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PetsAndPajamas.Models
 {
-    public class User
+    public class SiteUser
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -18,7 +18,7 @@ namespace PetsAndPajamas.Models
         public int ZipCode { get; set; }
         public string Country { get; set; }
         public string Phone { get; set; }
-        public int CartId { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
         public bool Admin { get; set; }
 
     }
