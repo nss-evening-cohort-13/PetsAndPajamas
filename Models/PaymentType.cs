@@ -11,5 +11,6 @@ namespace PetsAndPajamas.Models
         public string Type { get; set; }
         public string AccountNumber { get; set; }
         public string CreditCardType { get; set; }
+        public bool IsActive { get; set; }
     }
 }
