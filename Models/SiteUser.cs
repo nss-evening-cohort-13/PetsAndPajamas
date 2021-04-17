@@ -20,6 +20,7 @@ namespace PetsAndPajamas.Models
         public string Phone { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
         public bool Admin { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }
