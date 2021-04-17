@@ -8,31 +8,28 @@ using System.Threading.Tasks;
 
 namespace PetsAndPajamas.DataAccess
 {
-    public class PajamaTypesRepository
+    public class PetTypesRepository
     {
         const string ConnectionString = "Server=localhost;Database=PetsAndPajamas;Trusted_Connection=True;";
-
-        public List<PajamaType> GetAll()
+        public List<PetType> GetAll()
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"select *
-                        from PajamaType";
+            var sql = @"Select *
+                        from PetType";
 
-            return db.Query<PajamaType>(sql).ToList();
+            return db.Query<PetType>(sql).ToList();
         }
 
-        public PajamaType Get(int id)
+        public PetType Get(int id)
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"select *
-                        from PajamaType
+            var sql = @"Select *
+                        from PetType
                         where id = @id";
 
-            var type = db.QueryFirstOrDefault<PajamaType>(sql, new { id });
-
-            return type;
+            return db.QueryFirstOrDefault<PetType>(sql, new { id });
         }
     }
 }
