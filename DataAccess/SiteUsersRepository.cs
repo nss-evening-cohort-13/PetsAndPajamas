@@ -52,5 +52,16 @@ namespace PetsAndPajamas.DataAccess
             return user;
         }
 
+        public void Disable(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"update SiteUser
+                        set IsActive = 0
+                        where id = @id";
+
+            db.Execute(sql, new { id });
+        }
+
     }
 }
