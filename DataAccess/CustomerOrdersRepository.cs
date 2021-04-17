@@ -31,11 +31,12 @@ namespace PetsAndPajamas.DataAccess
 
             using var db = new SqlConnection(ConnectionString);
 
-            var orders = db.Query<CustomerOrder, User, PaymentType, CustomerOrder>(sql,
-                (customerOrder, user, paymentType) =>
+            var orders = db.Query<CustomerOrder, SiteUser, PaymentType, ShoppingCart, CustomerOrder>(sql,
+                (customerOrder, siteUser, paymentType, shoppingCart) =>
                 {
-                    customerOrder.User = user;
+                    customerOrder.SiteUser = siteUser;
                     customerOrder.PaymentType = paymentType;
+                    siteUser.ShoppingCart = shoppingCart;
 
                     return customerOrder;
                 }, splitOn: "Id");
