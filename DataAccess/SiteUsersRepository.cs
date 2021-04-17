@@ -36,8 +36,9 @@ namespace PetsAndPajamas.DataAccess
             using var db = new SqlConnection(ConnectionString);
 
             var sql = @"select *
-                        from SiteUser
-                        where id = @id";
+                        from SiteUser u
+                        join ShoppingCart c on u.CartId = c.Id
+                        where u.id = @id";
 
             var user = db.QueryFirstOrDefault<SiteUser>(sql, new { id });
 
