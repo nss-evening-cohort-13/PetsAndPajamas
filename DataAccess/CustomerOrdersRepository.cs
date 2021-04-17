@@ -18,6 +18,7 @@ namespace PetsAndPajamas.DataAccess
             ConnectionString = config.GetConnectionString("PetsAndPajamas");
         }
 
+        //Gets all customer orders
         public IEnumerable<CustomerOrder> GetAll()
         {
             var sql = @"select * from CustomerOrder co
@@ -39,6 +40,20 @@ namespace PetsAndPajamas.DataAccess
                     return customerOrder;
                 }, splitOn: "Id");
             return orders;
+        }
+
+        //Gets a customer order by the Id
+        public CustomerOrder Get(int id)
+        {
+            var sql = @"SELECT * 
+                        FROM CustomerOrder
+                        WHERE id = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var order = db.QueryFirstOrDefault<CustomerOrder>(sql, new { id = id });
+
+            return order;
         }
     }
 }

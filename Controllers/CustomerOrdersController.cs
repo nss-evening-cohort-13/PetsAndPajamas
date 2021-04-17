@@ -27,7 +27,7 @@ namespace PetsAndPajamas.Controllers
             return Ok(customerOrders);
         }
 
-        /*[HttpGet("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var order = _repo.Get(id);
@@ -37,7 +37,7 @@ namespace PetsAndPajamas.Controllers
                 return NotFound("This order id does not exist");
             }
 
-            return Ok(order);*/
-        /*}*/
+            return Ok(order);
+        }
     }
 }
