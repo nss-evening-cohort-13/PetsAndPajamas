@@ -44,15 +44,29 @@ namespace PetsAndPajamas.DataAccess
         }
 
         //Gets a customer order by the Id
-        public CustomerOrder Get(int id)
+        public IEnumerable<CustomerOrder> Get(int id)
         {
             var sql = @"SELECT * 
-                        FROM CustomerOrder
-                        WHERE id = @id";
+                        FROM CustomerOrder co
+                            left join SiteUser su
+                                on su.Id = co.UserId
+                            left join PaymentType pt
+                                on pt.Id = co.PaymentId
+                            join ShoppingCart sc
+                                on sc.Id = su.CartId
+                        WHERE co.Id = @id";
 
             using var db = new SqlConnection(ConnectionString);
 
-            var order = db.QueryFirstOrDefault<CustomerOrder>(sql, new { id = id });
+            var order = db.Query<CustomerOrder, SiteUser, PaymentType, ShoppingCart, CustomerOrder>(sql,
+                (customerOrder, siteUser, paymentType, shoppingCart) =>
+                {
+                    customerOrder.SiteUser = siteUser;
+                    customerOrder.PaymentType = paymentType;
+                    siteUser.ShoppingCart = shoppingCart;
+
+                    return customerOrder;
+                }, new { id });
 
             return order;
         }

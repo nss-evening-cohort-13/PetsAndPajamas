@@ -15,7 +15,6 @@ namespace PetsAndPajamas.Models
         public string ShipState { get; set; }
         public int ShipZip { get; set; }
         public string ShipCountry { get; set; }
-        public double TotalCost { get; set; }
 
         public SiteUser SiteUser { get; set; }
         public PaymentType PaymentType { get; set; }
