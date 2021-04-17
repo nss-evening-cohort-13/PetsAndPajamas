@@ -19,54 +19,135 @@ namespace PetsAndPajamas.DataAccess
         }
 
         //Gets all customer orders
-        public IEnumerable<CustomerOrder> GetAll()
+        public IEnumerable<CartInfo> GetAll()
         {
-            var sql = @"select * from CustomerOrder co
-                            left join SiteUser su
-                                on su.Id = co.UserId
-                            left join PaymentType pt
-                                on pt.Id = co.PaymentId
-                            join ShoppingCart sc
-                                on sc.Id = su.CartId";
+            var sql = @"select
+	                        co.Id as OrderId,
+	                        co.OrderDate as NewOrderDate,
+	                        co.ShipDate as NewShipDate,
+	                        co.ShipAddress as NewShipAddress,
+	                        co.ShipCity as NewShipCity,
+	                        co.ShipState as NewShipState,
+	                        co.ShipZip as NewShipZip,
+	                        co.ShipCountry as NewShipCountry,
+	                        su.Id as UserId, 
+	                        su.FirstName as UserFirstName, 
+	                        su.LastName as UserLastName, 
+	                        su.EmailAddress as UserEmailAddress, 
+	                        sc.TotalCost as OrderTotalCost,
+	                        pt.Type as OrderPaymentType,
+	                        pt.AccountNumber as OrderAccountNumber,
+	                        pt.CreditCardType as OrderCreditCard,
+                            p.*
+                            pat.*,
+                            pet.* 
+                        from CustomerOrder co
+                                join SiteUser su
+                                    on su.Id = co.UserId
+                                join PaymentType pt
+                                    on pt.Id = co.PaymentId
+                                join ShoppingCart sc
+                                    on sc.Id = su.CartId
+                                join PajamaOrder po
+                                    on sc.Id = po.CartId
+							    join Pajama p
+								    on p.Id = po.PajamaId
+							    join PajamaType pat
+								    on pat.Id = p.PajamaTypeId
+							    join PetType pet
+								    on pet.Id = p.PetTypeId";
 
             using var db = new SqlConnection(ConnectionString);
 
-            var orders = db.Query<CustomerOrder, SiteUser, PaymentType, ShoppingCart, CustomerOrder>(sql,
-                (customerOrder, siteUser, paymentType, shoppingCart) =>
-                {
-                    customerOrder.SiteUser = siteUser;
-                    customerOrder.PaymentType = paymentType;
-                    siteUser.ShoppingCart = shoppingCart;
+            var carts = new Dictionary<int, CartInfo>();
 
-                    return customerOrder;
-                }, splitOn: "Id");
+            var orders = db.Query<CartInfo, Pajama, PajamaType, PetType, CartInfo>(sql,
+                (cartInfo, pajama, pajamaType, petType) =>
+                {
+
+                    if (!carts.TryGetValue(cartInfo.OrderId, out var cart))
+                    {
+                        cart = cartInfo;
+                        cart.OrderPajamas = new List<Pajama>();
+                        carts.Add(cart.OrderId, cart);
+                    }
+
+                    //map the pajama things
+                    pajama.PajamaType = pajamaType;
+                    pajama.PetType = petType;
+
+                    //map the order things
+                    cart.OrderPajamas.Add(pajama);
+
+                    return cart;
+                }, splitOn: "Id")
+                .Distinct();
             return orders;
         }
 
         //Gets a customer order by the Id
-        public IEnumerable<CustomerOrder> Get(int id)
+        public IEnumerable<CartInfo> Get(int id)
         {
             var sql = @"SELECT * 
-                        FROM CustomerOrder co
-                            left join SiteUser su
-                                on su.Id = co.UserId
-                            left join PaymentType pt
-                                on pt.Id = co.PaymentId
-                            join ShoppingCart sc
-                                on sc.Id = su.CartId
+	                        co.Id as OrderId,
+	                        co.OrderDate as NewOrderDate,
+	                        co.ShipDate as NewShipDate,
+	                        co.ShipAddress as NewShipAddress,
+	                        co.ShipCity as NewShipCity,
+	                        co.ShipState as NewShipState,
+	                        co.ShipZip as NewShipZip,
+	                        co.ShipCountry as NewShipCountry,
+	                        su.Id as UserId, 
+	                        su.FirstName as UserFirstName, 
+	                        su.LastName as UserLastName, 
+	                        su.EmailAddress as UserEmailAddress, 
+	                        sc.TotalCost as OrderTotalCost,
+	                        pt.Type as OrderPaymentType,
+	                        pt.AccountNumber as OrderAccountNumber,
+	                        pt.CreditCardType as OrderCreditCard,
+                            p.*
+                            pat.*,
+                            pet.* 
+                        from CustomerOrder co
+                                join SiteUser su
+                                    on su.Id = co.UserId
+                                join PaymentType pt
+                                    on pt.Id = co.PaymentId
+                                join ShoppingCart sc
+                                    on sc.Id = su.CartId
+                                join PajamaOrder po
+                                    on sc.Id = po.CartId
+							    join Pajama p
+								    on p.Id = po.PajamaId
+							    join PajamaType pat
+								    on pat.Id = p.PajamaTypeId
+							    join PetType pet
+								    on pet.Id = p.PetTypeId
                         WHERE co.Id = @id";
 
             using var db = new SqlConnection(ConnectionString);
 
-            var order = db.Query<CustomerOrder, SiteUser, PaymentType, ShoppingCart, CustomerOrder>(sql,
-                (customerOrder, siteUser, paymentType, shoppingCart) =>
-                {
-                    customerOrder.SiteUser = siteUser;
-                    customerOrder.PaymentType = paymentType;
-                    siteUser.ShoppingCart = shoppingCart;
+            var carts = new Dictionary<int, CartInfo>();
 
-                    return customerOrder;
-                }, new { id });
+            var order = db.Query<CartInfo, Pajama, PajamaType, PetType, CartInfo>(sql,
+                (cartInfo, pajama, pajamaType, petType) =>
+                {
+                    if (!carts.TryGetValue(cartInfo.OrderId, out var cart))
+                    {
+                        cart = cartInfo;
+                        cart.OrderPajamas = new List<Pajama>();
+                        carts.Add(cart.OrderId, cart);
+                    }
+
+                    //map the pajama things
+                    pajama.PajamaType = pajamaType;
+                    pajama.PetType = petType;
+
+                    //map the order things
+                    cart.OrderPajamas.Add(pajama);
+
+                    return cart;
+                }, new { OrderId = id });
 
             return order;
         }
