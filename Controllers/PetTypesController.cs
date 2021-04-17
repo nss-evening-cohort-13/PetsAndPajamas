@@ -35,5 +35,13 @@ namespace PetsAndPajamas.Controllers
 
             return Ok(type);
         }
+
+        [HttpPut("{id}/disable")]
+        public IActionResult DisablePetType(int id)
+        {
+            _repo.Disable(id);
+
+            return NoContent();
+        }
     }
 }
