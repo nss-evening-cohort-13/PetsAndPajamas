@@ -30,7 +30,7 @@ namespace PetsAndPajamas
 
             services.AddSingleton(Configuration);
             services.AddTransient<CustomerOrdersRepository>();
-            services.AddTransient<UsersRepository>();
+            services.AddTransient<SiteUsersRepository>();
             services.AddTransient<PajamasRepository>();
             services.AddTransient<PajamaTypesRepository>();
             services.AddTransient<PaymentTypesRepository>();
