@@ -38,7 +38,7 @@ namespace PetsAndPajamas.DataAccess
 	                        pt.Type as OrderPaymentType,
 	                        pt.AccountNumber as OrderAccountNumber,
 	                        pt.CreditCardType as OrderCreditCard,
-                            p.*
+                            p.*,
                             pat.*,
                             pet.* 
                         from CustomerOrder co
@@ -105,7 +105,7 @@ namespace PetsAndPajamas.DataAccess
 	                        pt.Type as OrderPaymentType,
 	                        pt.AccountNumber as OrderAccountNumber,
 	                        pt.CreditCardType as OrderCreditCard,
-                            p.*
+                            p.*,
                             pat.*,
                             pet.* 
                         from CustomerOrder co
