@@ -30,7 +30,7 @@ namespace PetsAndPajamas.DataAccess
                         from PajamaType
                         where id = @id";
 
-            var type = db.QueryFirstOrDefault(sql, new { id });
+            var type = db.QueryFirstOrDefault<PajamaType>(sql, new { id });
 
             return type;
         }
