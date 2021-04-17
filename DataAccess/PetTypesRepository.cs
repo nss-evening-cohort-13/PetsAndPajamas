@@ -31,5 +31,16 @@ namespace PetsAndPajamas.DataAccess
 
             return db.QueryFirstOrDefault<PetType>(sql, new { id });
         }
+
+        public void Disable(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"update PetType
+                        set IsActive = 0
+                        where id = @id";
+
+            db.Execute(sql, new { id });
+        }
     }
 }
