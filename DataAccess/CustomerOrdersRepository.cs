@@ -39,8 +39,9 @@ namespace PetsAndPajamas.DataAccess
 	                        pt.AccountNumber as OrderAccountNumber,
 	                        pt.CreditCardType as OrderCreditCard,
                             p.*,
+                            po.*,
                             pat.*,
-                            pet.* 
+                            pet.*
                         from CustomerOrder co
                                 join SiteUser su
                                     on su.Id = co.UserId
@@ -61,8 +62,8 @@ namespace PetsAndPajamas.DataAccess
 
             var carts = new Dictionary<int, CartInfo>();
 
-            var orders = db.Query<CartInfo, Pajama, PajamaType, PetType, CartInfo>(sql,
-                (cartInfo, pajama, pajamaType, petType) =>
+            var orders = db.Query<CartInfo, Pajama, PajamaOrder, PajamaType, PetType, CartInfo>(sql,
+                (cartInfo, pajama, pajamaOrder, pajamaType, petType) =>
                 {
 
                     if (!carts.TryGetValue(cartInfo.OrderId, out var cart))
@@ -75,6 +76,7 @@ namespace PetsAndPajamas.DataAccess
                     //map the pajama things
                     pajama.PajamaType = pajamaType;
                     pajama.PetType = petType;
+                    cart.PajamaQuantity = pajamaOrder.Quantity;
 
                     //map the order things
                     cart.OrderPajamas.Add(pajama);
@@ -106,6 +108,7 @@ namespace PetsAndPajamas.DataAccess
 	                        pt.AccountNumber as OrderAccountNumber,
 	                        pt.CreditCardType as OrderCreditCard,
                             p.*,
+                            po.*,
                             pat.*,
                             pet.* 
                         from CustomerOrder co
@@ -129,8 +132,8 @@ namespace PetsAndPajamas.DataAccess
 
             var carts = new Dictionary<int, CartInfo>();
 
-            var order = db.Query<CartInfo, Pajama, PajamaType, PetType, CartInfo>(sql,
-                (cartInfo, pajama, pajamaType, petType) =>
+            var order = db.Query<CartInfo, Pajama, PajamaOrder, PajamaType, PetType, CartInfo>(sql,
+                (cartInfo, pajama, pajamaOrder, pajamaType, petType) =>
                 {
                     if (!carts.TryGetValue(cartInfo.OrderId, out var cart))
                     {
@@ -142,6 +145,7 @@ namespace PetsAndPajamas.DataAccess
                     //map the pajama things
                     pajama.PajamaType = pajamaType;
                     pajama.PetType = petType;
+                    cart.PajamaQuantity = pajamaOrder.Quantity;
 
                     //map the order things
                     cart.OrderPajamas.Add(pajama);

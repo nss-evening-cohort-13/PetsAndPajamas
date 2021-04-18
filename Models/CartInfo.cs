@@ -24,6 +24,7 @@ namespace PetsAndPajamas.Models
         public string OrderAccountNumber { get; set; }
         public string OrderCreditCard { get; set; }
         public List<Pajama> OrderPajamas { get; set; }
+        public int PajamaQuantity { get; set; }
 
     }
 }
