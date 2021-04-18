@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PetsAndPajamas.Models
 {
-    public class Pajama
+    public class PajamaAdd
     {
         public int Id { get; set; }
         public string Size { get; set; }
@@ -17,7 +17,7 @@ namespace PetsAndPajamas.Models
         public string Title { get; set; }
         public DateTime DateCreated { get; set; }
         public bool IsActive { get; set; }
-        public PajamaType PajamaType { get; set; }
-        public PetType PetType { get; set; }
+        public int PajamaTypeId { get; set; }
+        public int PetTypeId { get; set; }
     }
 }

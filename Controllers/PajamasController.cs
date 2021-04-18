@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PetsAndPajamas.DataAccess;
+using PetsAndPajamas.Models;
 
 namespace PetsAndPajamas.Controllers
 {
@@ -37,6 +38,22 @@ namespace PetsAndPajamas.Controllers
             }
 
             return Ok(pajama);
+        }
+
+        [HttpPut("{id}/disable")]
+        public IActionResult DisablePajama(int id)
+        {
+            _repo.Disable(id);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        public IActionResult AddPajama(PajamaAdd pajama)
+        {
+            var newPajama = _repo.Add(pajama);
+
+            return Created($"api/Pajamas/{newPajama.Id}", newPajama);
         }
     }
 }

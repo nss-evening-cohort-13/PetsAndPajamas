@@ -60,5 +60,30 @@ namespace PetsAndPajamas.DataAccess
                 }, new { id });
             return pajama;
         }
+        
+        public void Disable(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Update Pajama
+                        set IsActive = 0
+                        where Id = @id";
+
+            db.Execute(sql, new { id });
+        }
+
+        public Pajama Add(PajamaAdd pajama)
+        {
+            var sql = @"INSERT INTO [Pajama] ([Size],[Color],[Pattern], [Price], [Description], [Inventory], [Title], [DateCreated], [IsActive], [PajamaTypeId], [PetTypeId])
+                        OUTPUT inserted.*
+                        VALUES(@Size, @Color, @Pattern, @Price, @Description, @Inventory, @Title, @DateCreated, @IsActive, @PajamaTypeId, @PetTypeId)";
+
+            using var db = new SqlConnection(ConnectionString);
+
+
+            var newPajama = db.QuerySingle<Pajama>(sql, new { pajama.Size, pajama.Color, pajama.Pattern, pajama.Price, pajama.Description, pajama.Inventory, pajama.Title, pajama.DateCreated, pajama.IsActive, pajama.PajamaTypeId, pajama.PetTypeId });
+
+            return newPajama;
+        }
     }
 }
