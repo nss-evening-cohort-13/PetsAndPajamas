@@ -88,7 +88,7 @@ namespace PetsAndPajamas.DataAccess
         //Gets a customer order by the Id
         public IEnumerable<CartInfo> Get(int id)
         {
-            var sql = @"SELECT * 
+            var sql = @"SELECT 
 	                        co.Id as OrderId,
 	                        co.OrderDate as NewOrderDate,
 	                        co.ShipDate as NewShipDate,
@@ -147,7 +147,7 @@ namespace PetsAndPajamas.DataAccess
                     cart.OrderPajamas.Add(pajama);
 
                     return cart;
-                }, new { OrderId = id });
+                }, new { id });
 
             return order;
         }
