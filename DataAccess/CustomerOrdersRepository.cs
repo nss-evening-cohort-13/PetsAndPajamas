@@ -155,5 +155,18 @@ namespace PetsAndPajamas.DataAccess
 
             return order;
         }
+
+        public void Add(CustomerOrder customerOrder)
+        {
+            var sql = @"INSERT INTO [CustomerOrder] ([UserId],[CartId],[OrderDate],[ShipDate],[ShipAddress], [ShipCity], [ShipState], [ShipZip], [ShipCountry], [PaymentId])
+                        OUTPUT inserted.Id
+                        VALUES(@UserId, @CartId, @OrderDate, @ShipDate, @ShipAddress, @ShipCity, @ShipState, @ShipZip, @ShipCountry, @PaymentId)";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var id = db.ExecuteScalar<int>(sql, customerOrder);
+
+            customerOrder.Id = id;
+        }
     }
 }
