@@ -168,5 +168,25 @@ namespace PetsAndPajamas.DataAccess
 
             customerOrder.Id = id;
         }
+
+        public void Update(CustomerOrder customerOrder)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"update CustomerOrder
+                        Set UserId = @UserId,
+                            CartId = @CartId,
+                            OrderDate = @OrderDate,
+                            ShipDate = @ShipDate,
+                            ShipAddress = @ShipAddress,
+                            ShipCity = @ShipCity,
+                            ShipState = @ShipState,
+                            ShipZip = @ShipZip,
+                            ShipCountry = @ShipCountry,
+                            PaymentId = @PaymentId
+                        Where Id = @id";
+
+            db.Execute(sql, customerOrder);
+        }
     }
 }
