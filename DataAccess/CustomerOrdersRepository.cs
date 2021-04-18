@@ -188,5 +188,16 @@ namespace PetsAndPajamas.DataAccess
 
             db.Execute(sql, customerOrder);
         }
+
+        public void Remove(int id)
+        {
+            var sql = @"Delete 
+                        from CustomerOrder 
+                        where Id = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            db.Execute(sql, new { id });
+        }
     }
 }

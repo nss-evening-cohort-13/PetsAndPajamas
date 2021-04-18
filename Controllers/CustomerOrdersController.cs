@@ -55,5 +55,13 @@ namespace PetsAndPajamas.Controllers
             return Ok();
 
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCustomerOrder(int id)
+        {
+            _repo.Remove(id);
+
+            return Ok();
+        }
     }
 }
