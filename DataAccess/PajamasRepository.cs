@@ -85,5 +85,26 @@ namespace PetsAndPajamas.DataAccess
 
             return newPajama;
         }
+
+        public void Update(PajamaAdd pajama)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"update Pajama
+                        Set Size = @Size,
+                            Color = @Color,
+                            Pattern = @Pattern,
+                            Price = @Price,
+                            Description = @Description,
+                            Inventory = @Inventory,
+                            Title = @Title,
+                            DateCreated = @DateCreated,
+                            IsActive = @IsActive,
+                            PajamaTypeId = @PajamaTypeId,
+                            PetTypeId = @PetTypeId
+                        Where Id = @id";
+
+            db.Execute(sql, pajama);
+        }
     }
 }
