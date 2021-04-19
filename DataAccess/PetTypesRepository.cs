@@ -42,5 +42,42 @@ namespace PetsAndPajamas.DataAccess
 
             db.Execute(sql, new { id });
         }
+
+        public void Add(PetType petType)
+        {
+            var sql = @"INSERT INTO [PetType] ([Type],[isActive])
+                       OUTPUT inserted.Id
+                       VALUES(@Type, @isActive)";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var id = db.ExecuteScalar<int>(sql, petType);
+
+            petType.Id = id;
+        }
+
+        public void Update(PetType petType)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE PetType
+                        SET Type = @Type,
+                            isActive = @isActive
+                        Where Id = @id";
+
+            db.Execute(sql, petType);
+        }
+
+        public void Remove(int id)
+        {
+            var sql = @"Delete
+                        from PetType
+                        where Id = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            db.Execute(sql, new { id });
+        }
+
     }
 }

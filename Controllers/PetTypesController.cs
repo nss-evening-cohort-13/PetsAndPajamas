@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PetsAndPajamas.Models;
 
 namespace PetsAndPajamas.Controllers
 {
@@ -42,6 +43,28 @@ namespace PetsAndPajamas.Controllers
             _repo.Disable(id);
 
             return NoContent();
+        }
+
+        [HttpPost]
+        public IActionResult AddAPetType(PetType petType)
+        {
+            _repo.Add(petType);
+            return Created($"api/PetTypes/{petType.Id}", petType);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdatePetType(PetType petType)
+        {
+            _repo.Update(petType);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletePetType(int id)
+        {
+            _repo.Remove(id);
+
+            return Ok();
         }
     }
 }
