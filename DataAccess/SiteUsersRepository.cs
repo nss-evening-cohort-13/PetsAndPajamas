@@ -56,9 +56,18 @@ namespace PetsAndPajamas.DataAccess
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"update SiteUser
-                        set IsActive = 0
-                        where id = @id";
+            var sql = @"UPDATE [dbo].[SiteUser]
+                        SET [FirstName] = 'DeletedUser',
+                            [LastName] = 'DeletedUser',
+                            [EmailAddress] = 'DeletedUser',
+                            [Address] = 'DeletedUser',
+                            [City] = 'DeletedUser',
+                            [State] = 'DU',
+                            [ZipCode] = 00000,
+                            [Country] = 'DeletedUser',
+                            [Phone] = 'DeleteUser',
+                            [IsActive] = 0
+                        WHERE id = @id";
 
             db.Execute(sql, new { id });
         }
