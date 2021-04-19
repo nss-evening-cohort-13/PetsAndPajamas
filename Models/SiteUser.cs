@@ -18,6 +18,7 @@ namespace PetsAndPajamas.Models
         public int ZipCode { get; set; }
         public string Country { get; set; }
         public string Phone { get; set; }
+        public int CartId { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
         public bool Admin { get; set; }
         public bool IsActive { get; set; }

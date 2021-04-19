@@ -54,6 +54,11 @@ namespace PetsAndPajamas.Controllers
             return Created($"api/SiteUsers/{siteUser.Id}", siteUser);
         }
 
-
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(SiteUser siteUser)
+        {
+            _repo.Update(siteUser);
+            return Ok(siteUser);
+        }
     }
 }
