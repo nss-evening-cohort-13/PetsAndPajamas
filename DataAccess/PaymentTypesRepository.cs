@@ -46,6 +46,47 @@ namespace PetsAndPajamas.DataAccess
             db.Execute(sql, new { id });
         }
 
+        public void Add(PaymentType paymentType)
+        {
+            var sql = @"INSERT INTO [PaymentType] ([Type],[AccountNumber],[Cvv],[ExpirationMonth],[ExpirationYear],[CreditCardType],[isActive])
+                       OUTPUT inserted.Id
+                       VALUES(@Type, @AccountNumber, @Cvv, @ExpirationMonth, @ExpirationYear, @CreditCardType, @isActive)";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var id = db.ExecuteScalar<int>(sql, paymentType);
+
+            paymentType.Id = id;
+        }
+
+        public void Update(PaymentType paymentType)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE PaymentType
+                        SET Type = @Type,
+                            AccountNumber = @AccountNumber,
+                            Cvv = @Cvv,
+                            ExpirationMonth = @ExpirationMonth,
+                            ExpirationYear = @ExpirationYear,
+                            CreditCardType = @CreditCardType,
+                            isActive = @isActive
+                        Where Id = @id";
+
+            db.Execute(sql, paymentType);
+        }
+
+        public void Remove(int id)
+        {
+            var sql = @"Delete
+                        from PaymentType
+                        where Id = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            db.Execute(sql, new { id });
+        }
+
 
     }
 }
