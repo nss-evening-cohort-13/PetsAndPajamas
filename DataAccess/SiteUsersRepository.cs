@@ -63,5 +63,40 @@ namespace PetsAndPajamas.DataAccess
             db.Execute(sql, new { id });
         }
 
+        public void Add(SiteUser siteUser)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"INSERT INTO [dbo].[SiteUser] ([FirstName],[LastName],[EmailAddress],[Address],[City],[State],[ZipCode],[Country],[Phone],[CartId],[Admin],[IsActive])
+                        OUTPUT inserted.id
+                        VALUES(@FirstName,@LastName,@EmailAddress,@Address,@City,@State,@ZipCode,@Country,@Phone,@cartId,@Admin,@IsActive)";
+
+            var id = db.ExecuteScalar<int>(sql, siteUser);
+
+            siteUser.Id = id;
+        }
+
+        public void Update(SiteUser siteUser)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE [dbo].[SiteUser]
+                        SET [FirstName] = @FirstName,
+                            [LastName] = @LastName,
+                            [EmailAddress] = @EmailAddress,
+                            [Address] = @Address,
+                            [City] = @City,
+                            [State] = @State,
+                            [ZipCode] = @ZipCode,
+                            [Country] = @Country,
+                            [Phone] = @Phone,
+                            [CartId] = @CartId,
+                            [Admin] = @Admin,
+                            [IsActive] = @IsActive
+                        WHERE id = @id";
+
+            db.Execute(sql, siteUser);
+        }
+
     }
 }
