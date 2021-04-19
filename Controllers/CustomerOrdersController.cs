@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PetsAndPajamas.DataAccess;
+using PetsAndPajamas.Models;
 
 namespace PetsAndPajamas.Controllers
 {
@@ -38,6 +39,29 @@ namespace PetsAndPajamas.Controllers
             }
 
             return Ok(order);
+        }
+
+        [HttpPost]
+        public IActionResult AddCustomerOrder(CustomerOrder customerOrder)
+        {
+            _repo.Add(customerOrder);
+            return Created($"api/CustomerOrders/{customerOrder.Id}", customerOrder);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateCustomerOrder(CustomerOrder customerOrder)
+        {
+            _repo.Update(customerOrder);
+            return Ok();
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCustomerOrder(int id)
+        {
+            _repo.Remove(id);
+
+            return Ok();
         }
     }
 }
