@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetsAndPajamas.DataAccess;
+using PetsAndPajamas.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,5 +45,15 @@ namespace PetsAndPajamas.Controllers
 
             return NoContent();
         }
+
+        [HttpPost]
+        public IActionResult AddUser(SiteUser siteUser)
+        {
+            _repo.Add(siteUser);
+
+            return Created($"api/SiteUsers/{siteUser.Id}", siteUser);
+        }
+
+
     }
 }
