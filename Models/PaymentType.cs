@@ -10,6 +10,10 @@ namespace PetsAndPajamas.Models
         public int Id { get; set; }
         public string Type { get; set; }
         public string AccountNumber { get; set; }
+        public string Cvv { get; set; }
+        public string ExpirationMonth { get; set; }
+        public string ExpirationYear { get; set; }
         public string CreditCardType { get; set; }
+        public bool IsActive { get; set; }
     }
 }
