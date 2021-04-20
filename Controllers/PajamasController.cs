@@ -20,7 +20,7 @@ namespace PetsAndPajamas.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllCustomerOrders()
+        public IActionResult GetAllPajamas()
         {
             var pajamas = _repo.GetAll();
 
