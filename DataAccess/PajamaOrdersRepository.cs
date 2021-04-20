@@ -44,5 +44,33 @@ namespace PetsAndPajamas.DataAccess
                 }, splitOn: "Id");
             return pajamaOrders;
         }
+
+        public IEnumerable<PajamaOrder> Get(int id)
+        {
+            var sql = @"select * from PajamaOrder po
+                            join ShoppingCart sc
+                                on sc.Id = po.CartId
+                            join Pajama p
+                                on p.Id = po.PajamaId
+                            join PajamaType pat
+                                on pat.Id = p.PajamaTypeId
+                            join PetType pet
+                                on pet.Id = p.PetTypeId
+                        where po.Id = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var pajama = db.Query<PajamaOrder, ShoppingCart, Pajama, PajamaType, PetType, PajamaOrder>(sql,
+                (pajamaOrder, shoppingCart, pajama, pajamaType, petType) =>
+                {
+                    pajamaOrder.ShoppingCart = shoppingCart;
+                    pajamaOrder.Pajama = pajama;
+                    pajama.PajamaType = pajamaType;
+                    pajama.PetType = petType;
+
+                    return pajamaOrder;
+                }, new { id });
+            return pajama;
+        }
     }
 }

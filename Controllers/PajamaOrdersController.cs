@@ -26,5 +26,19 @@ namespace PetsAndPajamas.Controllers
 
             return Ok(pajamaOrders);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var pajamaOrder = _repo.Get(id);
+
+            if (pajamaOrder == null)
+            {
+                return NotFound("This pajama id does not exist");
+            }
+
+            return Ok(pajamaOrder);
+        }
+
     }
 }
