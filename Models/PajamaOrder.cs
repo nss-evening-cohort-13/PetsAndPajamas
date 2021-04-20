@@ -8,6 +8,8 @@ namespace PetsAndPajamas.Models
     public class PajamaOrder
     {
         public int Id { get; set; }
+        public int CartId { get; set; }
+        public int PajamaId { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
         public Pajama Pajama { get; set; }
         public int Quantity { get; set; }

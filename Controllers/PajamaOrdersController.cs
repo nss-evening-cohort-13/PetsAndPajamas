@@ -40,5 +40,13 @@ namespace PetsAndPajamas.Controllers
             return Ok(pajamaOrder);
         }
 
+        [HttpPost]
+        public IActionResult AddUser(PajamaOrder pajamaOrder)
+        {
+            _repo.Add(pajamaOrder);
+
+            return Created($"api/PajamaOrders/{pajamaOrder.Id}", pajamaOrder);
+        }
+
     }
 }

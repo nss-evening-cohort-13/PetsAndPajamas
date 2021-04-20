@@ -72,5 +72,19 @@ namespace PetsAndPajamas.DataAccess
                 }, new { id });
             return pajama;
         }
+
+        public void Add(PajamaOrder pajamaOrder)
+        {
+            var sql = @"INSERT INTO [PajamaOrder] ([CartId],[PajamaId],[Quantity])
+                        OUTPUT inserted.id
+                        VALUES(@cartId, @pajamaId, @quantity)";
+
+            using var db = new SqlConnection(ConnectionString);
+
+
+            var id = db.ExecuteScalar<int>(sql, pajamaOrder);
+
+            pajamaOrder.Id = id;
+        }
     }
 }
