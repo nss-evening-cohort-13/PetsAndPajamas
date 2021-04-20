@@ -34,6 +34,7 @@ namespace PetsAndPajamas
             services.AddTransient<PajamasRepository>();
             services.AddTransient<PajamaTypesRepository>();
             services.AddTransient<PaymentTypesRepository>();
+            services.AddTransient<ShoppingCartsRepository>();
             services.AddTransient<PajamaOrdersRepository>();
         }
 
