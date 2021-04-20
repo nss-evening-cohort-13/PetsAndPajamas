@@ -35,6 +35,7 @@ namespace PetsAndPajamas
             services.AddTransient<PajamaTypesRepository>();
             services.AddTransient<PaymentTypesRepository>();
             services.AddTransient<ShoppingCartsRepository>();
+            services.AddTransient<PajamaOrdersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
