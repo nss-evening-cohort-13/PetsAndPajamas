@@ -9,5 +9,6 @@ namespace PetsAndPajamas.Models
     {
         public int Id { get; set; }
         public double TotalCost { get; set; }
+        public bool IsActive { get; set; }
     }
 }
