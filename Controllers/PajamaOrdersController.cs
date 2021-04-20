@@ -48,5 +48,13 @@ namespace PetsAndPajamas.Controllers
             return Created($"api/PajamaOrders/{pajamaOrder.Id}", pajamaOrder);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(PajamaOrder pajamaOrder)
+        {
+            _repo.Update(pajamaOrder);
+
+            return Ok(pajamaOrder);
+        }
+
     }
 }

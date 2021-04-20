@@ -86,5 +86,18 @@ namespace PetsAndPajamas.DataAccess
 
             pajamaOrder.Id = id;
         }
+
+        public void Update(PajamaOrder pajamaOrder)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE [PajamaOrder]
+                        SET [CartId] = @CartId,
+                            [PajamaId] = @PajamaId,
+                            [Quantity] = @Quantity
+                        WHERE id = @id";
+
+            db.Execute(sql, pajamaOrder);
+        }
     }
 }
