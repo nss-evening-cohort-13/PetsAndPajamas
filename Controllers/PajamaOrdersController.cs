@@ -41,7 +41,7 @@ namespace PetsAndPajamas.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUser(PajamaOrder pajamaOrder)
+        public IActionResult AddPajamaOrder(PajamaOrder pajamaOrder)
         {
             _repo.Add(pajamaOrder);
 
@@ -49,11 +49,19 @@ namespace PetsAndPajamas.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(PajamaOrder pajamaOrder)
+        public IActionResult UpdatePajamaOrder(PajamaOrder pajamaOrder)
         {
             _repo.Update(pajamaOrder);
 
             return Ok(pajamaOrder);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletePajamaOrder(int id)
+        {
+            _repo.Remove(id);
+
+            return Ok();
         }
 
     }

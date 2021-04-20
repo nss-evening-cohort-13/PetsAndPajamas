@@ -99,5 +99,16 @@ namespace PetsAndPajamas.DataAccess
 
             db.Execute(sql, pajamaOrder);
         }
+
+        public void Remove(int id)
+        {
+            var sql = @"Delete 
+                        from PajamaOrder 
+                        where Id = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            db.Execute(sql, new { id });
+        }
     }
 }
