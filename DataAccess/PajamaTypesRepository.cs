@@ -45,5 +45,30 @@ namespace PetsAndPajamas.DataAccess
 
             db.Execute(sql, new { id });
         }
+
+        public void Add(PajamaType pajamaType)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"INSERT INTO [dbo].[PajamaType]([Type],[IsActive])
+                        OUTPUT inserted.id
+                        VALUES(@Type,@IsActive)";
+
+            var id = db.ExecuteScalar<int>(sql, pajamaType);
+
+            pajamaType.Id = id;
+        }
+
+        public void Update(PajamaType pajamaType)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE [dbo].[PajamaType]
+                        SET [Type] = @Type,
+                            [IsActive] = @IsActive
+                        WHERE Id = @id";
+
+            db.Execute(sql, pajamaType);
+        }
     }
 }

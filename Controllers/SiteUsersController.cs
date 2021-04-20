@@ -58,6 +58,7 @@ namespace PetsAndPajamas.Controllers
         public IActionResult UpdateUser(SiteUser siteUser)
         {
             _repo.Update(siteUser);
+
             return Ok(siteUser);
         }
     }

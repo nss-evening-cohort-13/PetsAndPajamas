@@ -58,13 +58,5 @@ namespace PetsAndPajamas.Controllers
             _repo.Update(petType);
             return Ok();
         }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeletePetType(int id)
-        {
-            _repo.Remove(id);
-
-            return Ok();
-        }
-    }
+     }
 }

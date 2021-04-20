@@ -68,16 +68,5 @@ namespace PetsAndPajamas.DataAccess
             db.Execute(sql, petType);
         }
 
-        public void Remove(int id)
-        {
-            var sql = @"Delete
-                        from PetType
-                        where Id = @id";
-
-            using var db = new SqlConnection(ConnectionString);
-
-            db.Execute(sql, new { id });
-        }
-
     }
 }

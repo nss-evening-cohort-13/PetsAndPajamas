@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetsAndPajamas.DataAccess;
+using PetsAndPajamas.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,22 @@ namespace PetsAndPajamas.Controllers
             _repo.Disable(id);
 
             return NoContent();
+        }
+
+        [HttpPost]
+        public IActionResult AddPajamaType(PajamaType pajamaType)
+        {
+            _repo.Add(pajamaType);
+
+            return Created($"api/PajamaType/{pajamaType.Id}", pajamaType);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdatePajamaType(PajamaType pajamaType)
+        {
+            _repo.Update(pajamaType);
+
+            return Ok(pajamaType);
         }
     }
 }
