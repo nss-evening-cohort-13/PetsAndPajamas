@@ -19,5 +19,6 @@ namespace PetsAndPajamas.Models
         public bool IsActive { get; set; }
         public PajamaType PajamaType { get; set; }
         public PetType PetType { get; set; }
+        public string Image { get; set; }
     }
 }
