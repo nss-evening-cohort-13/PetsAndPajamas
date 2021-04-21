@@ -10,7 +10,10 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "firebase": "^8.4.1",
+<<<<<<< HEAD
     "font-awesome": "^4.7.0",
+=======
+>>>>>>> 421f788a3ee73372712ba70c7a88ba3483c3b64c
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
