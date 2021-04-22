@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AboutUs from '../views/AboutUs';
 import Cart from '../views/Cart';
@@ -9,8 +9,9 @@ import Home from '../views/Home';
 import ProductDetail from '../views/ProductDetail';
 import ProfilePage from '../views/ProfilePage';
 
-export default function Routes() {
-  return (
+class Routes extends Component {
+  render() {
+    return (
             <Switch>
                 <Route exact path='/about' component={() => <AboutUs />} />
                 <Route exact path='/cart' component={() => <Cart />} />
@@ -21,5 +22,8 @@ export default function Routes() {
                 <Route exact path='/product-detail/:id' component={(props) => <ProductDetail {...props}/>} />
                 <Route exact path='/profile-page' component={() => <ProfilePage />} />
             </Switch>
-  );
+    );
+  }
 }
+
+export default Routes;
