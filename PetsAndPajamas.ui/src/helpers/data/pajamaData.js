@@ -7,4 +7,9 @@ const getSinglePajama = (pajamaId) => new Promise((resolve, reject) => axios.get
   resolve(response.data);
 }).catch((error) => reject(error)));
 
-export default { getSinglePajama };
+const getCatPajamas = () => new Promise((resolve, reject) => axios
+  .get(`${pajamaUrl}/cat`)
+  .then((res) => resolve(res.data))
+  .catch((err) => reject(err)));
+
+export default { getSinglePajama, getCatPajamas };
