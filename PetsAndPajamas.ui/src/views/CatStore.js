@@ -24,9 +24,13 @@ export default class CatStore extends React.Component {
     return (
       <div className="cat-store-page">
           <h1>Cats</h1>
-          <FilterAccordion />
-          <div className="product-cards-container">
-          {this.state.pajamas.map((pajama) => <ProductCard key={pajama.id} pajama={pajama} />)}
+          <div className="cat-store-body">
+            <div className="accordion-container">
+              <FilterAccordion />
+            </div>
+            <div className="product-cards-container">
+              {this.state.pajamas.map((pajama) => <ProductCard key={pajama.id} pajama={pajama} />)}
+            </div>
           </div>
       </div>
     );
