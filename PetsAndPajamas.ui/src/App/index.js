@@ -13,7 +13,6 @@ class App extends React.Component {
         <MyNavbar />
           <Routes />
         </Router>
-        <h2>Pets And Pajamas</h2>
       </div>
     );
   }
