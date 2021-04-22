@@ -1,27 +1,10 @@
 import React from 'react';
 import { Accordion, Card } from 'react-bootstrap';
-import pajamaTypeData from '../../helpers/data/pajamaTypeData';
 
 export default class FilterAccordion extends React.Component {
-    state = {
-      categories: []
-    }
-
-    componentDidMount() {
-      this.getPajamaTypes();
-    }
-
-    getPajamaTypes = () => {
-      pajamaTypeData.getPajamaTypes().then((res) => {
-        this.setState({
-          categories: res
-        });
-      });
-    }
-
-    render() {
-      const { categories } = this.state;
-      return (
+  render() {
+    const { categories } = this.props;
+    return (
         <>
             <Accordion defaultActiveKey="0">
                 <Card>
@@ -34,6 +17,6 @@ export default class FilterAccordion extends React.Component {
                 </Card>
             </Accordion>
         </>
-      );
-    }
+    );
+  }
 }
