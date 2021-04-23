@@ -23,21 +23,24 @@ class MyNavbar extends Component {
     return (
       <>
         <div>
-        <Navbar color='dark' dark expand='md' className='navbar justify-content-between'>
+        <Navbar expand='md' dark className='navbar justify-content-between'>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className='mr-auto' navbar>
               <NavItem>
-                <Link className="nav-link" to='/about'>About</Link>
+                <img className='mr-5 navbar-logo' src='https://imgur.com/bApYAR0.jpg' alt='logo'></img>
               </NavItem>
-              <Link className="nav-link" to='/'>Home</Link>
               <NavItem>
-                <Link className="nav-link" to='/dog-store'>
+                <Link className="mr-3 nav-link" to='/about'>About</Link>
+              </NavItem>
+              <Link className="mr-3 nav-link" to='/'>Home</Link>
+              <NavItem>
+                <Link className="mr-3 nav-link" to='/dog-store'>
                   Dogs
                 </Link>
               </NavItem>
               <NavItem>
-                <Link className="nav-link" to='/cat-store'>
+                <Link className="mr-3 nav-link" to='/cat-store'>
                   Cats
                 </Link>
               </NavItem>
