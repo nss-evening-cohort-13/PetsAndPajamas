@@ -1,6 +1,7 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import 'variables';
 @import './DogPage/';
+@import './components/index.scss';
 
 body {
   background-color: $favColor;
