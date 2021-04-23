@@ -30,18 +30,19 @@ export default class FilterAccordion extends React.Component {
 
     render() {
       const { categories } = this.state;
+      const { filterProducts } = this.props;
       return (
         <>
             <Accordion defaultActiveKey="0">
                 <Card>
                     <Accordion.Toggle as={Card.Header} eventKey="0">
-                        Category
+                        Category <i className="fas fa-plus"></i>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                         <Card.Body className="checkboxes-container">
                             {categories.map((category) => {
                               if (this.countType(category.type) !== 0) {
-                                return <AccordianCheckbox key={category.id} category={category} amount={this.countType(category.type)} />;
+                                return <AccordianCheckbox key={category.id} category={category} quantity={this.countType(category.type)} filterProducts={filterProducts} />;
                               }
                             })}
                         </Card.Body>
