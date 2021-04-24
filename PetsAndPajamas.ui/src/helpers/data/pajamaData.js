@@ -23,6 +23,11 @@ const getDogPajamas = () => new Promise((resolve, reject) => axios
   .then((response) => resolve(response.data))
   .catch((error) => reject(error)));
 
+const getLatestPajamas = () => new Promise((resolve, reject) => axios
+  .get(`${pajamaUrl}/new`)
+  .then((res) => resolve(res.data))
+  .catch((err) => reject(err)));
+
 export default {
-  getSinglePajama, getDogPajamas, getCatPajamas, getSearchedPajamas
+  getSinglePajama, getDogPajamas, getCatPajamas, getSearchedPajamas, getLatestPajamas
 };
