@@ -27,7 +27,7 @@ class ProductDetail extends Component {
   setLoading = () => {
     this.timer = setInterval(() => {
       this.setState({ loading: false });
-    }, 1000);
+    }, 500);
   }
 
   componentWillUnmount() {
