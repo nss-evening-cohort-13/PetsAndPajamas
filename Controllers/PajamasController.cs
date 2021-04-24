@@ -27,6 +27,14 @@ namespace PetsAndPajamas.Controllers
             return Ok(pajamas);
         }
 
+        [HttpGet("dog")]
+        public IActionResult GetAllCatPajamas()
+        {
+            var pajamas = _repo.GetAllDogPajamas();
+
+            return Ok(pajamas);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
