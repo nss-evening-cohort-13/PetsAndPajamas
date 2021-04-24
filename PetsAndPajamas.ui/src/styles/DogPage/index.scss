@@ -7,6 +7,18 @@
     margin-top: 2%;
 }
 
+.accordion-container {
+    flex-basis: 20%;
+}
+
+.checkboxes-container {
+    text-align: left;
+}
+
+.single-checkbox {
+    margin-right: 5%;
+}
+
 .product-cards-container {
     display: flex;
     flex-flow: row wrap;
@@ -15,4 +27,4 @@
 
 .card-container {
     width: 30%;
-} 
+}
