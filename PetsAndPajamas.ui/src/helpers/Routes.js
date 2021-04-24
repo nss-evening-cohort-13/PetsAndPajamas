@@ -8,6 +8,7 @@ import DogStore from '../views/DogStore';
 import Home from '../views/Home';
 import ProductDetail from '../views/ProductDetail';
 import ProfilePage from '../views/ProfilePage';
+import SearchResults from '../views/SearchResults';
 
 class Routes extends Component {
   render() {
@@ -21,6 +22,7 @@ class Routes extends Component {
                 <Route exact path='/' component={() => <Home />} />
                 <Route exact path='/product-detail/:id' component={(props) => <ProductDetail {...props}/>} />
                 <Route exact path='/profile-page' component={() => <ProfilePage />} />
+                <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
             </Switch>
     );
   }
