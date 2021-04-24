@@ -7,6 +7,7 @@ import {
   Nav,
   NavItem,
 } from 'reactstrap';
+import SearchInput from '../SearchInput';
 
 class MyNavbar extends Component {
   state = {
@@ -42,6 +43,8 @@ class MyNavbar extends Component {
                 </Link>
               </NavItem>
             </Nav>
+            <p className='mr-2 mt-3 text-light'>Search:</p>
+            <SearchInput />
           </Collapse>
         </Navbar>
       </div>
