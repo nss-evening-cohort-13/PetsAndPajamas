@@ -21,8 +21,10 @@ namespace PetsAndPajamas.DataAccess
         public IEnumerable<PajamaOrder> GetAll()
         {
             var sql = @"select * from PajamaOrder po
-                            join ShoppingCart sc
-                                on sc.Id = po.CartId
+                            join CustomerOrder co
+                                on co.Id = po.OrderId
+                            join SiteUser su
+                                on su.Id = co.UserId
                             join Pajama p
                                 on p.Id = po.PajamaId
                             join PajamaType pat
@@ -32,11 +34,12 @@ namespace PetsAndPajamas.DataAccess
 
             using var db = new SqlConnection(ConnectionString);
 
-            var pajamaOrders = db.Query<PajamaOrder, ShoppingCart, Pajama, PajamaType, PetType, PajamaOrder>(sql,
-                (pajamaOrder, shoppingCart, pajama, pajamaType, petType) =>
+            var pajamaOrders = db.Query<PajamaOrder, CustomerOrder, SiteUser, Pajama, PajamaType, PetType, PajamaOrder>(sql,
+                (pajamaOrder, customerOrder, siteUser, pajama, pajamaType, petType) =>
                 {
-                    pajamaOrder.ShoppingCart = shoppingCart;
+                    pajamaOrder.CustomerOrder = customerOrder;
                     pajamaOrder.Pajama = pajama;
+                    customerOrder.SiteUser = siteUser;
                     pajama.PajamaType = pajamaType;
                     pajama.PetType = petType;
 
@@ -48,8 +51,10 @@ namespace PetsAndPajamas.DataAccess
         public IEnumerable<PajamaOrder> Get(int id)
         {
             var sql = @"select * from PajamaOrder po
-                            join ShoppingCart sc
-                                on sc.Id = po.CartId
+                            join CustomerOrder co
+                                on co.Id = po.OrderId
+                            join SiteUser su
+                                on su.Id = co.UserId
                             join Pajama p
                                 on p.Id = po.PajamaId
                             join PajamaType pat
@@ -60,11 +65,12 @@ namespace PetsAndPajamas.DataAccess
 
             using var db = new SqlConnection(ConnectionString);
 
-            var pajama = db.Query<PajamaOrder, ShoppingCart, Pajama, PajamaType, PetType, PajamaOrder>(sql,
-                (pajamaOrder, shoppingCart, pajama, pajamaType, petType) =>
+            var pajama = db.Query<PajamaOrder, CustomerOrder, SiteUser, Pajama, PajamaType, PetType, PajamaOrder>(sql,
+                (pajamaOrder, customerOrder, siteUser, pajama, pajamaType, petType) =>
                 {
-                    pajamaOrder.ShoppingCart = shoppingCart;
+                    pajamaOrder.CustomerOrder = customerOrder;
                     pajamaOrder.Pajama = pajama;
+                    customerOrder.SiteUser = siteUser;
                     pajama.PajamaType = pajamaType;
                     pajama.PetType = petType;
 
@@ -75,9 +81,9 @@ namespace PetsAndPajamas.DataAccess
 
         public void Add(PajamaOrder pajamaOrder)
         {
-            var sql = @"INSERT INTO [PajamaOrder] ([CartId],[PajamaId],[Quantity])
+            var sql = @"INSERT INTO [PajamaOrder] ([OrderId],[PajamaId],[Quantity])
                         OUTPUT inserted.id
-                        VALUES(@cartId, @pajamaId, @quantity)";
+                        VALUES(@orderId, @pajamaId, @quantity)";
 
             using var db = new SqlConnection(ConnectionString);
 
@@ -92,7 +98,7 @@ namespace PetsAndPajamas.DataAccess
             using var db = new SqlConnection(ConnectionString);
 
             var sql = @"UPDATE [PajamaOrder]
-                        SET [CartId] = @CartId,
+                        SET [OrderId] = @OrderId,
                             [PajamaId] = @PajamaId,
                             [Quantity] = @Quantity
                         WHERE id = @id";

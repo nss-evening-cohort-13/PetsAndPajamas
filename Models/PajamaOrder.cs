@@ -10,7 +10,7 @@ namespace PetsAndPajamas.Models
         public int Id { get; set; }
         public int CartId { get; set; }
         public int PajamaId { get; set; }
-        public ShoppingCart ShoppingCart { get; set; }
+        public CustomerOrder CustomerOrder { get; set; }
         public Pajama Pajama { get; set; }
         public int Quantity { get; set; }
     }
