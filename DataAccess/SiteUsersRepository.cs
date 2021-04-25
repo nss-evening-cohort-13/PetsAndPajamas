@@ -17,18 +17,9 @@ namespace PetsAndPajamas.DataAccess
             using var db = new SqlConnection(ConnectionString);
 
             var sql = @"select *
-                        from SiteUser u
-                        join ShoppingCart c on u.CartId = c.Id";
+                        from SiteUser";
 
-            return db.Query<SiteUser, ShoppingCart, SiteUser>(
-                sql,
-                (siteUser, shoppingCart) =>
-                {
-                    siteUser.ShoppingCart = shoppingCart;
-                    return siteUser;
-                },
-                splitOn:"Id")
-                .ToList();
+            return db.Query<SiteUser>(sql).ToList();
         }
 
         public IEnumerable<SiteUser> Get(int id)
@@ -36,18 +27,10 @@ namespace PetsAndPajamas.DataAccess
             using var db = new SqlConnection(ConnectionString);
 
             var sql = @"select *
-                        from SiteUser u
-                            join ShoppingCart c on u.CartId = c.Id
-                        where u.id = @id";
+                        from SiteUser
+                        where id = @id";
 
-            var user = db.Query<SiteUser, ShoppingCart, SiteUser>(
-                sql,
-                (siteUser, shoppingCart) =>
-                {
-                    siteUser.ShoppingCart = shoppingCart;
-                    return siteUser;
-                },
-                new { id });
+            var user = db.Query<SiteUser>(sql, new { id });
 
             return user;
         }
@@ -76,9 +59,9 @@ namespace PetsAndPajamas.DataAccess
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"INSERT INTO [dbo].[SiteUser] ([FirstName],[LastName],[EmailAddress],[Address],[City],[State],[ZipCode],[Country],[Phone],[CartId],[Admin],[IsActive])
+            var sql = @"INSERT INTO [dbo].[SiteUser] ([FirstName],[LastName],[EmailAddress],[Address],[City],[State],[ZipCode],[Country],[Phone],[Admin],[IsActive])
                         OUTPUT inserted.id
-                        VALUES(@FirstName,@LastName,@EmailAddress,@Address,@City,@State,@ZipCode,@Country,@Phone,@cartId,@Admin,@IsActive)";
+                        VALUES(@FirstName,@LastName,@EmailAddress,@Address,@City,@State,@ZipCode,@Country,@Phone,@Admin,@IsActive)";
 
             var id = db.ExecuteScalar<int>(sql, siteUser);
 
@@ -99,7 +82,6 @@ namespace PetsAndPajamas.DataAccess
                             [ZipCode] = @ZipCode,
                             [Country] = @Country,
                             [Phone] = @Phone,
-                            [CartId] = @CartId,
                             [Admin] = @Admin,
                             [IsActive] = @IsActive
                         WHERE id = @id";

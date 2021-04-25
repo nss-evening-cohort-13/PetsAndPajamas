@@ -30,11 +30,11 @@ namespace PetsAndPajamas.DataAccess
 	                        co.ShipState as NewShipState,
 	                        co.ShipZip as NewShipZip,
 	                        co.ShipCountry as NewShipCountry,
+	                        co.TotalCost as OrderTotalCost,
 	                        su.Id as UserId, 
 	                        su.FirstName as UserFirstName, 
 	                        su.LastName as UserLastName, 
 	                        su.EmailAddress as UserEmailAddress, 
-	                        sc.TotalCost as OrderTotalCost,
 	                        pt.Type as OrderPaymentType,
 	                        pt.AccountNumber as OrderAccountNumber,
 	                        pt.CreditCardType as OrderCreditCard,
@@ -47,10 +47,8 @@ namespace PetsAndPajamas.DataAccess
                                     on su.Id = co.UserId
                                 join PaymentType pt
                                     on pt.Id = co.PaymentId
-                                join ShoppingCart sc
-                                    on sc.Id = su.CartId
                                 join PajamaOrder po
-                                    on sc.Id = po.CartId
+                                    on co.Id = po.OrderId
 							    join Pajama p
 								    on p.Id = po.PajamaId
 							    join PajamaType pat
@@ -99,11 +97,12 @@ namespace PetsAndPajamas.DataAccess
 	                        co.ShipState as NewShipState,
 	                        co.ShipZip as NewShipZip,
 	                        co.ShipCountry as NewShipCountry,
+	                        co.TotalCost as OrderTotalCost,
+                            co.IsCompleted as CompletedOrder,
 	                        su.Id as UserId, 
 	                        su.FirstName as UserFirstName, 
 	                        su.LastName as UserLastName, 
 	                        su.EmailAddress as UserEmailAddress, 
-	                        sc.TotalCost as OrderTotalCost,
 	                        pt.Type as OrderPaymentType,
 	                        pt.AccountNumber as OrderAccountNumber,
 	                        pt.CreditCardType as OrderCreditCard,
@@ -116,10 +115,8 @@ namespace PetsAndPajamas.DataAccess
                                     on su.Id = co.UserId
                                 join PaymentType pt
                                     on pt.Id = co.PaymentId
-                                join ShoppingCart sc
-                                    on sc.Id = su.CartId
                                 join PajamaOrder po
-                                    on sc.Id = po.CartId
+                                    on co.Id = po.OrderId
 							    join Pajama p
 								    on p.Id = po.PajamaId
 							    join PajamaType pat
@@ -158,9 +155,9 @@ namespace PetsAndPajamas.DataAccess
 
         public void Add(CustomerOrder customerOrder)
         {
-            var sql = @"INSERT INTO [CustomerOrder] ([UserId],[CartId],[OrderDate],[ShipDate],[ShipAddress], [ShipCity], [ShipState], [ShipZip], [ShipCountry], [PaymentId])
+            var sql = @"INSERT INTO [CustomerOrder] ([UserId], [OrderDate],[ShipDate],[ShipAddress], [ShipCity], [ShipState], [ShipZip], [ShipCountry], [PaymentId], [TotalCost], [IsCompleted])
                         OUTPUT inserted.Id
-                        VALUES(@UserId, @CartId, @OrderDate, @ShipDate, @ShipAddress, @ShipCity, @ShipState, @ShipZip, @ShipCountry, @PaymentId)";
+                        VALUES(@UserId, @OrderDate, @ShipDate, @ShipAddress, @ShipCity, @ShipState, @ShipZip, @ShipCountry, @PaymentId, @TotalCost, @IsCompleted)";
 
             using var db = new SqlConnection(ConnectionString);
 
@@ -175,7 +172,6 @@ namespace PetsAndPajamas.DataAccess
 
             var sql = @"update CustomerOrder
                         Set UserId = @UserId,
-                            CartId = @CartId,
                             OrderDate = @OrderDate,
                             ShipDate = @ShipDate,
                             ShipAddress = @ShipAddress,
@@ -183,7 +179,9 @@ namespace PetsAndPajamas.DataAccess
                             ShipState = @ShipState,
                             ShipZip = @ShipZip,
                             ShipCountry = @ShipCountry,
-                            PaymentId = @PaymentId
+                            PaymentId = @PaymentId,
+                            TotalCost = @TotalCost,
+                            IsCompleted = @IsCompleted
                         Where Id = @id";
 
             db.Execute(sql, customerOrder);

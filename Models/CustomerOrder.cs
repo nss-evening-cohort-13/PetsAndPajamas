@@ -9,7 +9,7 @@ namespace PetsAndPajamas.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public int CartId { get; set; }
+        public SiteUser SiteUser { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShipDate { get; set; }
         public string ShipAddress { get; set; }
@@ -18,5 +18,7 @@ namespace PetsAndPajamas.Models
         public int ShipZip { get; set; }
         public string ShipCountry { get; set; }
         public int PaymentId { get; set; }
+        public decimal TotalCost { get; set; }
+        public bool isCompleted { get; set; }
     }
 }
