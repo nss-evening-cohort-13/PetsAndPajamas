@@ -1,5 +1,4 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
 
 export default class Checkout extends React.Component {
   render() {
