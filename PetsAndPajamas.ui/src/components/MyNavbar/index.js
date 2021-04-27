@@ -43,7 +43,8 @@ class MyNavbar extends Component {
                 </Link>
               </NavItem>
             </Nav>
-            <p className='mr-2 mt-3 text-light'>Search:</p>
+              <p className="fas fa-shopping-cart fa-3x"></p>
+              <p className='mr-2 mt-3 text-light'>Search:</p>
             <SearchInput />
           </Collapse>
         </Navbar>

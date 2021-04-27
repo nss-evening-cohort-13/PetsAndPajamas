@@ -4,9 +4,7 @@ import customerOrderData from '../helpers/data/customerOrderData';
 
 export default class Cart extends React.Component {
   state = {
-    pajamas: [],
-    orders: [],
-    isCompleted: []
+    pajamas: []
   }
 
   componentDidMount() {
