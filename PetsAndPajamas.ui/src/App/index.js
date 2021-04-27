@@ -6,6 +6,7 @@ import './App.scss';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import MyNavbar from '../components/MyNavbar';
+import MyFooter from '../components/Footer';
 
 class App extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class App extends React.Component {
         <Router>
         <MyNavbar />
           <Routes />
+        <MyFooter />
         </Router>
       </div>
     );

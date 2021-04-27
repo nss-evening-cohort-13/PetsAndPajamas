@@ -1,0 +1,45 @@
+@media (min-width: 1200px) {
+    .footer-table {
+        max-width: 2000px;
+        padding-left: 15%;
+    }
+}
+
+.footer-container {
+    background-color: $purple;
+    padding-top: 3%;
+}
+
+.footer-header {
+    color: $green;
+    text-align: left;
+}
+
+.footer-text {
+    color: white;
+    text-align: left;
+    display: block;
+    margin-top: 1%;
+}
+
+.footer-contact-div {
+    color: white;
+    display: flex;
+}
+
+a.footer-text:hover {
+    color: $pink;
+    text-decoration: none;
+}
+
+.footer-icons {
+    color: white;
+    text-align: left;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+
+.footer-logo {
+    display: flex;
+    justify-content: flex-start;
+}
