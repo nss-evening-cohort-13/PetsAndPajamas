@@ -3,7 +3,19 @@
 @import './components/';
 @import './DogPage/';
 @import './components/index.scss';
+@import url('https://fonts.googleapis.com/css2?family=Karla&family=Spectral:wght@700&display=swap');
 
 body {
-  background-color: white;
+  background-color: $favColor;
+  font-family: $bodyFont;
+}
+
+h1 {
+  font-family: $headerFont;
+  font-size: 48px;
+}
+
+a {
+  font-family: $headerFont;
+  font-size: 30px;
 }
