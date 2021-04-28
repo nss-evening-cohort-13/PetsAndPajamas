@@ -15,10 +15,15 @@ export default class Checkout extends React.Component {
     }));
   }
 
+  submitOrder = (orderInfo) => {
+    // submit order needs to be completed
+    console.log(orderInfo);
+  }
+
   render() {
     return (
       <div className="checkoutPage">
-      <CheckoutForm />
+      <CheckoutForm order={this.state.order} submitOrder={this.submitOrder} />
       <OrderSummary />
       </div>
     );

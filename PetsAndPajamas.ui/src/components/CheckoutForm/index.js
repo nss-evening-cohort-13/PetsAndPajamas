@@ -4,28 +4,51 @@ import {
 } from 'react-bootstrap';
 
 export default class CheckoutForm extends React.Component {
+  state = {
+    paymentType: '',
+    cardNumber: '',
+    expMonth: '',
+    expYear: '',
+    cvv: '',
+    shippingAddress: '',
+    city: '',
+    state: '',
+    zipCode: ''
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.submitOrder(this.state);
+  }
+
   render() {
     return (
 <div className="checkoutForm">
           <h1>Checkout</h1>
-          <Form>
-            <Form.Group controlId="PaymentType">
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId="paymentType">
               <Form.Label>Payment Type</Form.Label>
-              <Form.Control as="select">
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.paymentType}>
                 <option>Visa</option>
                 <option>Mastercard</option>
                 <option>American Express</option>
                 <option>Discover</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="CardNumber">
+            <Form.Group controlId="cardNumber">
               <Form.Label>Card Number</Form.Label>
-              <Form.Control type="number" />
+              <Form.Control type="number" onChange={this.handleChange} value={this.state.cardNumber} />
             </Form.Group>
             <Form.Row>
-            <Form.Group as={Col} controlId="ExpMonth">
+            <Form.Group as={Col} controlId="expMonth">
               <Form.Label>Expiration Month</Form.Label>
-              <Form.Control as="select">
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.expMonth}>
                 <option>01</option>
                 <option>02</option>
                 <option>03</option>
@@ -40,9 +63,9 @@ export default class CheckoutForm extends React.Component {
                 <option>12</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group as={Col} controlId="ExpYear">
+            <Form.Group as={Col} controlId="expYear">
             <Form.Label>Expiration Year</Form.Label>
-              <Form.Control as="select">
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.expYear}>
                 <option>2021</option>
                 <option>2022</option>
                 <option>2023</option>
@@ -55,23 +78,23 @@ export default class CheckoutForm extends React.Component {
                 <option>2030</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group as={Col} controlId="CVV">
+            <Form.Group as={Col} controlId="cvv">
               <Form.Label>CVV</Form.Label>
-              <Form.Control type="number" />
+              <Form.Control type="number" onChange={this.handleChange} value={this.state.cvv} />
             </Form.Group>
             </Form.Row>
-            <Form.Group as={Col} controlId="ShippingAddress">
+            <Form.Group as={Col} controlId="shippingAddress">
               <Form.Label>Shipping Address</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control type="text" onChange={this.handleChange} value={this.state.shippingAddress} />
             </Form.Group>
             <Form.Row>
-            <Form.Group as={Col} controlId="City">
+            <Form.Group as={Col} controlId="city">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control type="text" onChange={this.handleChange} value={this.state.city} />
             </Form.Group>
-            <Form.Group as={Col} controlId="State">
+            <Form.Group as={Col} controlId="state">
             <Form.Label>State</Form.Label>
-              <Form.Control as="select">
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.state}>
                 <option>AL</option>
                 <option>AK</option>
                 <option>AS</option>
@@ -127,9 +150,9 @@ export default class CheckoutForm extends React.Component {
                 <option>WY</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group as={Col} controlId="ZipCode">
+            <Form.Group as={Col} controlId="zipCode">
               <Form.Label>Zip Code</Form.Label>
-              <Form.Control type="number" />
+              <Form.Control type="number" onChange={this.handleChange} value={this.state.zipCode} />
             </Form.Group>
             </Form.Row>
             <Button variant="primary" type="submit">
