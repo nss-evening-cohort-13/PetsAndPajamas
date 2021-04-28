@@ -23,11 +23,11 @@ namespace PetsAndPajamas.Models
         public string OrderPaymentType { get; set; }
         public string OrderAccountNumber { get; set; }
         public string OrderCreditCard { get; set; }
+        public int PaymentId { get; set; }
         public int OrderExpMonth { get; set; }
         public int OrderExpYear { get; set; }
         public int OrderCVV { get; set; }
         public List<OrderPajama> OrderPajamas { get; set; }
-        public int PajamaQuantity { get; set; }
         public bool CompletedOrder { get; set; }
 
     }

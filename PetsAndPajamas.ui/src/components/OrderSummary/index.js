@@ -2,6 +2,14 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 
 export default class OrderSummary extends React.Component {
+  // calculateTotal = () => {
+  //   let total = 0;
+  //   this.props.order.orderPajamas.forEach((pajama) => {
+  //     total += pajama.price;
+  //   });
+  //   return total;
+  // }
+
   render() {
     const { order } = this.props;
 
@@ -10,9 +18,18 @@ export default class OrderSummary extends React.Component {
       renderPajamas = order.orderPajamas.map((p) => <tr key={p.id}>
             <td className="product-td"><img src={p.image} alt={p.description} className="summary-img"></img><p>{p.title}</p></td>
             <td>{p.size}</td>
-            <td>quantity</td>
+            <td>{p.pajamaQuantity}</td>
             <td>${p.price}</td>
           </tr>);
+    }
+
+    let renderTotal;
+    if (order && Object.keys(order).length !== 0) {
+      let total = 0;
+      this.props.order.orderPajamas.forEach((pajama) => {
+        total += pajama.price;
+      });
+      renderTotal = total;
     }
 
     return (
@@ -31,7 +48,7 @@ export default class OrderSummary extends React.Component {
               {renderPajamas}
             </tbody>
           </Table>
-          <h3 className="total-line">Amount Due: $13.99</h3>
+          <h3 className="total-line">Amount Due: ${renderTotal}</h3>
         </div>
     );
   }

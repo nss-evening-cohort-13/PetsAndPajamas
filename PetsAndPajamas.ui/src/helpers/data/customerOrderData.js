@@ -7,4 +7,7 @@ const getByUserId = (userId) => new Promise((resolve, reject) => axios.get(`${or
   .then((response) => { resolve(response.data[0]); })
   .catch((error) => reject(error)));
 
-export default { getByUserId };
+const updateOrder = (orderId, newOrder) => new Promise((resolve, reject) => axios.put(`${orderUrl}/${orderId}`, newOrder)
+  .catch((err) => reject(err)));
+
+export default { getByUserId, updateOrder };

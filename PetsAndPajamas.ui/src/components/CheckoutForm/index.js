@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Form, Button, Col
 } from 'react-bootstrap';
+import moment from 'moment-timezone';
+import customerOrderData from '../../helpers/data/customerOrderData';
 
 export default class CheckoutForm extends React.Component {
   state = {
@@ -10,10 +12,10 @@ export default class CheckoutForm extends React.Component {
     expMonth: '',
     expYear: '',
     cvv: '',
-    shippingAddress: '',
-    city: '',
-    state: '',
-    zipCode: ''
+    shipAddress: '',
+    shipCity: '',
+    shipState: '',
+    shipZip: ''
   }
 
   handleChange = (e) => {
@@ -24,7 +26,23 @@ export default class CheckoutForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.submitOrder(this.state);
+    const date = moment(Date.now());
+    const newOrder = {
+      userId: this.props.order.userId,
+      orderDate: date.tz('America/Chicago').format(),
+      shipDate: date.add(2, 'days').tz('America/Chicago').format(),
+      shipAddress: this.state.shipAddress,
+      shipCity: this.state.shipCity,
+      shipState: this.state.shipState,
+      shipZip: parseInt(this.state.shipZip, 10),
+      shipCountry: 'United States',
+      paymentId: this.props.order.paymentId,
+      totalCost: this.props.order.orderTotalCost,
+      isCompleted: true,
+      id: this.props.order.orderId
+    };
+    customerOrderData.updateOrder(this.props.order.orderId, newOrder);
+    console.log(this.props.order.orderId, newOrder);
   }
 
   render() {
@@ -34,7 +52,8 @@ export default class CheckoutForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="paymentType">
               <Form.Label>Payment Type</Form.Label>
-              <Form.Control as="select" onChange={this.handleChange} value={this.state.paymentType}>
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.paymentType} required>
+                <option value="" selected disabled hidden>Choose card type</option>
                 <option>Visa</option>
                 <option>Mastercard</option>
                 <option>American Express</option>
@@ -43,12 +62,13 @@ export default class CheckoutForm extends React.Component {
             </Form.Group>
             <Form.Group controlId="cardNumber">
               <Form.Label>Card Number</Form.Label>
-              <Form.Control type="number" onChange={this.handleChange} value={this.state.cardNumber} />
+              <Form.Control type="number" onChange={this.handleChange} value={this.state.cardNumber} required />
             </Form.Group>
             <Form.Row>
             <Form.Group as={Col} controlId="expMonth">
               <Form.Label>Expiration Month</Form.Label>
-              <Form.Control as="select" onChange={this.handleChange} value={this.state.expMonth}>
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.expMonth} required>
+                <option value="" selected disabled hidden>Month</option>
                 <option>01</option>
                 <option>02</option>
                 <option>03</option>
@@ -65,7 +85,8 @@ export default class CheckoutForm extends React.Component {
             </Form.Group>
             <Form.Group as={Col} controlId="expYear">
             <Form.Label>Expiration Year</Form.Label>
-              <Form.Control as="select" onChange={this.handleChange} value={this.state.expYear}>
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.expYear} required>
+                <option value="" selected disabled hidden>Year</option>
                 <option>2021</option>
                 <option>2022</option>
                 <option>2023</option>
@@ -80,21 +101,22 @@ export default class CheckoutForm extends React.Component {
             </Form.Group>
             <Form.Group as={Col} controlId="cvv">
               <Form.Label>CVV</Form.Label>
-              <Form.Control type="number" onChange={this.handleChange} value={this.state.cvv} />
+              <Form.Control type="number" onChange={this.handleChange} value={this.state.cvv} required />
             </Form.Group>
             </Form.Row>
-            <Form.Group as={Col} controlId="shippingAddress">
+            <Form.Group as={Col} controlId="shipAddress">
               <Form.Label>Shipping Address</Form.Label>
-              <Form.Control type="text" onChange={this.handleChange} value={this.state.shippingAddress} />
+              <Form.Control type="text" onChange={this.handleChange} value={this.state.shippingAddress} required />
             </Form.Group>
             <Form.Row>
-            <Form.Group as={Col} controlId="city">
+            <Form.Group as={Col} controlId="shipCity">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" onChange={this.handleChange} value={this.state.city} />
+              <Form.Control type="text" onChange={this.handleChange} value={this.state.city} required />
             </Form.Group>
-            <Form.Group as={Col} controlId="state">
+            <Form.Group as={Col} controlId="shipState">
             <Form.Label>State</Form.Label>
-              <Form.Control as="select" onChange={this.handleChange} value={this.state.state}>
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.state} required >
+                <option value="" selected disabled hidden>Choose state</option>
                 <option>AL</option>
                 <option>AK</option>
                 <option>AS</option>
@@ -150,9 +172,9 @@ export default class CheckoutForm extends React.Component {
                 <option>WY</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group as={Col} controlId="zipCode">
+            <Form.Group as={Col} controlId="shipZip">
               <Form.Label>Zip Code</Form.Label>
-              <Form.Control type="number" onChange={this.handleChange} value={this.state.zipCode} />
+              <Form.Control type="number" onChange={this.handleChange} value={this.state.zipCode} required />
             </Form.Group>
             </Form.Row>
             <Button variant="primary" type="submit">
