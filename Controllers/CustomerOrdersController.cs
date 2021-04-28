@@ -28,10 +28,10 @@ namespace PetsAndPajamas.Controllers
             return Ok(customerOrders);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        [HttpGet("{userId}")]
+        public IActionResult GetById(string userId)
         {
-            var order = _repo.Get(id);
+            var order = _repo.Get(userId);
 
             if (order == null)
             {

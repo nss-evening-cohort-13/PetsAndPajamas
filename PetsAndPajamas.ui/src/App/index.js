@@ -14,7 +14,7 @@ fbConnection();
 
 class App extends React.Component {
     state = {
-      user: null
+      user: ''
     };
 
     componentDidMount() {
@@ -37,7 +37,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
         <MyNavbar />
-          <Routes />
+          <Routes user={this.state.user} />
         <MyFooter />
         </Router>
       </div>

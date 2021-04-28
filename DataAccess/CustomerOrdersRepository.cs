@@ -86,7 +86,7 @@ namespace PetsAndPajamas.DataAccess
         }
 
         //Gets a customer order by the Id
-        public IEnumerable<CartInfo> Get(int id)
+        public IEnumerable<CartInfo> Get(string userId)
         {
             var sql = @"SELECT 
 	                        co.Id as OrderId,
@@ -123,7 +123,7 @@ namespace PetsAndPajamas.DataAccess
 								    on pat.Id = p.PajamaTypeId
 							    join PetType pet
 								    on pet.Id = p.PetTypeId
-                        WHERE co.Id = @id";
+                        WHERE su.FirebaseId = @userId AND co.isCompleted = 'false'";
 
             using var db = new SqlConnection(ConnectionString);
 
@@ -148,7 +148,7 @@ namespace PetsAndPajamas.DataAccess
                     cart.OrderPajamas.Add(pajama);
 
                     return cart;
-                }, new { id });
+                }, new { userId = userId });
 
             return order;
         }
