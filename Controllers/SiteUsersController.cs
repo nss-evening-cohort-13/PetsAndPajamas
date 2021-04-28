@@ -26,7 +26,7 @@ namespace PetsAndPajamas.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(string id)
         {
             var user = _repo.Get(id);
 
@@ -39,7 +39,7 @@ namespace PetsAndPajamas.Controllers
         }
 
         [HttpPut("{id}/disable")]
-        public IActionResult DisableUser(int id)
+        public IActionResult DisableUser(string id)
         {
             _repo.Disable(id);
 
