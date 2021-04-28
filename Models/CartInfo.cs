@@ -26,7 +26,7 @@ namespace PetsAndPajamas.Models
         public int OrderExpMonth { get; set; }
         public int OrderExpYear { get; set; }
         public int OrderCVV { get; set; }
-        public List<Pajama> OrderPajamas { get; set; }
+        public List<OrderPajama> OrderPajamas { get; set; }
         public int PajamaQuantity { get; set; }
         public bool CompletedOrder { get; set; }
 
