@@ -24,7 +24,7 @@ export default class Checkout extends React.Component {
     return (
       <div className="checkoutPage">
       <CheckoutForm order={this.state.order} submitOrder={this.submitOrder} />
-      <OrderSummary />
+      <OrderSummary order={this.state.order} />
       </div>
     );
   }
