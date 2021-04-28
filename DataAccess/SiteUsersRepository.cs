@@ -22,20 +22,20 @@ namespace PetsAndPajamas.DataAccess
             return db.Query<SiteUser>(sql).ToList();
         }
 
-        public IEnumerable<SiteUser> Get(int id)
+        public IEnumerable<SiteUser> Get(string id)
         {
             using var db = new SqlConnection(ConnectionString);
 
             var sql = @"select *
                         from SiteUser
-                        where id = @id";
+                        where firebaseid = @id";
 
             var user = db.Query<SiteUser>(sql, new { id });
 
             return user;
         }
 
-        public void Disable(int id)
+        public void Disable(string id)
         {
             using var db = new SqlConnection(ConnectionString);
 
@@ -49,8 +49,8 @@ namespace PetsAndPajamas.DataAccess
                             [ZipCode] = 00000,
                             [Country] = 'DeletedUser',
                             [Phone] = 'DeleteUser',
-                            [IsActive] = 0
-                        WHERE id = @id";
+                            [IsActive] = 0,
+                        WHERE firebaseid = @id";
 
             db.Execute(sql, new { id });
         }
@@ -59,9 +59,9 @@ namespace PetsAndPajamas.DataAccess
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"INSERT INTO [dbo].[SiteUser] ([FirstName],[LastName],[EmailAddress],[Address],[City],[State],[ZipCode],[Country],[Phone],[Admin],[IsActive])
-                        OUTPUT inserted.id
-                        VALUES(@FirstName,@LastName,@EmailAddress,@Address,@City,@State,@ZipCode,@Country,@Phone,@Admin,@IsActive)";
+            var sql = @"INSERT INTO [dbo].[SiteUser] ([FirebaseId], [FirstName],[LastName],[EmailAddress],[Address],[City],[State],[ZipCode],[Country],[Phone],[Admin],[IsActive])
+                            OUTPUT inserted.id
+                            VALUES(@FirebaseId,@FirstName,@LastName,@EmailAddress,@Address,@City,@State,@ZipCode,@Country,@Phone,@Admin,@IsActive)";
 
             var id = db.ExecuteScalar<int>(sql, siteUser);
 
@@ -84,7 +84,7 @@ namespace PetsAndPajamas.DataAccess
                             [Phone] = @Phone,
                             [Admin] = @Admin,
                             [IsActive] = @IsActive
-                        WHERE id = @id";
+                        WHERE firebaseid = @id";
 
             db.Execute(sql, siteUser);
         }

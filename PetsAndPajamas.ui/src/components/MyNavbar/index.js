@@ -8,6 +8,7 @@ import {
   NavItem,
 } from 'reactstrap';
 import SearchInput from '../SearchInput';
+import Auth from '../Auth';
 
 class MyNavbar extends Component {
   state = {
@@ -49,6 +50,7 @@ class MyNavbar extends Component {
               <p className="fas fa-shopping-cart fa-3x"></p>
               <p className='mr-3 mt-3 text-light'>Search:</p>
             <SearchInput />
+            <Auth />
           </Collapse>
         </Navbar>
       </div>
