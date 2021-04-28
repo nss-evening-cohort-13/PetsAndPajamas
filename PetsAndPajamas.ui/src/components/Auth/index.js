@@ -13,6 +13,7 @@ class Auth extends Component {
       if (cred.additionalUserInfo.isNewUser) {
         // get uid from firebase, the rest of this info is just made up, whatever registration information you're already saving to the database
         const userInfo = {
+          firebaseid: cred.user.uid,
           firstname: user.given_name,
           lastname: user.family_name,
           emailaddress: user.email,
