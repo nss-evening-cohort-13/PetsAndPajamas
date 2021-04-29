@@ -15,7 +15,7 @@ class Routes extends Component {
     return (
             <Switch>
                 <Route exact path='/about' component={() => <AboutUs />} />
-                <Route exact path='/cart/:id' component={() => <Cart />} />
+                <Route exact path='/cart' component={() => <Cart />} />
                 <Route exact path='/cat-store' component={() => <CatStore />} />
                 <Route exact path='/checkout' component={() => <Checkout />} />
                 <Route exact path='/dog-store' component={() => <DogStore />} />
