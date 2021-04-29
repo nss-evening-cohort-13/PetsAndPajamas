@@ -15,21 +15,6 @@ export default class Checkout extends React.Component {
     }));
   }
 
-  // submitOrder = (orderInfo) => {
-  //   // const newOrder = {
-  //   //   orderDate: Date.now(),
-  //   //   shipDate: Date.now() + 2,
-  //   //   shipAddress: orderInfo.shipAddress,
-  //   //   shipCity: orderInfo.shipCity,
-  //   //   shipState: orderInfo.shipState,
-  //   //   shipZip: orderInfo.shipZip,
-  //   //   shipCountry: 'United States',
-  //   //   isCompleted: true
-  //   // };
-  //   // customerOrderData.updateOrder(this.state.order.orderId, newOrder);
-  //   // console.log(this.state.order.orderId, newOrder);
-  // }
-
   render() {
     return (
       <div className="checkoutPage">

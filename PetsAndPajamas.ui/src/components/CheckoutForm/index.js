@@ -4,6 +4,7 @@ import {
 } from 'react-bootstrap';
 import moment from 'moment-timezone';
 import customerOrderData from '../../helpers/data/customerOrderData';
+import paymentTypeData from '../../helpers/data/paymentTypeData';
 
 export default class CheckoutForm extends React.Component {
   state = {
@@ -42,6 +43,17 @@ export default class CheckoutForm extends React.Component {
       id: this.props.order.orderId
     };
     customerOrderData.updateOrder(this.props.order.orderId, newOrder);
+
+    const newPaymentType = {
+      type: 'Credit Card',
+      accountNumber: this.state.cardNumber,
+      cvv: this.state.cvv,
+      expirationMonth: this.state.expMonth,
+      expirationYear: this.state.expYear,
+      creditCardType: this.state.paymentType,
+      isActive: true,
+    };
+    paymentTypeData.addPaymentType(newPaymentType);
   }
 
   render() {

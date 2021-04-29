@@ -2,14 +2,6 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 
 export default class OrderSummary extends React.Component {
-  // calculateTotal = () => {
-  //   let total = 0;
-  //   this.props.order.orderPajamas.forEach((pajama) => {
-  //     total += pajama.price;
-  //   });
-  //   return total;
-  // }
-
   render() {
     const { order } = this.props;
 
