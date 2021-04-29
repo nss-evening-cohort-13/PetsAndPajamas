@@ -12,12 +12,14 @@ import SearchResults from '../views/SearchResults';
 
 class Routes extends Component {
   render() {
+    const { user } = this.props;
+
     return (
             <Switch>
                 <Route exact path='/about' component={() => <AboutUs />} />
                 <Route exact path='/cart' component={() => <Cart />} />
                 <Route exact path='/cat-store' component={() => <CatStore />} />
-                <Route exact path='/checkout' component={() => <Checkout />} />
+                <Route exact path='/checkout' component={() => <Checkout userId={user.uid}/>} />
                 <Route exact path='/dog-store' component={() => <DogStore />} />
                 <Route exact path='/' component={() => <Home />} />
                 <Route exact path='/product-detail/:id' component={(props) => <ProductDetail {...props}/>} />

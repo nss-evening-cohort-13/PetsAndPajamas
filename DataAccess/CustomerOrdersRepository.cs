@@ -38,6 +38,7 @@ namespace PetsAndPajamas.DataAccess
 	                        pt.Type as OrderPaymentType,
 	                        pt.AccountNumber as OrderAccountNumber,
 	                        pt.CreditCardType as OrderCreditCard,
+                            pt.Id as PaymentId,
                             p.*,
                             po.*,
                             pat.*,
@@ -60,24 +61,24 @@ namespace PetsAndPajamas.DataAccess
 
             var carts = new Dictionary<int, CartInfo>();
 
-            var orders = db.Query<CartInfo, Pajama, PajamaOrder, PajamaType, PetType, CartInfo>(sql,
-                (cartInfo, pajama, pajamaOrder, pajamaType, petType) =>
+            var orders = db.Query<CartInfo, OrderPajama, PajamaOrder, PajamaType, PetType, CartInfo>(sql,
+                (cartInfo, orderPajama, pajamaOrder, pajamaType, petType) =>
                 {
 
                     if (!carts.TryGetValue(cartInfo.OrderId, out var cart))
                     {
                         cart = cartInfo;
-                        cart.OrderPajamas = new List<Pajama>();
+                        cart.OrderPajamas = new List<OrderPajama>();
                         carts.Add(cart.OrderId, cart);
                     }
 
                     //map the pajama things
-                    pajama.PajamaType = pajamaType;
-                    pajama.PetType = petType;
-                    cart.PajamaQuantity = pajamaOrder.Quantity;
+                    orderPajama.PajamaType = pajamaType;
+                    orderPajama.PetType = petType;
+                    orderPajama.PajamaQuantity = pajamaOrder.Quantity;
 
                     //map the order things
-                    cart.OrderPajamas.Add(pajama);
+                    cart.OrderPajamas.Add(orderPajama);
 
                     return cart;
                 }, splitOn: "Id")
@@ -86,7 +87,7 @@ namespace PetsAndPajamas.DataAccess
         }
 
         //Gets a customer order by the Id
-        public IEnumerable<CartInfo> Get(int id)
+        public IEnumerable<CartInfo> Get(string userId)
         {
             var sql = @"SELECT 
 	                        co.Id as OrderId,
@@ -106,6 +107,10 @@ namespace PetsAndPajamas.DataAccess
 	                        pt.Type as OrderPaymentType,
 	                        pt.AccountNumber as OrderAccountNumber,
 	                        pt.CreditCardType as OrderCreditCard,
+                            pt.ExpirationMonth as OrderExpMonth,
+                            pt.ExpirationYear as OrderExpYear,
+                            pt.CVV as OrderCVV,
+                            pt.Id as PaymentId,
                             p.*,
                             po.*,
                             pat.*,
@@ -123,37 +128,38 @@ namespace PetsAndPajamas.DataAccess
 								    on pat.Id = p.PajamaTypeId
 							    join PetType pet
 								    on pet.Id = p.PetTypeId
-                        WHERE co.Id = @id";
+                        WHERE su.FirebaseId = @userId AND co.isCompleted = 'false'";
 
             using var db = new SqlConnection(ConnectionString);
 
             var carts = new Dictionary<int, CartInfo>();
 
-            var order = db.Query<CartInfo, Pajama, PajamaOrder, PajamaType, PetType, CartInfo>(sql,
-                (cartInfo, pajama, pajamaOrder, pajamaType, petType) =>
+            var order = db.Query<CartInfo, OrderPajama, PajamaOrder, PajamaType, PetType, CartInfo>(sql,
+                (cartInfo, orderPajama, pajamaOrder, pajamaType, petType) =>
                 {
                     if (!carts.TryGetValue(cartInfo.OrderId, out var cart))
                     {
                         cart = cartInfo;
-                        cart.OrderPajamas = new List<Pajama>();
+                        cart.OrderPajamas = new List<OrderPajama>();
                         carts.Add(cart.OrderId, cart);
                     }
 
                     //map the pajama things
-                    pajama.PajamaType = pajamaType;
-                    pajama.PetType = petType;
-                    cart.PajamaQuantity = pajamaOrder.Quantity;
+                    orderPajama.PajamaType = pajamaType;
+                    orderPajama.PetType = petType;
+                    orderPajama.PajamaQuantity = pajamaOrder.Quantity;
+                    //cart.PajamaQuantity = pajamaOrder.Quantity;
 
                     //map the order things
-                    cart.OrderPajamas.Add(pajama);
+                    cart.OrderPajamas.Add(orderPajama);
 
                     return cart;
-                }, new { id });
+                }, new { userId = userId });
 
             return order;
         }
-
-        public void Add(CustomerOrder customerOrder)
+       
+            public void Add(CustomerOrder customerOrder)
         {
             var sql = @"INSERT INTO [CustomerOrder] ([UserId], [OrderDate],[ShipDate],[ShipAddress], [ShipCity], [ShipState], [ShipZip], [ShipCountry], [PaymentId], [TotalCost], [IsCompleted])
                         OUTPUT inserted.Id
