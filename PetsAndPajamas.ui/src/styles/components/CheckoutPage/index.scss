@@ -1,0 +1,20 @@
+.checkoutPage {
+    display: flex;
+    justify-content: space-around;
+    margin: 5% 5%;
+}
+
+.orderSummary {
+    width: 50%;
+    text-align: left;
+}
+
+.total-line{
+    text-align: right;
+}
+
+.summary-img {
+    width: 10%;
+    float: left;
+    margin-right: 4%;
+}
