@@ -42,7 +42,6 @@ export default class CheckoutForm extends React.Component {
       id: this.props.order.orderId
     };
     customerOrderData.updateOrder(this.props.order.orderId, newOrder);
-    console.log(this.props.order.orderId, newOrder);
   }
 
   render() {
