@@ -22,7 +22,7 @@ class Routes extends Component {
                 <Route exact path='/checkout' component={() => <Checkout userId={user.uid}/>} />
                 <Route exact path='/dog-store' component={() => <DogStore />} />
                 <Route exact path='/' component={() => <Home />} />
-                <Route exact path='/product-detail/:id' component={(props) => <ProductDetail {...props}/>} />
+                <Route exact path='/product-detail/:id' component={(props) => <ProductDetail userId={user.uid}{...props}/>} />
                 <Route exact path='/profile-page' component={() => <ProfilePage />} />
                 <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
             </Switch>

@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import Select from 'react-select';
 import pajamaData from '../helpers/data/pajamaData';
+import customerOrderData from '../helpers/data/customerOrderData';
+import pajamaOrderData from '../helpers/data/pajamaOrderData';
 
 class ProductDetail extends Component {
   state = {
     pajama: {},
+    order: {},
+    quantity: 0,
     loading: true
   }
 
   componentDidMount() {
     // eslint-disable-next-line react/prop-types
     const pajamaId = this.props.match.params.id;
-
+    const { userId } = this.props;
+    this.getActiveOrder(userId);
     this.getPajama(pajamaId);
   }
 
@@ -22,6 +27,18 @@ class ProductDetail extends Component {
         pajama: response
       }, this.setLoading);
     });
+  }
+
+  getActiveOrder = (uid) => {
+    customerOrderData.getByUserId(uid).then((res) => {
+      this.setState({
+        order: res
+      });
+    });
+  }
+
+  addPajamaToCart = (pajamaOrder) => {
+    pajamaOrderData.createPajamaOrder(pajamaOrder);
   }
 
   setLoading = () => {
@@ -35,7 +52,9 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const { pajama, loading } = this.state;
+    const {
+      pajama, order, loading, quantity
+    } = this.state;
     const thisPajama = pajama[0];
     const options = [
       { value: 1, label: '1' },
@@ -71,9 +90,9 @@ class ProductDetail extends Component {
           <div className='d-flex justify-content-center'>
           <Select className='w-50'
             options={options}
-            label='Quantity' />
+            onChange={(e) => this.setState({ quantity: e.value })}/>
             </div>
-          <Button className='mt-3' color='success'>Add to Cart</Button>
+          <Button className='mt-3' color='success' onClick={() => this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity })}>Add to Cart</Button>
           </div>
           </div>
 

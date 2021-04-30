@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import moment from 'moment-timezone';
 import axios from 'axios';
 import { baseUrl } from '../../helpers/config.json';
+import customerOrderData from '../../helpers/data/customerOrderData';
 
 class Auth extends Component {
   loginClickEvent = (e) => {
@@ -22,7 +24,17 @@ class Auth extends Component {
           // cred here is the created, logged in user from firebase
         };
         // save the user to the the api
-        axios.post(`${baseUrl}/siteusers`, userInfo);
+        axios.post(`${baseUrl}/siteusers`, userInfo).then((response) => {
+          const date = moment(Date.now());
+          const orderInfo = {
+            UserId: response.data.id,
+            OrderDate: date.tz('America/Chicago').format(),
+            ShipDate: date.add(2, 'days').tz('America/Chicago').format(),
+            TotalCost: 0.00,
+            IsCompleted: false
+          };
+          customerOrderData.createCustomerOrder(orderInfo);
+        });
       }
     });
   };

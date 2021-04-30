@@ -46,15 +46,15 @@ namespace PetsAndPajamas.DataAccess
                         from CustomerOrder co
                                 join SiteUser su
                                     on su.Id = co.UserId
-                                join PaymentType pt
+                                left join PaymentType pt
                                     on pt.Id = co.PaymentId
-                                join PajamaOrder po
+                                left join PajamaOrder po
                                     on co.Id = po.OrderId
-							    join Pajama p
+							    left join Pajama p
 								    on p.Id = po.PajamaId
-							    join PajamaType pat
+							    left join PajamaType pat
 								    on pat.Id = p.PajamaTypeId
-							    join PetType pet
+							    left join PetType pet
 								    on pet.Id = p.PetTypeId";
 
             using var db = new SqlConnection(ConnectionString);
@@ -72,13 +72,17 @@ namespace PetsAndPajamas.DataAccess
                         carts.Add(cart.OrderId, cart);
                     }
 
-                    //map the pajama things
-                    orderPajama.PajamaType = pajamaType;
-                    orderPajama.PetType = petType;
-                    orderPajama.PajamaQuantity = pajamaOrder.Quantity;
+                    if (orderPajama != null)
+                    {
+                        //map the pajama things
+                        orderPajama.PajamaType = pajamaType;
+                        orderPajama.PetType = petType;
+                        orderPajama.PajamaQuantity = pajamaOrder.Quantity;
 
-                    //map the order things
-                    cart.OrderPajamas.Add(orderPajama);
+                        //map the order things
+                        cart.OrderPajamas.Add(orderPajama);
+                    }
+
 
                     return cart;
                 }, splitOn: "Id")
@@ -118,15 +122,15 @@ namespace PetsAndPajamas.DataAccess
                         from CustomerOrder co
                                 join SiteUser su
                                     on su.Id = co.UserId
-                                join PaymentType pt
+                                left join PaymentType pt
                                     on pt.Id = co.PaymentId
-                                join PajamaOrder po
+                                left join PajamaOrder po
                                     on co.Id = po.OrderId
-							    join Pajama p
+							    left join Pajama p
 								    on p.Id = po.PajamaId
-							    join PajamaType pat
+							    left join PajamaType pat
 								    on pat.Id = p.PajamaTypeId
-							    join PetType pet
+							    left join PetType pet
 								    on pet.Id = p.PetTypeId
                         WHERE su.FirebaseId = @userId AND co.isCompleted = 'false'";
 
@@ -144,14 +148,16 @@ namespace PetsAndPajamas.DataAccess
                         carts.Add(cart.OrderId, cart);
                     }
 
-                    //map the pajama things
-                    orderPajama.PajamaType = pajamaType;
-                    orderPajama.PetType = petType;
-                    orderPajama.PajamaQuantity = pajamaOrder.Quantity;
-                    //cart.PajamaQuantity = pajamaOrder.Quantity;
+                    if (orderPajama != null)
+                    {
+                        //map the pajama things
+                        orderPajama.PajamaType = pajamaType;
+                        orderPajama.PetType = petType;
+                        orderPajama.PajamaQuantity = pajamaOrder.Quantity;
 
-                    //map the order things
-                    cart.OrderPajamas.Add(orderPajama);
+                        //map the order things
+                        cart.OrderPajamas.Add(orderPajama);
+                    }
 
                     return cart;
                 }, new { userId = userId });
@@ -161,9 +167,9 @@ namespace PetsAndPajamas.DataAccess
 
         public void Add(CustomerOrder customerOrder)
         {
-            var sql = @"INSERT INTO [CustomerOrder] ([UserId], [OrderDate],[ShipDate],[ShipAddress], [ShipCity], [ShipState], [ShipZip], [ShipCountry], [PaymentId], [TotalCost], [IsCompleted])
+            var sql = @"INSERT INTO [CustomerOrder] ([UserId], [OrderDate],[ShipDate],[ShipAddress], [ShipCity], [ShipState], [ShipZip], [ShipCountry], [TotalCost], [IsCompleted])
                         OUTPUT inserted.Id
-                        VALUES(@UserId, @OrderDate, @ShipDate, @ShipAddress, @ShipCity, @ShipState, @ShipZip, @ShipCountry, @PaymentId, @TotalCost, @IsCompleted)";
+                        VALUES(@UserId, @OrderDate, @ShipDate, @ShipAddress, @ShipCity, @ShipState, @ShipZip, @ShipCountry, @TotalCost, @IsCompleted)";
 
             using var db = new SqlConnection(ConnectionString);
 
