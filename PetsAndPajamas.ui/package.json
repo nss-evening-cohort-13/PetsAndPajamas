@@ -15,10 +15,7 @@
     "firebase": "^8.4.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
-<<<<<<< HEAD
     "moment": "^2.29.1",
-=======
->>>>>>> f4a41e245bf2d75568a50b96611d2b0c1829a694
     "moment-timezone": "^0.5.33",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",

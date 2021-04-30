@@ -1,18 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 
 export default class ShoppingCart extends React.Component {
   render() {
-      const { order } = this.props;
+    const { order } = this.props;
 
-      let renderPajamas;
+    let renderPajamas;
     if (order && Object.keys(order).length !== 0) {
       renderPajamas = order.orderPajamas.map((p) => <tr key={p.id}>
             <td className="product-td"><img src={p.image} alt={p.description} className="summary-img"></img><p>{p.title}</p></td>
             <td>{p.size}</td>
+            <td>{p.price}</td>
             <td>{p.pajamaQuantity}</td>
-            <td>${p.price}</td>
+            <td>${p.price * p.pajamaQuantity}</td>
           </tr>);
+    }
+
+    let renderTotal;
+    if (order && Object.keys(order).length !== 0) {
+      let total = 0;
+      this.props.order.orderPajamas.forEach((pajama) => {
+        total += (pajama.price * pajama.pajamaQuantity);
+      });
+      renderTotal = total;
     }
 
     return (
@@ -22,16 +33,20 @@ export default class ShoppingCart extends React.Component {
                 <thead>
                     <tr>
                         <th>Item</th>
+                        <th>Size</th>
                         <th>Unit Price</th>
                         <th>Qty</th>
                         <th>Item Total</th>
                     </tr>
                 </thead>
                 <tbody>
-                  {renderPajamas}
             </tbody>
+                {renderPajamas}
             </Table>
-            <Button variant="primary" type="submit">Continue To Checkout</Button>
+            <h3 className="cart-total">Cart Total: ${renderTotal}</h3>
+            <Link to="/checkout">
+              <Button type="button">Continue To Checkout</Button>
+            </Link>
         </div>
     );
   }
