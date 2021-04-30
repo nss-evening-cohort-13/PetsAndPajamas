@@ -16,4 +16,13 @@ const getByUserId = (userId) => new Promise((resolve, reject) => axios.get(`${or
 const updateOrder = (orderId, newOrder) => new Promise((_resolve, reject) => axios.put(`${orderUrl}/${orderId}`, newOrder)
   .catch((err) => reject(err)));
 
-export default { getByUserId, updateOrder, getSingleOrder };
+const createCustomerOrder = (customerOrder) => new Promise((resolve, reject) => {
+  axios.post(`${orderUrl}`, customerOrder)
+    .then((response) => {
+      resolve(response.data);
+    }).catch((error) => reject(error));
+});
+
+export default {
+  getByUserId, updateOrder, createCustomerOrder, getSingleOrder
+};
