@@ -47,7 +47,8 @@ class MyNavbar extends Component {
                 </Link>
               </NavItem>
             </Nav>
-            <p className='mr-3 mt-3 text-light'>Search:</p>
+              <Link className="fas fa-shopping-cart fa-3x" to='/cart'></Link>
+              <p className='mr-3 mt-3 text-light'>Search:</p>
             <SearchInput />
             <Auth />
           </Collapse>
