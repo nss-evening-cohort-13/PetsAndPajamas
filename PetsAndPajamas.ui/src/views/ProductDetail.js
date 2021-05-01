@@ -5,19 +5,24 @@ import firebase from 'firebase';
 import axios from 'axios';
 import moment from 'moment-timezone';
 import pajamaData from '../helpers/data/pajamaData';
-import baseUrl from '../helpers/config.json';
 import customerOrderData from '../helpers/data/customerOrderData';
+import baseUrl from '../helpers/config.json';
+import pajamaOrderData from '../helpers/data/pajamaOrderData';
 
 class ProductDetail extends Component {
   state = {
     pajama: {},
+    order: {},
+    quantity: 0,
+    clicked: false,
     loading: true
   }
 
   componentDidMount() {
     // eslint-disable-next-line react/prop-types
     const pajamaId = this.props.match.params.id;
-
+    const { userId } = this.props;
+    this.getActiveOrder(userId);
     this.getPajama(pajamaId);
   }
 
@@ -27,6 +32,23 @@ class ProductDetail extends Component {
         pajama: response
       }, this.setLoading);
     });
+  }
+
+  getActiveOrder = (uid) => {
+    customerOrderData.getByUserId(uid).then((res) => {
+      this.setState({
+        order: res
+      });
+    });
+  }
+
+  addPajamaToCart = (pajamaOrder) => {
+    pajamaOrderData.createPajamaOrder(pajamaOrder);
+  }
+
+  deactivateButton = () => {
+    const currentState = this.state.clicked;
+    this.setState({ clicked: !currentState });
   }
 
   setLoading = () => {
@@ -73,7 +95,9 @@ class ProductDetail extends Component {
   };
 
   render() {
-    const { pajama, loading } = this.state;
+    const {
+      pajama, order, loading, quantity, clicked
+    } = this.state;
     const thisPajama = pajama[0];
     const options = [
       { value: 1, label: '1' },
@@ -99,23 +123,40 @@ class ProductDetail extends Component {
           <div className='w-50 ml-5 mt-5'>
           <p>{thisPajama.description}</p>
           <p className='mt-3'>Price: ${thisPajama.price}</p>
-          <p className='pajama-in-stock'>{thisPajama.inventory !== 0 && 'In Stock'}</p>
-          <p>{thisPajama.inventory === 0 && 'Out of Stock'}</p>
+          <p className='pajama-in-stock'>{thisPajama.inventory > 10 && 'In Stock'}</p>
+          <p className='text-danger'>{(thisPajama.inventory > 0 && thisPajama.inventory <= 10) && `Only ${thisPajama.inventory} left!`} </p>
+          <p className='text-danger'>{thisPajama.inventory === 0 && 'Out of Stock'}</p>
           <div className='mt-3 d-flex column-wrap justify-content-center'>
           <p>Size: {thisPajama.size}</p>
           <p className='ml-5'>Color: {thisPajama.color}</p>
           </div>
-          {this.props.user === false
-            ? <button className='btn btn-secondary mt-2' onClick={this.loginClickEvent}>
+          <p className='mb-2'>Quantity</p>
+          <div className='d-flex justify-content-center'>
+          <Select className='w-50'
+            options={options}
+            onChange={(e) => this.setState({ quantity: e.value })}
+            label='Quantity'/>
+            </div>
+            {this.props.user === false
+              ? <button className='btn btn-secondary mt-2' onClick={this.loginClickEvent}>
                 Login to purchase products
               </button>
-            : <><p className='mb-2'>Quantity</p>
-                  <div className='d-flex justify-content-center'>
-                    <Select className='w-50' options={options} label='Quantity' />
-                  </div>
-                    <Button className='mt-3' color='success'>Add to Cart</Button> </>}
-            </div>
+              : <>
+            {clicked ? (
+            <Button className='btn btn-secondary' disabled>Pajama Added to Cart!</Button>
+            )
+              : <Button className='mt-3' color='success' onClick={() => {
+                if (thisPajama.inventory >= quantity) {
+                  this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
+                  this.deactivateButton();
+                }
+              }}>Add to Cart</Button>
+            }
+            {thisPajama.inventory < quantity && <p className='text-danger'>Only {thisPajama.inventory} left in stock. Please update the quantity.</p>}</>}
+
           </div>
+          </div>
+
       </div>
       )
   }
