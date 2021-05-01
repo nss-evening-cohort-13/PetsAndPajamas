@@ -6,8 +6,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla&family=Spectral:wght@700&display=swap');
 
 body {
-  background-color: $favColor;
-  font-family: $bodyFont;
+  background-color: white;
+}
+
+.fa-shopping-cart {
+  color: white;
+  padding: 10px;
 }
 
 h1 {

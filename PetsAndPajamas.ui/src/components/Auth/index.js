@@ -27,12 +27,29 @@ class Auth extends Component {
     });
   };
 
+  logoutClickEvent = () => {
+    firebase.auth().signOut();
+  }
+
+  renderAuthBtn = () => {
+    const user = firebase.auth().currentUser;
+    let authBtn;
+    if (user) {
+      authBtn = <button className='btn btn-secondary mt-2' onClick={this.logoutClickEvent}>
+          Logout
+        </button>;
+    } else {
+      authBtn = <button className='btn btn-secondary mt-2' onClick={this.loginClickEvent}>
+          Login
+        </button>;
+    }
+    return authBtn;
+  }
+
   render() {
     return (
       <div className='Auth'>
-        <button className='btn btn-secondary mt-2' onClick={this.loginClickEvent}>
-          Log In
-        </button>
+        {this.renderAuthBtn()}
       </div>
     );
   }

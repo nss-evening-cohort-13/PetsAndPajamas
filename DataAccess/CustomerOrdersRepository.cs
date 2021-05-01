@@ -158,8 +158,8 @@ namespace PetsAndPajamas.DataAccess
 
             return order;
         }
-
-        public void Add(CustomerOrder customerOrder)
+       
+            public void Add(CustomerOrder customerOrder)
         {
             var sql = @"INSERT INTO [CustomerOrder] ([UserId], [OrderDate],[ShipDate],[ShipAddress], [ShipCity], [ShipState], [ShipZip], [ShipCountry], [PaymentId], [TotalCost], [IsCompleted])
                         OUTPUT inserted.Id

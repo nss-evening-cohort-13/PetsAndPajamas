@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import Select from 'react-select';
+import firebase from 'firebase';
+import axios from 'axios';
+import moment from 'moment-timezone';
 import pajamaData from '../helpers/data/pajamaData';
+import baseUrl from '../helpers/config.json';
+import customerOrderData from '../helpers/data/customerOrderData';
 
 class ProductDetail extends Component {
   state = {
@@ -33,6 +38,39 @@ class ProductDetail extends Component {
   componentWillUnmount() {
     clearInterval(this.timer);
   }
+
+  loginClickEvent = (e) => {
+    e.preventDefault();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then((cred) => {
+      const user = cred.additionalUserInfo.profile;
+      if (cred.additionalUserInfo.isNewUser) {
+        // get uid from firebase, the rest of this info is just made up, whatever registration information you're already saving to the database
+        const userInfo = {
+          firebaseid: cred.user.uid,
+          firstname: user.given_name,
+          lastname: user.family_name,
+          emailaddress: user.email,
+          admin: false,
+          isactive: true
+          // cred here is the created, logged in user from firebase
+        };
+        // save the user to the the api
+        axios.post(`${baseUrl}/siteusers`, userInfo).then((response) => {
+          console.log(response);
+          const date = moment(Date.now());
+          const orderInfo = {
+            UserId: response.data.id,
+            OrderDate: date.tz('America/Chicago').format(),
+            ShipDate: date.add(2, 'days').tz('America/Chicago').format(),
+            TotalCost: 0.00,
+            IsCompleted: false
+          };
+          customerOrderData.createCustomerOrder(orderInfo);
+        });
+      }
+    });
+  };
 
   render() {
     const { pajama, loading } = this.state;
@@ -67,16 +105,17 @@ class ProductDetail extends Component {
           <p>Size: {thisPajama.size}</p>
           <p className='ml-5'>Color: {thisPajama.color}</p>
           </div>
-          <p className='mb-2'>Quantity</p>
-          <div className='d-flex justify-content-center'>
-          <Select className='w-50'
-            options={options}
-            label='Quantity' />
+          {this.props.user === false
+            ? <button className='btn btn-secondary mt-2' onClick={this.loginClickEvent}>
+                Login to purchase products
+              </button>
+            : <><p className='mb-2'>Quantity</p>
+                  <div className='d-flex justify-content-center'>
+                    <Select className='w-50' options={options} label='Quantity' />
+                  </div>
+                    <Button className='mt-3' color='success'>Add to Cart</Button> </>}
             </div>
-          <Button className='mt-3' color='success'>Add to Cart</Button>
           </div>
-          </div>
-
       </div>
       )
   }
