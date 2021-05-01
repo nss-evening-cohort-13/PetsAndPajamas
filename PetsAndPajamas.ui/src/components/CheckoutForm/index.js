@@ -5,6 +5,7 @@ import {
 import moment from 'moment-timezone';
 import customerOrderData from '../../helpers/data/customerOrderData';
 import paymentTypeData from '../../helpers/data/paymentTypeData';
+import pajamaData from '../../helpers/data/pajamaData';
 
 export default class CheckoutForm extends React.Component {
   state = {
@@ -54,6 +55,29 @@ export default class CheckoutForm extends React.Component {
       isActive: true,
     };
     paymentTypeData.addPaymentType(newPaymentType);
+
+    const soldPajamas = this.props.order.orderPajamas;
+    const allUpdatePromises = [];
+    soldPajamas.forEach((pajama) => {
+      const newInventory = pajama.inventory - pajama.pajamaQuantity;
+      const newPajama = {
+        size: pajama.size,
+        color: pajama.color,
+        pattern: pajama.pattern,
+        price: pajama.price,
+        description: pajama.description,
+        inventory: newInventory,
+        title: pajama.title,
+        dateCreated: pajama.dateCreated,
+        isActive: pajama.isActive,
+        pajamaTypeId: pajama.pajamaType.id,
+        petTypeId: pajama.petType.id,
+        id: pajama.id
+      };
+      const promise = pajamaData.updatePajama(pajama.id, newPajama);
+      allUpdatePromises.push(promise);
+    });
+    Promise.all(allUpdatePromises).catch((err) => console.warn(err));
   }
 
   render() {
