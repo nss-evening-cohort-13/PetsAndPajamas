@@ -12,4 +12,6 @@ const getSinglePajamaOrder = (orderId) => ((resolve, reject) => {
 
 const createPajamaOrder = (pajamaOrder) => axios.post(`${pajamaOrderUrl}`, pajamaOrder);
 
-export default { createPajamaOrder, getSinglePajamaOrder };
+const deleteCartItem = (pajamaId, orderId) => axios.delete(`${pajamaOrderUrl}/${pajamaId}/${orderId}`);
+
+export default { createPajamaOrder, getSinglePajamaOrder, deleteCartItem };

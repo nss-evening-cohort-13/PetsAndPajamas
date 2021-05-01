@@ -14,6 +14,8 @@ export default class ShoppingCart extends React.Component {
             <td>{p.price}</td>
             <td>{p.pajamaQuantity}</td>
             <td>${p.price * p.pajamaQuantity}</td>
+            <Button className="btn-danger far fa-trash-alt fa-2x">
+            </Button>
           </tr>);
     }
 

@@ -106,15 +106,16 @@ namespace PetsAndPajamas.DataAccess
             db.Execute(sql, pajamaOrder);
         }
 
-        public void Remove(int id)
+        public void Remove(int pajamaId, int orderId)
         {
             var sql = @"Delete 
                         from PajamaOrder 
-                        where Id = @id";
+                        where pajamaOrder.orderId = @orderId AND
+                        where pajamaOrder.pajamaId = @pajamaId";
 
             using var db = new SqlConnection(ConnectionString);
 
-            db.Execute(sql, new { id });
+            db.Execute(sql, new { pajamaId, orderId });
         }
     }
 }

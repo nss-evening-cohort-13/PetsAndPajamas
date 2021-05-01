@@ -56,10 +56,10 @@ namespace PetsAndPajamas.Controllers
             return Ok(pajamaOrder);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeletePajamaOrder(int id)
+        [HttpDelete("{pajamaId}/{orderId}")]
+        public IActionResult DeletePajamaOrder(int pajamaId, int orderId)
         {
-            _repo.Remove(id);
+            _repo.Remove(pajamaId, orderId);
 
             return Ok();
         }
