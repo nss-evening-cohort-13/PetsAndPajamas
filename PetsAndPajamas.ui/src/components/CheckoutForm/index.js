@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from 'react';
 import {
   Form, Button, Col
@@ -5,6 +6,7 @@ import {
 import moment from 'moment-timezone';
 import customerOrderData from '../../helpers/data/customerOrderData';
 import paymentTypeData from '../../helpers/data/paymentTypeData';
+import pajamaData from '../../helpers/data/pajamaData';
 
 export default class CheckoutForm extends React.Component {
   state = {
@@ -28,6 +30,9 @@ export default class CheckoutForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const date = moment(Date.now());
+    const soldPajamas = this.props.order.orderPajamas;
+    let total = 0;
+    soldPajamas.forEach((pajama) => total += (pajama.price * pajama.pajamaQuantity));
     const newOrder = {
       userId: this.props.order.userId,
       orderDate: date.tz('America/Chicago').format(),
@@ -38,7 +43,7 @@ export default class CheckoutForm extends React.Component {
       shipZip: parseInt(this.state.shipZip, 10),
       shipCountry: 'United States',
       paymentId: this.props.order.paymentId,
-      totalCost: this.props.order.orderTotalCost,
+      totalCost: total,
       isCompleted: true,
       id: this.props.order.orderId
     };
@@ -54,6 +59,28 @@ export default class CheckoutForm extends React.Component {
       isActive: true,
     };
     paymentTypeData.addPaymentType(newPaymentType);
+
+    const allUpdatePromises = [];
+    soldPajamas.forEach((pajama) => {
+      const newInventory = pajama.inventory - pajama.pajamaQuantity;
+      const newPajama = {
+        size: pajama.size,
+        color: pajama.color,
+        pattern: pajama.pattern,
+        price: pajama.price,
+        description: pajama.description,
+        inventory: newInventory,
+        title: pajama.title,
+        dateCreated: pajama.dateCreated,
+        isActive: pajama.isActive,
+        pajamaTypeId: pajama.pajamaType.id,
+        petTypeId: pajama.petType.id,
+        id: pajama.id
+      };
+      const promise = pajamaData.updatePajama(pajama.id, newPajama);
+      allUpdatePromises.push(promise);
+    });
+    Promise.all(allUpdatePromises).catch((err) => console.warn(err));
   }
 
   render() {
