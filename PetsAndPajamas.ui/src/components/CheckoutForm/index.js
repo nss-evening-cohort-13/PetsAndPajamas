@@ -54,6 +54,15 @@ export default class CheckoutForm extends React.Component {
       isActive: true,
     };
     paymentTypeData.addPaymentType(newPaymentType);
+
+    const orderInfo = {
+      UserId: this.props.user.id,
+      OrderDate: date.tz('America/Chicago').format(),
+      ShipDate: date.add(2, 'days').tz('America/Chicago').format(),
+      TotalCost: 0.00,
+      IsCompleted: false
+    };
+    customerOrderData.createCustomerOrder(orderInfo);
   }
 
   render() {

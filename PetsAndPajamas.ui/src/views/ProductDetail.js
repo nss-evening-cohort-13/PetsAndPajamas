@@ -14,6 +14,7 @@ class ProductDetail extends Component {
     pajama: {},
     order: {},
     quantity: 0,
+    pajamaOrder: {},
     clicked: false,
     loading: true
   }
@@ -22,7 +23,7 @@ class ProductDetail extends Component {
     // eslint-disable-next-line react/prop-types
     const pajamaId = this.props.match.params.id;
     const { userId } = this.props;
-    this.getActiveOrder(userId);
+    this.getActiveOrder(pajamaId, userId);
     this.getPajama(pajamaId);
   }
 
@@ -34,16 +35,29 @@ class ProductDetail extends Component {
     });
   }
 
-  getActiveOrder = (uid) => {
+  getActiveOrder = (pajamaId, uid) => {
     customerOrderData.getByUserId(uid).then((res) => {
-      this.setState({
-        order: res
-      });
+      if (res.orderPajamas.filter((pajama) => pajama.id === Number(pajamaId)).length > 0) {
+        pajamaOrderData.getSinglePajamaOrder(pajamaId, res.orderId).then((re) => {
+          this.setState({
+            order: res,
+            pajamaOrder: re
+          }, this.setLoading);
+        });
+      } else {
+        this.setState({
+          order: res,
+        }, this.setLoading);
+      }
     });
   }
 
   addPajamaToCart = (pajamaOrder) => {
     pajamaOrderData.createPajamaOrder(pajamaOrder);
+  }
+
+  updatePajamaQuantity = (pajamaId, pajamaOrder) => {
+    pajamaOrderData.updatePajamaOrder(pajamaId, pajamaOrder);
   }
 
   deactivateButton = () => {
@@ -96,7 +110,7 @@ class ProductDetail extends Component {
 
   render() {
     const {
-      pajama, order, loading, quantity, clicked
+      pajama, order, loading, quantity, clicked, pajamaOrder
     } = this.state;
     const thisPajama = pajama[0];
     const options = [
@@ -147,7 +161,13 @@ class ProductDetail extends Component {
             )
               : <Button className='mt-3' color='success' onClick={() => {
                 if (thisPajama.inventory >= quantity) {
-                  this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
+                  if (pajamaOrder.length) {
+                    this.updatePajamaQuantity(thisPajama.id, {
+                      id: pajamaOrder[0].id, orderId: pajamaOrder[0].orderId, pajamaId: pajamaOrder[0].pajamaId, quantity
+                    });
+                  } else {
+                    this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
+                  }
                   this.deactivateButton();
                 }
               }}>Add to Cart</Button>
