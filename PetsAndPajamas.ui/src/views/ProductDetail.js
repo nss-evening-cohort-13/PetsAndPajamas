@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import Select from 'react-select';
+import firebase from 'firebase';
+import axios from 'axios';
+import moment from 'moment-timezone';
 import pajamaData from '../helpers/data/pajamaData';
 import customerOrderData from '../helpers/data/customerOrderData';
+import baseUrl from '../helpers/config.json';
 import pajamaOrderData from '../helpers/data/pajamaOrderData';
 
 class ProductDetail extends Component {
@@ -57,6 +61,39 @@ class ProductDetail extends Component {
     clearInterval(this.timer);
   }
 
+  loginClickEvent = (e) => {
+    e.preventDefault();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then((cred) => {
+      const user = cred.additionalUserInfo.profile;
+      if (cred.additionalUserInfo.isNewUser) {
+        // get uid from firebase, the rest of this info is just made up, whatever registration information you're already saving to the database
+        const userInfo = {
+          firebaseid: cred.user.uid,
+          firstname: user.given_name,
+          lastname: user.family_name,
+          emailaddress: user.email,
+          admin: false,
+          isactive: true
+          // cred here is the created, logged in user from firebase
+        };
+        // save the user to the the api
+        axios.post(`${baseUrl}/siteusers`, userInfo).then((response) => {
+          console.log(response);
+          const date = moment(Date.now());
+          const orderInfo = {
+            UserId: response.data.id,
+            OrderDate: date.tz('America/Chicago').format(),
+            ShipDate: date.add(2, 'days').tz('America/Chicago').format(),
+            TotalCost: 0.00,
+            IsCompleted: false
+          };
+          customerOrderData.createCustomerOrder(orderInfo);
+        });
+      }
+    });
+  };
+
   render() {
     const {
       pajama, order, loading, quantity, clicked
@@ -96,8 +133,14 @@ class ProductDetail extends Component {
           <div className='d-flex justify-content-center'>
           <Select className='w-50'
             options={options}
-            onChange={(e) => this.setState({ quantity: e.value })}/>
+            onChange={(e) => this.setState({ quantity: e.value })}
+            label='Quantity'/>
             </div>
+            {this.props.user === false
+              ? <button className='btn btn-secondary mt-2' onClick={this.loginClickEvent}>
+                Login to purchase products
+              </button>
+              : <>
             {clicked ? (
             <Button className='btn btn-secondary' disabled>Pajama Added to Cart!</Button>
             )
@@ -105,7 +148,7 @@ class ProductDetail extends Component {
                 this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
                 this.deactivateButton();
               }}>Add to Cart</Button>
-            }
+            }  </>}
 
           </div>
           </div>

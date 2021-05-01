@@ -11,7 +11,7 @@ export default class OrderSummary extends React.Component {
             <td className="product-td"><img src={p.image} alt={p.description} className="summary-img"></img><p>{p.title}</p></td>
             <td>{p.size}</td>
             <td>{p.pajamaQuantity}</td>
-            <td>${p.price}</td>
+            <td>${p.price * p.pajamaQuantity}</td>
           </tr>);
     }
 
@@ -19,7 +19,7 @@ export default class OrderSummary extends React.Component {
     if (order && Object.keys(order).length !== 0) {
       let total = 0;
       this.props.order.orderPajamas.forEach((pajama) => {
-        total += pajama.price;
+        total += (pajama.price * pajama.pajamaQuantity);
       });
       renderTotal = total;
     }

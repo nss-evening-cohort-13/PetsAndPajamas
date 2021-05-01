@@ -17,12 +17,12 @@ class Routes extends Component {
     return (
             <Switch>
                 <Route exact path='/about' component={() => <AboutUs />} />
-                <Route exact path='/cart' component={() => <Cart />} />
+                <Route exact path='/cart' component={() => <Cart userId={user.uid} />} />
                 <Route exact path='/cat-store' component={() => <CatStore />} />
                 <Route exact path='/checkout' component={() => <Checkout userId={user.uid}/>} />
                 <Route exact path='/dog-store' component={() => <DogStore />} />
                 <Route exact path='/' component={() => <Home />} />
-                <Route exact path='/product-detail/:id' component={(props) => <ProductDetail userId={user.uid}{...props}/>} />
+                <Route exact path='/product-detail/:id' component={(props) => <ProductDetail {...props} user={user}/>} />
                 <Route exact path='/profile-page' component={() => <ProfilePage />} />
                 <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
             </Switch>
