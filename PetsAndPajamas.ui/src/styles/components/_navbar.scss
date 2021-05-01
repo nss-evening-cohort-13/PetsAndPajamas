@@ -1,9 +1,18 @@
 .navbar {
   background-color: $secondary;
   color: white;
-  font-size: 18px;
+}
+
+a.navbar-links {
+  font-size: 20px;
+  padding: 0;
+  color: $green;
 }
 
 .navbar-logo {
-  width: 150px;
+  width: 40%;
+}
+
+.cart-icon {
+  font-size: 150%;
 }

@@ -93,7 +93,6 @@ class ProductDetail extends Component {
         };
         // save the user to the the api
         axios.post(`${baseUrl}/siteusers`, userInfo).then((response) => {
-          console.log(response);
           const date = moment(Date.now());
           const orderInfo = {
             UserId: response.data.id,
