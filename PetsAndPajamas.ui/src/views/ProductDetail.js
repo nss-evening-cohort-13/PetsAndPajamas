@@ -162,7 +162,7 @@ class ProductDetail extends Component {
                 if (thisPajama.inventory >= quantity) {
                   if (pajamaOrder.length) {
                     this.updatePajamaQuantity(thisPajama.id, {
-                      id: pajamaOrder[0].id, orderId: pajamaOrder[0].orderId, pajamaId: pajamaOrder[0].pajamaId, quantity
+                      id: pajamaOrder[0].id, orderId: pajamaOrder[0].orderId, pajamaId: pajamaOrder[0].pajamaId, quantity: pajamaOrder[0].quantity += quantity
                     });
                   } else {
                     this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
