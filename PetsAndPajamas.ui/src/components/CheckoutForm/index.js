@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from 'react';
 import {
   Form, Button, Col
@@ -29,6 +30,9 @@ export default class CheckoutForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const date = moment(Date.now());
+    const soldPajamas = this.props.order.orderPajamas;
+    let total = 0;
+    soldPajamas.forEach((pajama) => total += (pajama.price * pajama.pajamaQuantity));
     const newOrder = {
       userId: this.props.order.userId,
       orderDate: date.tz('America/Chicago').format(),
@@ -39,7 +43,7 @@ export default class CheckoutForm extends React.Component {
       shipZip: parseInt(this.state.shipZip, 10),
       shipCountry: 'United States',
       paymentId: this.props.order.paymentId,
-      totalCost: this.props.order.orderTotalCost,
+      totalCost: total,
       isCompleted: true,
       id: this.props.order.orderId
     };
@@ -56,7 +60,6 @@ export default class CheckoutForm extends React.Component {
     };
     paymentTypeData.addPaymentType(newPaymentType);
 
-    const soldPajamas = this.props.order.orderPajamas;
     const allUpdatePromises = [];
     soldPajamas.forEach((pajama) => {
       const newInventory = pajama.inventory - pajama.pajamaQuantity;
