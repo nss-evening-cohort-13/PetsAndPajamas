@@ -123,8 +123,9 @@ class ProductDetail extends Component {
           <div className='w-50 ml-5 mt-5'>
           <p>{thisPajama.description}</p>
           <p className='mt-3'>Price: ${thisPajama.price}</p>
-          <p className='pajama-in-stock'>{thisPajama.inventory !== 0 && 'In Stock'}</p>
-          <p>{thisPajama.inventory === 0 && 'Out of Stock'}</p>
+          <p className='pajama-in-stock'>{thisPajama.inventory > 10 && 'In Stock'}</p>
+          <p className='text-danger'>{(thisPajama.inventory > 0 && thisPajama.inventory <= 10) && `Only ${thisPajama.inventory} left!`} </p>
+          <p className='text-danger'>{thisPajama.inventory === 0 && 'Out of Stock'}</p>
           <div className='mt-3 d-flex column-wrap justify-content-center'>
           <p>Size: {thisPajama.size}</p>
           <p className='ml-5'>Color: {thisPajama.color}</p>
@@ -145,10 +146,13 @@ class ProductDetail extends Component {
             <Button className='btn btn-secondary' disabled>Pajama Added to Cart!</Button>
             )
               : <Button className='mt-3' color='success' onClick={() => {
-                this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
-                this.deactivateButton();
+                if (thisPajama.inventory >= quantity) {
+                  this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
+                  this.deactivateButton();
+                }
               }}>Add to Cart</Button>
-            }  </>}
+            }
+            {thisPajama.inventory < quantity && <p className='text-danger'>Only {thisPajama.inventory} left in stock. Please update the quantity.</p>}</>}
 
           </div>
           </div>
