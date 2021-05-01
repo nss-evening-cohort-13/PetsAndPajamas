@@ -10,6 +10,7 @@ class ProductDetail extends Component {
     pajama: {},
     order: {},
     quantity: 0,
+    clicked: false,
     loading: true
   }
 
@@ -41,6 +42,11 @@ class ProductDetail extends Component {
     pajamaOrderData.createPajamaOrder(pajamaOrder);
   }
 
+  deactivateButton = () => {
+    const currentState = this.state.clicked;
+    this.setState({ clicked: !currentState });
+  }
+
   setLoading = () => {
     this.timer = setInterval(() => {
       this.setState({ loading: false });
@@ -53,7 +59,7 @@ class ProductDetail extends Component {
 
   render() {
     const {
-      pajama, order, loading, quantity
+      pajama, order, loading, quantity, clicked
     } = this.state;
     const thisPajama = pajama[0];
     const options = [
@@ -92,7 +98,15 @@ class ProductDetail extends Component {
             options={options}
             onChange={(e) => this.setState({ quantity: e.value })}/>
             </div>
-          <Button className='mt-3' color='success' onClick={() => this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity })}>Add to Cart</Button>
+            {clicked ? (
+            <Button className='btn btn-secondary' disabled>Pajama Added to Cart!</Button>
+            )
+              : <Button className='mt-3' color='success' onClick={() => {
+                this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
+                this.deactivateButton();
+              }}>Add to Cart</Button>
+            }
+
           </div>
           </div>
 
