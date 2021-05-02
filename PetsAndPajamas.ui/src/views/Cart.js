@@ -9,7 +9,6 @@ export default class Cart extends React.Component {
 
   componentDidMount() {
     const { userId } = this.props;
-    console.log(userId);
     customerOrderData.getByUserId(userId).then((res) => this.setState({
       order: res
     }));

@@ -81,6 +81,15 @@ export default class CheckoutForm extends React.Component {
       allUpdatePromises.push(promise);
     });
     Promise.all(allUpdatePromises).catch((err) => console.warn(err));
+
+    const orderInfo = {
+      UserId: this.props.user.id,
+      OrderDate: date.tz('America/Chicago').format(),
+      ShipDate: date.add(2, 'days').tz('America/Chicago').format(),
+      TotalCost: 0.00,
+      IsCompleted: false
+    };
+    customerOrderData.createCustomerOrder(orderInfo);
   }
 
   render() {

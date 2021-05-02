@@ -79,6 +79,37 @@ namespace PetsAndPajamas.DataAccess
             return pajama;
         }
 
+        public IEnumerable<PajamaOrder> GetByPajamaId(int pajamaId, int orderId)
+        {
+            var sql = @"select * from PajamaOrder po
+                            join CustomerOrder co
+                                on co.Id = po.OrderId
+                            join SiteUser su
+                                on su.Id = co.UserId
+                            join Pajama p
+                                on p.Id = po.PajamaId
+                            join PajamaType pat
+                                on pat.Id = p.PajamaTypeId
+                            join PetType pet
+                                on pet.Id = p.PetTypeId
+                        where p.Id = @pajamaId AND co.Id = @orderId";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var pajama = db.Query<PajamaOrder, CustomerOrder, SiteUser, Pajama, PajamaType, PetType, PajamaOrder>(sql,
+                (pajamaOrder, customerOrder, siteUser, pajama, pajamaType, petType) =>
+                {
+                    pajamaOrder.CustomerOrder = customerOrder;
+                    pajamaOrder.Pajama = pajama;
+                    customerOrder.SiteUser = siteUser;
+                    pajama.PajamaType = pajamaType;
+                    pajama.PetType = petType;
+
+                    return pajamaOrder;
+                }, new { pajamaId, orderId });
+            return pajama;
+        }
+
         public void Add(PajamaOrder pajamaOrder)
         {
             var sql = @"INSERT INTO [PajamaOrder] ([OrderId],[PajamaId],[Quantity])
