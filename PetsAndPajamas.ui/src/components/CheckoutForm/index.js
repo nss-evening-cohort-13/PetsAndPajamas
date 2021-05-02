@@ -1,14 +1,16 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-return-assign */
 import React from 'react';
 import {
   Form, Button, Col
 } from 'react-bootstrap';
 import moment from 'moment-timezone';
+import { withRouter } from 'react-router';
 import customerOrderData from '../../helpers/data/customerOrderData';
 import paymentTypeData from '../../helpers/data/paymentTypeData';
 import pajamaData from '../../helpers/data/pajamaData';
 
-export default class CheckoutForm extends React.Component {
+class CheckoutForm extends React.Component {
   state = {
     paymentType: '',
     cardNumber: '',
@@ -90,6 +92,9 @@ export default class CheckoutForm extends React.Component {
       IsCompleted: false
     };
     customerOrderData.createCustomerOrder(orderInfo);
+
+    const { history } = this.props;
+    history.push('/checkout/confirmation');
   }
 
   render() {
@@ -224,7 +229,7 @@ export default class CheckoutForm extends React.Component {
               <Form.Control type="number" onChange={this.handleChange} value={this.state.zipCode} required />
             </Form.Group>
             </Form.Row>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={this.handleClick}>
               Check Out
             </Button>
           </Form>
@@ -232,3 +237,5 @@ export default class CheckoutForm extends React.Component {
     );
   }
 }
+
+export default withRouter(CheckoutForm);
