@@ -9,12 +9,14 @@ import Routes from '../helpers/Routes';
 import MyNavbar from '../components/MyNavbar';
 import MyFooter from '../components/Footer';
 import fbConnection from '../helpers/data/connection';
+import userData from '../helpers/data/userData';
 
 fbConnection();
 
 class App extends React.Component {
     state = {
-      user: ''
+      user: '',
+      realUser: {},
     };
 
     componentDidMount() {
@@ -22,6 +24,9 @@ class App extends React.Component {
         if (user) {
           user.getIdToken().then((token) => sessionStorage.setItem('token', token));
           this.setState({ user });
+          userData.getUserByUid(user.uid).then((currentUser) => {
+            this.setState({ realUser: currentUser[0] });
+          });
         } else {
           this.setState({ user: false });
         }
@@ -36,8 +41,8 @@ class App extends React.Component {
       return (
       <div className="App">
         <Router>
-        <MyNavbar />
-          <Routes user={this.state.user} />
+        <MyNavbar realUser={this.state.realUser}/>
+          <Routes user={this.state.user} realUser={this.state.realUser} />
         <MyFooter />
         </Router>
       </div>

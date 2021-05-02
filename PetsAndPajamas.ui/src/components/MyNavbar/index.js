@@ -20,6 +20,7 @@ class MyNavbar extends Component {
   })
 
   render() {
+    const { realUser } = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -45,6 +46,9 @@ class MyNavbar extends Component {
                 <Link className="mt-1 mr-3 nav-link navbar-links" to='/cat-store'>
                   Cats
                 </Link>
+                {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links" to='/admin-dashboard'>
+                  Admin
+                </Link>}
               </NavItem>
             </Nav>
               <Link className="fas fa-shopping-cart fa-3x cart-icon" to='/cart'></Link>

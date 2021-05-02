@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import AboutUs from '../views/AboutUs';
 import Cart from '../views/Cart';
 import CatStore from '../views/CatStore';
@@ -9,8 +9,17 @@ import Home from '../views/Home';
 import ProductDetail from '../views/ProductDetail';
 import ProfilePage from '../views/ProfilePage';
 import SearchResults from '../views/SearchResults';
+import AdminDashboard from '../views/AdminDashboard';
 
 class Routes extends Component {
+  PrivateRoute = ({ user, ...rest }) => {
+    const routeChecker = (route) => (user && this.props.realUser.admin === true
+      ? (<Component {...route} user={user} />)
+      : (<Redirect to={{ pathname: '/', state: { from: route.location } }} />));
+
+    return <Route {...rest} render={(props) => routeChecker(props) } />;
+  }
+
   render() {
     const { user } = this.props;
 
@@ -25,6 +34,7 @@ class Routes extends Component {
                 <Route exact path='/product-detail/:id' component={(props) => <ProductDetail userId={user.uid}{...props} user={user}/>} />
                 <Route exact path='/profile-page' component={() => <ProfilePage />} />
                 <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
+                <this.PrivateRoute exact path='/admin-dashboard' component={AdminDashboard} user={user} />
             </Switch>
     );
   }
