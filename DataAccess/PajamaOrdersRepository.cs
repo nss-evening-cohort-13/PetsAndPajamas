@@ -110,8 +110,9 @@ namespace PetsAndPajamas.DataAccess
         {
             var sql = @"Delete 
                         from PajamaOrder 
-                        where pajamaOrder.orderId = @orderId AND
-                        where pajamaOrder.pajamaId = @pajamaId";
+                        Where
+                         pajamaOrder.orderId = @orderId AND
+                         pajamaOrder.pajamaId = @pajamaId";
 
             using var db = new SqlConnection(ConnectionString);
 

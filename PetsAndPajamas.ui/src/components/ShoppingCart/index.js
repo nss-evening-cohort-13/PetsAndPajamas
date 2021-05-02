@@ -8,25 +8,27 @@ export default class ShoppingCart extends React.Component {
     order: {}
   }
 
-  removeCartItem = (e) => {
-    pajamaOrderData.deleteCartItem(this.props.orderId, e.target.id);
+  removeCartItem = (e, orderId) => {
+    pajamaOrderData.deleteCartItem(e.target.id, orderId);
   }
 
   render() {
     const { order } = this.props;
     let renderPajamas;
     if (order && Object.keys(order).length !== 0) {
-      renderPajamas = order.orderPajamas.map((p) => <tr key={p.id} removeItem={this.removeCartItem}>
+      renderPajamas = order.orderPajamas.map((p) => <tr key={p.id} >
             <td className="product-td"><img src={p.image} alt={p.description} className="summary-img"></img><p>{p.title}</p></td>
             <td>{p.size}</td>
             <td>{p.price}</td>
             <td>{p.pajamaQuantity}</td>
             <td>${p.price * p.pajamaQuantity}</td>
-            <Button
-              className='btn-danger far fa-trash-alt fa-2x'
-              id={p.id}
-              OnClick={(e) => this.removeCartItem(e)}>
-            </Button>
+            <td>
+              <Button
+                className='btn-danger far fa-trash-alt fa-2x'
+                id={p.id}
+                onClick={(e) => this.removeCartItem(e, order.orderId)}>
+              </Button>
+            </td>
           </tr>);
     }
     let renderTotal;
