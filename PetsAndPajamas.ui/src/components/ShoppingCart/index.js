@@ -1,8 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
+import pajamaOrderData from '../../helpers/data/pajamaOrderData';
 
 export default class ShoppingCart extends React.Component {
+  state = {
+    order: {}
+  }
+
+  removeCartItem = () => {
+    pajamaOrderData.deleteCartItem(this.state.pajamaId, this.state.pajamaId).then((response) => {
+      this.setState({
+        orders: response
+      });
+    });
+  }
+
   render() {
     const { order } = this.props;
 
@@ -14,8 +27,12 @@ export default class ShoppingCart extends React.Component {
             <td>{p.price}</td>
             <td>{p.pajamaQuantity}</td>
             <td>${p.price * p.pajamaQuantity}</td>
-            <Button className="btn-danger far fa-trash-alt fa-2x">
-            </Button>
+            <div>
+              <Button
+                className='btn-danger far fa-trash-alt fa-2x'
+                onClick={console.log('CLICKED')}>
+              </Button>
+            </div>
           </tr>);
     }
 
