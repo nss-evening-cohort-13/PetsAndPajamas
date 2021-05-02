@@ -26,7 +26,7 @@ class Routes extends Component {
                 <Route exact path='/product-detail/:id' component={(props) => <ProductDetail userId={user.uid}{...props} user={user}/>} />
                 <Route exact path='/profile-page' component={() => <ProfilePage />} />
                 <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
-                <Route exact path='/checkout/confirmation' component={() => <CheckoutConfirmation/>}/>
+                <Route exact path='/checkout/confirmation' component={(props) => <CheckoutConfirmation userId={user.uid} {...props} />}/>
             </Switch>
     );
   }

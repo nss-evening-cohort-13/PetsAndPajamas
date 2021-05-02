@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-return-assign */
 import React from 'react';
 import {
@@ -93,8 +92,8 @@ class CheckoutForm extends React.Component {
     };
     customerOrderData.createCustomerOrder(orderInfo);
 
-    const { history } = this.props;
-    history.push('/checkout/confirmation');
+    const { history, order } = this.props;
+    history.push('/checkout/confirmation', { order });
   }
 
   render() {
