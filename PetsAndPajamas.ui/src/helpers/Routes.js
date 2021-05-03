@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import AboutUs from '../views/AboutUs';
 import Cart from '../views/Cart';
@@ -12,19 +12,8 @@ import ProfilePage from '../views/ProfilePage';
 import SearchResults from '../views/SearchResults';
 import AdminDashboard from '../views/AdminDashboard';
 
-class Routes extends Component {
-  PrivateRoute = ({ user, ...rest }) => {
-    const routeChecker = (route) => (user && this.props.realUser.admin === true
-      ? (<Component {...route} user={user} />)
-      : (<Redirect to={{ pathname: '/', state: { from: route.location } }} />));
-
-    return <Route {...rest} render={(props) => routeChecker(props) } />;
-  }
-
-  render() {
-    const { user } = this.props;
-
-    return (
+export default function Routes({ user, realUser }) {
+  return (
             <Switch>
                 <Route exact path='/about' component={() => <AboutUs />} />
                 <Route exact path='/cart' component={() => <Cart userId={user.uid} />} />
@@ -35,11 +24,18 @@ class Routes extends Component {
                 <Route exact path='/product-detail/:id' component={(props) => <ProductDetail userId={user.uid}{...props} user={user}/>} />
                 <Route exact path='/profile-page' component={() => <ProfilePage />} />
                 <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
-                <this.PrivateRoute exact path='/admin-dashboard' component={AdminDashboard} user={user} />
+                <PrivateRoute exact path='/admin-dashboard' component={AdminDashboard} user={user} realUser={realUser} />
                 <Route exact path='/checkout/confirmation' component={(props) => <CheckoutConfirmation userId={user.uid} {...props} />}/>
             </Switch>
-    );
-  }
+  );
 }
 
-export default Routes;
+const PrivateRoute = ({
+  component: Component, user, realUser, ...rest
+}) => {
+  const routeChecker = (route) => ((user && realUser.admin === true)
+    ? (<Component {...route} user={user} />)
+    : (<Redirect to={{ pathname: '/', state: { from: route.location } }} />));
+
+  return <Route {...rest} render={(props) => routeChecker(props) } />;
+};

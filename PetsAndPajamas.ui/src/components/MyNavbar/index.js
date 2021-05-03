@@ -46,7 +46,9 @@ class MyNavbar extends Component {
                 <Link className="mt-1 mr-3 nav-link navbar-links" to='/cat-store'>
                   Cats
                 </Link>
-                {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links" to='/admin-dashboard'>
+              </NavItem>
+              <NavItem>
+              {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links" to='/admin-dashboard'>
                   Admin
                 </Link>}
               </NavItem>
