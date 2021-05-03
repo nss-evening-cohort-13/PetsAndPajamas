@@ -4,11 +4,12 @@ import {
   Form, Button, Col
 } from 'react-bootstrap';
 import moment from 'moment-timezone';
+import { withRouter } from 'react-router';
 import customerOrderData from '../../helpers/data/customerOrderData';
 import paymentTypeData from '../../helpers/data/paymentTypeData';
 import pajamaData from '../../helpers/data/pajamaData';
 
-export default class CheckoutForm extends React.Component {
+class CheckoutForm extends React.Component {
   state = {
     paymentType: '',
     cardNumber: '',
@@ -81,6 +82,18 @@ export default class CheckoutForm extends React.Component {
       allUpdatePromises.push(promise);
     });
     Promise.all(allUpdatePromises).catch((err) => console.warn(err));
+
+    const orderInfo = {
+      UserId: this.props.user.id,
+      OrderDate: date.tz('America/Chicago').format(),
+      ShipDate: date.add(2, 'days').tz('America/Chicago').format(),
+      TotalCost: 0.00,
+      IsCompleted: false
+    };
+    customerOrderData.createCustomerOrder(orderInfo);
+
+    const { history, order } = this.props;
+    history.push('/checkout/confirmation', { order });
   }
 
   render() {
@@ -215,7 +228,7 @@ export default class CheckoutForm extends React.Component {
               <Form.Control type="number" onChange={this.handleChange} value={this.state.zipCode} required />
             </Form.Group>
             </Form.Row>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={this.handleClick}>
               Check Out
             </Button>
           </Form>
@@ -223,3 +236,5 @@ export default class CheckoutForm extends React.Component {
     );
   }
 }
+
+export default withRouter(CheckoutForm);

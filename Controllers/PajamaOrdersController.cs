@@ -40,6 +40,19 @@ namespace PetsAndPajamas.Controllers
             return Ok(pajamaOrder);
         }
 
+        [HttpGet("{pajamaId}/{orderId}")]
+        public IActionResult GetByPajamaId(int pajamaId, int orderId)
+        {
+            var pajamaOrder = _repo.GetByPajamaId(pajamaId, orderId);
+
+            if (pajamaOrder == null)
+            {
+                return NotFound("This pajama order does not exist");
+            }
+
+            return Ok(pajamaOrder);
+        }
+
         [HttpPost]
         public IActionResult AddPajamaOrder(PajamaOrder pajamaOrder)
         {
