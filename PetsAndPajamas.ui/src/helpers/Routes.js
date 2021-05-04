@@ -11,6 +11,8 @@ import ProductDetail from '../views/ProductDetail';
 import ProfilePage from '../views/ProfilePage';
 import SearchResults from '../views/SearchResults';
 import AdminDashboard from '../views/AdminDashboard';
+import AdminProducts from '../views/AdminProducts';
+import Orders from '../views/Orders';
 
 export default function Routes({ user, realUser }) {
   return (
@@ -25,6 +27,8 @@ export default function Routes({ user, realUser }) {
                 <Route exact path='/profile-page' component={() => <ProfilePage />} />
                 <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
                 <PrivateRoute exact path='/admin-dashboard' component={AdminDashboard} user={user} realUser={realUser} />
+                <PrivateRoute exact path='/admin-products' component={AdminProducts} user={user} realUser={realUser} />
+                <PrivateRoute exact path='/admin-order' component={Orders} user={user} realUser={realUser} />
                 <Route exact path='/checkout/confirmation' component={(props) => <CheckoutConfirmation userId={user.uid} {...props} />}/>
             </Switch>
   );

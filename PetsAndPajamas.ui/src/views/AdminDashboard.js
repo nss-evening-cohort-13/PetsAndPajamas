@@ -8,7 +8,11 @@ class AdminDashboard extends Component {
     return (
       <div>
       <h1>Admin Dashboard</h1>
-      <Link to='/'></Link>
+      <p>Total Sales:</p>
+      <p>Total This Month:</p>
+      <p>Average Per Item:</p>
+      <Link to='/admin-products'>Admin products</Link>
+      <Link to='/admin-order'>Admin orders</Link>
       </div>
     );
   }
