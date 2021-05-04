@@ -6,6 +6,7 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
+  NavbarBrand
 } from 'reactstrap';
 import SearchInput from '../SearchInput';
 import Auth from '../Auth';
@@ -29,11 +30,11 @@ class MyNavbar extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className='mr-auto' navbar>
+            <NavbarBrand>
+                <img className='navbar-logo' src='https://i.imgur.com/VIS93zZ.png' alt='logo'></img>
+              </NavbarBrand>
               <NavItem>
-                <img className='mr-3 navbar-logo' src='https://imgur.com/fmnolhs.jpg' alt='logo'></img>
-              </NavItem>
-              <NavItem>
-                <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/about'>About</Link>
+                <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/about'>About Us</Link>
               </NavItem>
               <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/'>Home</Link>
               <NavItem>
@@ -46,6 +47,7 @@ class MyNavbar extends Component {
                   Cats
                 </Link>
               </NavItem>
+
             </Nav>
               <Link className="fas fa-shopping-cart fa-3x cart-icon nav-font" to='/cart'></Link>
             <SearchInput />

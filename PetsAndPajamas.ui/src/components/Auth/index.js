@@ -47,11 +47,11 @@ class Auth extends Component {
     const user = firebase.auth().currentUser;
     let authBtn;
     if (user) {
-      authBtn = <button className='btn btn-secondary mt-2' onClick={this.logoutClickEvent}>
+      authBtn = <button className='btn btn-secondary mt-1 auth-btn' onClick={this.logoutClickEvent}>
           Logout
         </button>;
     } else {
-      authBtn = <button className='btn btn-secondary mt-2' onClick={this.loginClickEvent}>
+      authBtn = <button className='btn btn-secondary mt-1 auth-btn' onClick={this.loginClickEvent}>
           Login
         </button>;
     }

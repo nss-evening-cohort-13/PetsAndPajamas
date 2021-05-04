@@ -3,10 +3,10 @@
 @import './components/';
 @import './DogPage/';
 @import './components/index.scss';
-@import url('https://fonts.googleapis.com/css2?family=Karla&family=Spectral:wght@700&display=swap');
 
 body {
   background-color: white;
+  font-family: $headerFont;
 }
 
 .fa-shopping-cart {
@@ -21,5 +21,6 @@ h1 {
 
 a {
   font-family: $headerFont;
+  font-weight: 500;
   font-size: 30px;
 }
