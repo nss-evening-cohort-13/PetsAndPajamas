@@ -1,12 +1,22 @@
 .home-header {
     font-size: 200%;
+    font-weight: 600;
     margin: 2% 20%;
+    color: $tertiary;
 }
 
 .jumbotron-container {
-    margin: 5%;
+    padding: 10%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .home-h2 {
+    margin-top: 2%;
     margin-bottom: 2%;
+    font-weight: 600;
+    font-size: 200%;
+    background-color: #FFD4C5;
+    color: $tertiary;
+    padding: .5%;
 }
