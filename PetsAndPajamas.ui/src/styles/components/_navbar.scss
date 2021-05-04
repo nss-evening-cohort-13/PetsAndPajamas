@@ -1,12 +1,10 @@
 .navbar {
   background-color: $secondary;
-  color: white;
 }
 
-a.navbar-links {
+.navbar-links {
   font-size: 20px;
   padding: 0;
-  color: $green;
 }
 
 .navbar-logo {
@@ -15,4 +13,17 @@ a.navbar-links {
 
 .cart-icon {
   font-size: 150%;
+}
+
+.nav-font {
+  color: $tertiary !important;
+}
+
+.search-input {
+  border: none;
+}
+
+.search-input:focus {
+  border: none;
+  outline: none;
 }

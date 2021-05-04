@@ -33,22 +33,21 @@ class MyNavbar extends Component {
                 <img className='mr-3 navbar-logo' src='https://imgur.com/fmnolhs.jpg' alt='logo'></img>
               </NavItem>
               <NavItem>
-                <Link className="mt-1 mr-3 nav-link navbar-links" to='/about'>About</Link>
+                <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/about'>About</Link>
               </NavItem>
-              <Link className="mt-1 mr-3 nav-link navbar-links" to='/'>Home</Link>
+              <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/'>Home</Link>
               <NavItem>
-                <Link className="mt-1 mr-3 nav-link navbar-links" to='/dog-store'>
+                <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/dog-store'>
                   Dogs
                 </Link>
               </NavItem>
               <NavItem>
-                <Link className="mt-1 mr-3 nav-link navbar-links" to='/cat-store'>
+                <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/cat-store'>
                   Cats
                 </Link>
               </NavItem>
             </Nav>
-              <Link className="fas fa-shopping-cart fa-3x cart-icon" to='/cart'></Link>
-              <p className='mr-3 mt-3 text-light'>Search:</p>
+              <Link className="fas fa-shopping-cart fa-3x cart-icon nav-font" to='/cart'></Link>
             <SearchInput />
             <Auth />
           </Collapse>
