@@ -2,18 +2,34 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import pajamaOrderData from '../../helpers/data/pajamaOrderData';
+import customerOrderData from '../../helpers/data/customerOrderData';
 
 export default class ShoppingCart extends React.Component {
   state = {
     order: {}
   }
 
+  componentDidMount() {
+    this.getCartItems();
+  }
+
   removeCartItem = (e, orderId) => {
     pajamaOrderData.deleteCartItem(e.target.id, orderId);
   }
 
+  getCartItems = () => {
+    const { userId } = this.props;
+    customerOrderData.getByUserId(userId).then((res) => this.setState({
+      order: res
+    }));
+  }
+
+  componentDidUpdate() {
+    this.getCartItems();
+  }
+
   render() {
-    const { order } = this.props;
+    const { order } = this.state;
     let renderPajamas;
     if (order && Object.keys(order).length !== 0) {
       renderPajamas = order.orderPajamas.map((p) => <tr key={p.id} >
@@ -34,7 +50,7 @@ export default class ShoppingCart extends React.Component {
     let renderTotal;
     if (order && Object.keys(order).length !== 0) {
       let total = 0;
-      this.props.order.orderPajamas.forEach((pajama) => {
+      this.state.order.orderPajamas.forEach((pajama) => {
         total += (pajama.price * pajama.pajamaQuantity);
       });
       renderTotal = total;

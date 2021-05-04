@@ -22,7 +22,7 @@ export default class Cart extends React.Component {
     return (
       <div>
         <div className="cartSummary">
-        <ShoppingCart order={this.state.order} />
+        <ShoppingCart order={this.state.order} userId={this.props.userId} />
       </div>
       </div>
     );
