@@ -12,7 +12,14 @@ const getSinglePajamaOrder = (pajamaId, orderId) => new Promise((resolve, reject
 
 const createPajamaOrder = (pajamaOrder) => axios.post(`${pajamaOrderUrl}`, pajamaOrder);
 
+const deleteCartItem = (pajamaId, orderId) => axios.delete(`${pajamaOrderUrl}/${pajamaId}/${orderId}`);
+
 const updatePajamaOrder = (pajamaOrderId, newPajamaOrder) => new Promise((_resolve, reject) => axios.put(`${pajamaOrderUrl}/${pajamaOrderId}`, newPajamaOrder)
   .catch((err) => reject(err)));
 
-export default { createPajamaOrder, getSinglePajamaOrder, updatePajamaOrder };
+export default {
+  createPajamaOrder,
+  getSinglePajamaOrder,
+  updatePajamaOrder,
+  deleteCartItem
+};
