@@ -8,6 +8,10 @@ export default class Cart extends React.Component {
   }
 
   componentDidMount() {
+    this.getCartItems();
+  }
+
+  getCartItems = () => {
     const { userId } = this.props;
     customerOrderData.getByUserId(userId).then((res) => this.setState({
       order: res
@@ -18,7 +22,7 @@ export default class Cart extends React.Component {
     return (
       <div>
         <div className="cartSummary">
-        <ShoppingCart order={this.state.order} />
+        <ShoppingCart order={this.state.order} userId={this.props.userId} />
       </div>
       </div>
     );
