@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import AboutUs from '../views/AboutUs';
 import Cart from '../views/Cart';
 import CatStore from '../views/CatStore';
@@ -35,7 +35,7 @@ const PrivateRoute = ({
 }) => {
   const routeChecker = (route) => ((user && realUser.admin === true)
     ? (<Component {...route} user={user} />)
-    : (<Redirect to={{ pathname: '/', state: { from: route.location } }} />));
+    : (<h1>401</h1>));
 
   return <Route {...rest} render={(props) => routeChecker(props) } />;
 };
