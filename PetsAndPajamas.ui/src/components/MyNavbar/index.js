@@ -51,6 +51,9 @@ class MyNavbar extends Component {
               {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links" to='/admin-dashboard'>
                   Admin
                 </Link>}
+                {realUser.admin === false && <Link className="mt-1 mr-3 nav-link navbar-links" to='/profile-page'>
+                Profile
+              </Link>}
               </NavItem>
             </Nav>
               <Link className="fas fa-shopping-cart fa-3x cart-icon" to='/cart'></Link>
