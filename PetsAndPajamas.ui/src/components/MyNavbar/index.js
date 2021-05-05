@@ -21,6 +21,7 @@ class MyNavbar extends Component {
   })
 
   render() {
+    const { realUser } = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -47,7 +48,14 @@ class MyNavbar extends Component {
                   Cats
                 </Link>
               </NavItem>
-
+              <NavItem>
+              {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links" to='/admin-dashboard'>
+                  Admin
+                </Link>}
+                {realUser.admin === false && <Link className="mt-1 mr-3 nav-link navbar-links" to='/profile-page'>
+                Profile
+              </Link>}
+              </NavItem>
             </Nav>
               <Link className="fas fa-shopping-cart fa-3x cart-icon nav-font" to='/cart'></Link>
             <SearchInput />
