@@ -165,7 +165,7 @@ namespace PetsAndPajamas.DataAccess
             return order;
         }
 
-        public IEnumerable<CartInfo> GetShipQueue()
+        public IEnumerable<CartInfo> GetShipQueue(DateTime today)
         {
             var sql = @"select
 	                        co.Id as OrderId,
@@ -201,7 +201,8 @@ namespace PetsAndPajamas.DataAccess
 							    left join PajamaType pat
 								    on pat.Id = p.PajamaTypeId
 							    left join PetType pet
-								    on pet.Id = p.PetTypeId";
+								    on pet.Id = p.PetTypeId
+                        where co.ShipDate >= @today";
 
             using var db = new SqlConnection(ConnectionString);
 
@@ -229,8 +230,9 @@ namespace PetsAndPajamas.DataAccess
                         cart.OrderPajamas.Add(orderPajama);
                     }
                     return cart;
-                }, splitOn: "Id")
+                }, new { today }, splitOn: "Id")
                 .Distinct();
+
             return orders;
         }
 
