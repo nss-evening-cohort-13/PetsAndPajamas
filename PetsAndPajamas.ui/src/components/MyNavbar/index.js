@@ -6,6 +6,7 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
+  NavbarBrand
 } from 'reactstrap';
 import SearchInput from '../SearchInput';
 import Auth from '../Auth';
@@ -30,34 +31,33 @@ class MyNavbar extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className='mr-auto' navbar>
+            <NavbarBrand>
+                <img className='navbar-logo' src='https://i.imgur.com/YWID0CA.png' alt='logo'></img>
+              </NavbarBrand>
               <NavItem>
-                <img className='mr-3 navbar-logo' src='https://imgur.com/fmnolhs.jpg' alt='logo'></img>
+                <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/about'>About Us</Link>
               </NavItem>
+              <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/'>Home</Link>
               <NavItem>
-                <Link className="mt-1 mr-3 nav-link navbar-links" to='/about'>About</Link>
-              </NavItem>
-              <Link className="mt-1 mr-3 nav-link navbar-links" to='/'>Home</Link>
-              <NavItem>
-                <Link className="mt-1 mr-3 nav-link navbar-links" to='/dog-store'>
+                <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/dog-store'>
                   Dogs
                 </Link>
               </NavItem>
               <NavItem>
-                <Link className="mt-1 mr-3 nav-link navbar-links" to='/cat-store'>
+                <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/cat-store'>
                   Cats
                 </Link>
               </NavItem>
               <NavItem>
-              {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links" to='/admin-dashboard'>
+              {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/admin-dashboard'>
                   Admin
                 </Link>}
-                {realUser.admin === false && <Link className="mt-1 mr-3 nav-link navbar-links" to='/profile-page'>
+                {realUser.admin === false && <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/profile-page'>
                 Profile
               </Link>}
               </NavItem>
             </Nav>
-              <Link className="fas fa-shopping-cart fa-3x cart-icon" to='/cart'></Link>
-              <p className='mr-3 mt-3 text-light'>Search:</p>
+              <Link className="fas fa-shopping-cart fa-3x cart-icon nav-font" to='/cart'></Link>
             <SearchInput />
             <Auth />
           </Collapse>
