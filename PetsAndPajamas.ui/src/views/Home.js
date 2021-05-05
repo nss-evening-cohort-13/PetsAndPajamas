@@ -26,9 +26,9 @@ export default class Home extends React.Component {
       <h1 className="home-header">
         Hello fellow pet lovers! Welcome to Pets & Pajamas where we provide high-quality sleepwear for felines and canines.
       </h1>
-    <div className="jumbotron-container">
-      <img src="https://i.imgur.com/D8NHcBA.png" alt="pets wearing pajamas"></img>
-    </div>
+      <div style={{
+        backgroundImage: 'url("https://i.imgur.com/D8NHcBA.png")'
+      }} className="jumbotron-container"></div>
     <h2 className="home-h2">Latest Products</h2>
     <div className="product-cards-container">
     {pajamas.map((p) => <ProductCard key={p.id} pajama={p} />)}
