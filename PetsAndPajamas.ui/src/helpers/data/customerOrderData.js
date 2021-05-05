@@ -23,6 +23,8 @@ const createCustomerOrder = (customerOrder) => new Promise((resolve, reject) => 
     }).catch((error) => reject(error));
 });
 
+// const getShipQueue =
+
 export default {
   getByUserId, updateOrder, createCustomerOrder, getSingleOrder
 };

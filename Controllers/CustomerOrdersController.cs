@@ -41,6 +41,19 @@ namespace PetsAndPajamas.Controllers
             return Ok(order);
         }
 
+        [HttpGet("ship-queue")]
+        public IActionResult GetShipQueue()
+        {
+            var orders = _repo.GetShipQueue();
+
+            if (orders == null)
+            {
+                return NotFound("There are no orders that need shipping.");
+            }
+
+            return Ok(orders);
+        }
+
         [HttpPost]
         public IActionResult AddCustomerOrder(CustomerOrder customerOrder)
         {
