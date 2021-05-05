@@ -1,5 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import moment from 'moment-timezone';
+// import customerOrderData from '../../helpers/data/customerOrderData';
 
 export default class ShipQueue extends React.Component {
     state = {
@@ -7,6 +9,9 @@ export default class ShipQueue extends React.Component {
     }
 
     componentDidMount() {
+      const date = moment().startOf('date');
+      console.log(date);
+      // customerOrderData.getShipQueue(date.tz('America/Chicago').format()).
     }
 
     render() {
