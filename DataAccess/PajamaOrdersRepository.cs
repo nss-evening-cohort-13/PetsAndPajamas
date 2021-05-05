@@ -48,6 +48,37 @@ namespace PetsAndPajamas.DataAccess
             return pajamaOrders;
         }
 
+        public IEnumerable<PajamaOrder> GetThisMonth()
+        {
+            var sql = @"select * from PajamaOrder po
+                            join CustomerOrder co
+                                on co.Id = po.OrderId
+                            join SiteUser su
+                                on su.Id = co.UserId
+                            join Pajama p
+                                on p.Id = po.PajamaId
+                            join PajamaType pat
+                                on pat.Id = p.PajamaTypeId
+                            join PetType pet
+                                on pet.Id = p.PetTypeId
+                            WHERE Month(co.OrderDate) = Month(getDate())";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var pajamaOrders = db.Query<PajamaOrder, CustomerOrder, SiteUser, Pajama, PajamaType, PetType, PajamaOrder>(sql,
+                (pajamaOrder, customerOrder, siteUser, pajama, pajamaType, petType) =>
+                {
+                    pajamaOrder.CustomerOrder = customerOrder;
+                    pajamaOrder.Pajama = pajama;
+                    customerOrder.SiteUser = siteUser;
+                    pajama.PajamaType = pajamaType;
+                    pajama.PetType = petType;
+
+                    return pajamaOrder;
+                }, splitOn: "Id");
+            return pajamaOrders;
+        }
+
         public IEnumerable<PajamaOrder> Get(int id)
         {
             var sql = @"select * from PajamaOrder po

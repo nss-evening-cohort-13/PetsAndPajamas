@@ -15,6 +15,11 @@ const getAllPajamaOrders = () => new Promise((resolve, reject) => axios
   .then((res) => resolve(res.data))
   .catch((err) => reject(err)));
 
+const getCurrentMonthPajamaOrders = () => new Promise((resolve, reject) => axios
+  .get(`${pajamaOrderUrl}/currentMonth`)
+  .then((res) => resolve(res.data))
+  .catch((err) => reject(err)));
+
 const createPajamaOrder = (pajamaOrder) => axios.post(`${pajamaOrderUrl}`, pajamaOrder);
 
 const deleteCartItem = (pajamaId, orderId) => axios.delete(`${pajamaOrderUrl}/${pajamaId}/${orderId}`);
@@ -27,5 +32,6 @@ export default {
   getSinglePajamaOrder,
   updatePajamaOrder,
   deleteCartItem,
-  getAllPajamaOrders
+  getAllPajamaOrders,
+  getCurrentMonthPajamaOrders
 };
