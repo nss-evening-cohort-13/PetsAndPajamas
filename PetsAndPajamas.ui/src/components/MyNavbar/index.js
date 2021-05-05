@@ -32,7 +32,7 @@ class MyNavbar extends Component {
           <Collapse isOpen={isOpen} navbar>
             <Nav className='mr-auto' navbar>
             <NavbarBrand>
-                <img className='navbar-logo' src='https://i.imgur.com/VIS93zZ.png' alt='logo'></img>
+                <img className='navbar-logo' src='https://i.imgur.com/YWID0CA.png' alt='logo'></img>
               </NavbarBrand>
               <NavItem>
                 <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/about'>About Us</Link>
@@ -49,10 +49,10 @@ class MyNavbar extends Component {
                 </Link>
               </NavItem>
               <NavItem>
-              {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links" to='/admin-dashboard'>
+              {realUser.admin === true && <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/admin-dashboard'>
                   Admin
                 </Link>}
-                {realUser.admin === false && <Link className="mt-1 mr-3 nav-link navbar-links" to='/profile-page'>
+                {realUser.admin === false && <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/profile-page'>
                 Profile
               </Link>}
               </NavItem>

@@ -6,34 +6,33 @@
 }
 
 .footer-container {
-    background-color: $purple;
+    background-color: $secondary;
     padding-top: 3%;
 }
 
 .footer-header {
-    color: $green;
+    color: $fourth;
     text-align: left;
 }
 
 .footer-text {
-    color: white;
+    color: $tertiary;
     text-align: left;
     display: block;
     margin-top: 1%;
 }
 
 .footer-contact-div {
-    color: white;
     display: flex;
 }
 
 a.footer-text:hover {
-    color: $pink;
+    color: $fourth;
     text-decoration: none;
 }
 
 .footer-icons {
-    color: white;
+    color: $tertiary;
     text-align: left;
     margin-right: 3%;
     margin-top: 1%;
