@@ -12,12 +12,12 @@ class Orders extends Component {
   }
 
   componentDidMount() {
-    this.getPajamaOrders();
+    this.getCompletedPajamaOrders();
     this.getCurrentMonthPajamaOrders();
   }
 
-  getPajamaOrders = () => {
-    pajamaOrderData.getAllPajamaOrders().then((response) => {
+  getCompletedPajamaOrders = () => {
+    pajamaOrderData.getCompletedPajamaOrders().then((response) => {
       this.setState({
         pajamaOrders: response
       });

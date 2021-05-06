@@ -15,6 +15,11 @@ const getAllPajamaOrders = () => new Promise((resolve, reject) => axios
   .then((res) => resolve(res.data))
   .catch((err) => reject(err)));
 
+const getCompletedPajamaOrders = () => new Promise((resolve, reject) => axios
+  .get(`${pajamaOrderUrl}/completed`)
+  .then((res) => resolve(res.data))
+  .catch((err) => reject(err)));
+
 const getCurrentMonthPajamaOrders = () => new Promise((resolve, reject) => axios
   .get(`${pajamaOrderUrl}/currentMonth`)
   .then((res) => resolve(res.data))
@@ -33,5 +38,6 @@ export default {
   updatePajamaOrder,
   deleteCartItem,
   getAllPajamaOrders,
-  getCurrentMonthPajamaOrders
+  getCurrentMonthPajamaOrders,
+  getCompletedPajamaOrders
 };
