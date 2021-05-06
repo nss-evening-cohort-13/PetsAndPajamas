@@ -27,6 +27,22 @@ namespace PetsAndPajamas.Controllers
             return Ok(pajamaOrders);
         }
 
+        [HttpGet("currentMonth")]
+        public IActionResult GetCurrentMonthPajamaOrders()
+        {
+            var pajamaOrders = _repo.GetThisMonth();
+
+            return Ok(pajamaOrders);
+        }
+
+        [HttpGet("completed")]
+        public IActionResult GetCompletedPajamaOrders()
+        {
+            var pajamaOrders = _repo.GetCompletedPajamaOrders();
+
+            return Ok(pajamaOrders);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
