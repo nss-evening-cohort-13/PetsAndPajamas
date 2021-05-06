@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import pajamaData from '../helpers/data/pajamaData';
 import TotalInventory from '../components/TotalInventory';
+import AddProductForm from '../components/AddProductForm';
 
 class AdminProducts extends Component {
   state = {
@@ -29,18 +30,21 @@ class AdminProducts extends Component {
     );
 
     return (
-      <div className='table-of-pajama-inventory'>
-        <Table boardered>
-          <tbody>
-            <tr>
-              <td>
-                {pajamas.length
-                  ? renderPajamas()
-                  : 'There are no pajamas in inventory.'}
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+      <div className='products-div'>
+        <AddProductForm />
+        <div className='table-of-pajama-inventory'>
+          <Table boardered>
+            <tbody>
+              <tr>
+                <td>
+                  {pajamas.length
+                    ? renderPajamas()
+                    : 'There are no pajamas in inventory.'}
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
       </div>
     );
   }
