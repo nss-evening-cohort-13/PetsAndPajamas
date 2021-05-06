@@ -3,6 +3,7 @@ import {
   Card, CardBody,
   CardTitle, CardSubtitle
 } from 'reactstrap';
+import ShipQueue from '../components/ShipQueue';
 import pajamaOrderData from '../helpers/data/pajamaOrderData';
 
 class Orders extends Component {
@@ -63,6 +64,8 @@ class Orders extends Component {
   render() {
     return (
       <div>
+        <h1>Orders</h1>
+        <ShipQueue />
         <div className="w-25 m-3">
         <Card>
           <CardBody>
