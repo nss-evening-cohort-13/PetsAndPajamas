@@ -202,7 +202,7 @@ namespace PetsAndPajamas.DataAccess
 								    on pat.Id = p.PajamaTypeId
 							    left join PetType pet
 								    on pet.Id = p.PetTypeId
-                        where co.ShipDate >= @today";
+                        where co.ShipDate >= @today AND co.isCompleted = 1";
 
             using var db = new SqlConnection(ConnectionString);
 

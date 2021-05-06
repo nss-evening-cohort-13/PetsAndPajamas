@@ -25,7 +25,7 @@ const createCustomerOrder = (customerOrder) => new Promise((resolve, reject) => 
 
 const getShipQueue = (today) => new Promise((resolve, reject) => axios
   .get(`${orderUrl}/ship-queue/${today}`)
-  .then((res) => resolve(res))
+  .then((res) => resolve(res.data))
   .catch((err) => reject(err)));
 
 export default {

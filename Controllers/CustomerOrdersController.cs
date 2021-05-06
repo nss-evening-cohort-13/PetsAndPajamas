@@ -41,10 +41,10 @@ namespace PetsAndPajamas.Controllers
             return Ok(order);
         }
 
-        [HttpGet("ship-queue")]
-        public IActionResult GetShipQueue()
+        [HttpGet("ship-queue/{todaysDate}")]
+        public IActionResult GetShipQueue(DateTime todaysDate)
         {
-            var orders = _repo.GetShipQueue();
+            var orders = _repo.GetShipQueue(todaysDate);
 
             if (orders == null)
             {
