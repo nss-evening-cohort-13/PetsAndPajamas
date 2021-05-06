@@ -32,6 +32,17 @@ const updatePajama = (id, pajama) => axios
   .put(`${pajamaUrl}/${id}`, pajama)
   .catch((err) => console.warn(err));
 
+const getAllPajamas = () => new Promise((resolve, reject) => axios
+  .get(`${pajamaUrl}`)
+  .then((response) => resolve(response.data))
+  .catch((err) => reject(err)));
+
 export default {
-  getSinglePajama, getDogPajamas, getCatPajamas, getSearchedPajamas, getLatestPajamas, updatePajama
+  getSinglePajama,
+  getDogPajamas,
+  getCatPajamas,
+  getSearchedPajamas,
+  getLatestPajamas,
+  updatePajama,
+  getAllPajamas
 };
