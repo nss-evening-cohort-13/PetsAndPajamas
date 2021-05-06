@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
-// import { Link, withRouter } from 'react-router-dom';
-// import {
-//   Collapse,
-//   Navbar,
-//   NavbarToggler,
-//   Nav,
-//   NavItem,
-//   NavbarBrand
-// } from 'reactstrap';
+import { Link, withRouter } from 'react-router-dom';
+import {
+  Navbar,
+  Nav,
+  NavItem,
+} from 'reactstrap';
 
 class Sidebar extends Component {
   state = { }
 
   render() {
     return (
-<h1>navvo</h1>
+      <div>
+      <Navbar className="col-md-12 d-none d-md-block bg-light sidebar">
+          <Nav navbar>
+          <div className="sidebar-sticky"></div>
+            <NavItem>
+              <Link to="/admin-order">Orders</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/admin-products">Products</Link>
+            </NavItem>
+          </Nav>
+          </Navbar>
+    </div>
     );
   }
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

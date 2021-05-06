@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import Sidebar from '../components/Sidebar';
 
 class Orders extends Component {
   state = { }
@@ -6,7 +8,16 @@ class Orders extends Component {
   render() {
     return (
       <div>
-        <h1>Orders</h1>
+         <Container fluid>
+                <Row>
+                    <Col xs={2} id="sidebar-wrapper">
+                      <Sidebar />
+                    </Col>
+                    <Col xs={10} id="page-content-wrapper">
+                    <h1>Orders</h1>
+                    </Col>
+                </Row>
+            </Container>
       </div>
     );
   }
