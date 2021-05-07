@@ -11,19 +11,19 @@ class Sidebar extends Component {
 
   render() {
     return (
-      <div>
-      <Navbar className="col-md-12 d-none d-md-block bg-light sidebar">
+      <>
+      <Navbar className="col-md-12 d-none d-md-block sidebar">
           <Nav navbar>
           <div className="sidebar-sticky"></div>
             <NavItem>
-              <Link to="/admin-order">Orders</Link>
+              <Link to="/admin-order" className="m-3 nav-link navbar-links nav-font">Orders</Link>
             </NavItem>
             <NavItem>
-              <Link to="/admin-products">Products</Link>
+              <Link to="/admin-products" className="m-3 nav-link navbar-links nav-font">Products</Link>
             </NavItem>
           </Nav>
           </Navbar>
-    </div>
+    </>
     );
   }
 }

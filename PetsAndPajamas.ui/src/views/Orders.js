@@ -68,7 +68,7 @@ class Orders extends Component {
       <div>
          <Container fluid>
                 <Row>
-                    <Col xs={2} id="sidebar-wrapper">
+                    <Col xs={-1} id="sidebar-wrapper">
                       <Sidebar />
                     </Col>
                     <Col xs={10} id="page-content-wrapper">
