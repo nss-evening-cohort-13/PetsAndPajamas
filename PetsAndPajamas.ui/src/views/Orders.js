@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 import ShipQueue from '../components/ShipQueue';
 import pajamaOrderData from '../helpers/data/pajamaOrderData';
+import PastOrders from '../components/PastOrders';
 
 class Orders extends Component {
   state = {
@@ -83,6 +84,7 @@ class Orders extends Component {
         </CardBody>
         </Card>
         </div>
+        <PastOrders />
 
       </div>
     );
