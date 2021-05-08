@@ -28,6 +28,11 @@ const getShipQueue = (today) => new Promise((resolve, reject) => axios
   .then((res) => resolve(res.data))
   .catch((err) => reject(err)));
 
+const getCompletedOrders = () => new Promise((resolve, reject) => axios
+  .get(`${orderUrl}/completed`)
+  .then((response) => resolve(response.data))
+  .catch((error) => reject(error)));
+
 export default {
-  getByUserId, updateOrder, createCustomerOrder, getSingleOrder, getShipQueue
+  getByUserId, updateOrder, createCustomerOrder, getSingleOrder, getShipQueue, getCompletedOrders
 };

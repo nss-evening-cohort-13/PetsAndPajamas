@@ -28,6 +28,14 @@ namespace PetsAndPajamas.Controllers
             return Ok(customerOrders);
         }
 
+        [HttpGet("completed")]
+        public IActionResult GetAllCompletedOrders()
+        {
+            var customerOrders = _repo.GetAllCompleted();
+
+            return Ok(customerOrders);
+        }
+
         [HttpGet("{userId}")]
         public IActionResult GetById(string userId)
         {
