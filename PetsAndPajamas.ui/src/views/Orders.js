@@ -66,15 +66,14 @@ class Orders extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Orders</h1>
-        <div className="w-25 m-3">
+      <>
          <Container fluid>
                 <Row>
                     <Col xs={-1} id="sidebar-wrapper">
                       <Sidebar />
                     </Col>
-                    <Col xs={10} id="page-content-wrapper">
+                    <Col xs={0} id="page-content-wrapper">
+                      <div className="d-flex col-wrap justify-content-around">
                     <div className="w-25 m-3">
         <Card>
           <CardBody>
@@ -93,13 +92,13 @@ class Orders extends Component {
         </Card>
         </div>
         <ShipQueue />
+        </div>
         <PastOrders />
                     </Col>
                 </Row>
             </Container>
 
-      </div>
-      </div>
+      </>
     );
   }
 }
