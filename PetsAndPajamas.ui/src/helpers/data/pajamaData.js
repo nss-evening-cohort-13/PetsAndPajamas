@@ -37,6 +37,8 @@ const getAllPajamas = () => new Promise((resolve, reject) => axios
   .then((response) => resolve(response.data))
   .catch((err) => reject(err)));
 
+const addPajama = (pajama) => axios.post(`${pajamaUrl}`, pajama).catch((err) => console.warn(err));
+
 export default {
   getSinglePajama,
   getDogPajamas,
@@ -44,5 +46,6 @@ export default {
   getSearchedPajamas,
   getLatestPajamas,
   updatePajama,
-  getAllPajamas
+  getAllPajamas,
+  addPajama
 };

@@ -140,14 +140,14 @@ namespace PetsAndPajamas.DataAccess
 
         public Pajama Add(PajamaAdd pajama)
         {
-            var sql = @"INSERT INTO [Pajama] ([Size],[Color],[Pattern], [Price], [Description], [Inventory], [Title], [DateCreated], [IsActive], [PajamaTypeId], [PetTypeId])
+            var sql = @"INSERT INTO [Pajama] ([Size],[Color],[Pattern], [Price], [Description], [Inventory], [Title], [DateCreated], [IsActive], [PajamaTypeId], [PetTypeId], [Image])
                         OUTPUT inserted.*
-                        VALUES(@Size, @Color, @Pattern, @Price, @Description, @Inventory, @Title, @DateCreated, @IsActive, @PajamaTypeId, @PetTypeId)";
+                        VALUES(@Size, @Color, @Pattern, @Price, @Description, @Inventory, @Title, @DateCreated, @IsActive, @PajamaTypeId, @PetTypeId, @Image)";
 
             using var db = new SqlConnection(ConnectionString);
 
 
-            var newPajama = db.QuerySingle<Pajama>(sql, new { pajama.Size, pajama.Color, pajama.Pattern, pajama.Price, pajama.Description, pajama.Inventory, pajama.Title, pajama.DateCreated, pajama.IsActive, pajama.PajamaTypeId, pajama.PetTypeId });
+            var newPajama = db.QuerySingle<Pajama>(sql, new { pajama.Size, pajama.Color, pajama.Pattern, pajama.Price, pajama.Description, pajama.Inventory, pajama.Title, pajama.DateCreated, pajama.IsActive, pajama.PajamaTypeId, pajama.PetTypeId, pajama.Image });
 
             return newPajama;
         }

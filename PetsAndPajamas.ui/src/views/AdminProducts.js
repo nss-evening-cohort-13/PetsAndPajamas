@@ -4,6 +4,7 @@ import { Table } from 'reactstrap';
 import Sidebar from '../components/Sidebar';
 import pajamaData from '../helpers/data/pajamaData';
 import TotalInventory from '../components/TotalInventory';
+import AddProductForm from '../components/AddProductForm';
 
 class AdminProducts extends Component {
   state = {
@@ -31,7 +32,9 @@ class AdminProducts extends Component {
     );
 
     return (
-      <div className='table-of-pajama-inventory'>
+      <div className='products-div'>
+        <AddProductForm />
+        <div className='table-of-pajama-inventory'>
         <Container fluid>
                 <Row>
                     <Col xs={-1} id="sidebar-wrapper">
@@ -52,6 +55,7 @@ class AdminProducts extends Component {
         </Col>
                 </Row>
             </Container>
+        </div>
       </div>
     );
   }
