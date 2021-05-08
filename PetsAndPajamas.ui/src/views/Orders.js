@@ -7,6 +7,7 @@ import {
 import Sidebar from '../components/Sidebar';
 import ShipQueue from '../components/ShipQueue';
 import pajamaOrderData from '../helpers/data/pajamaOrderData';
+import PastOrders from '../components/PastOrders';
 
 class Orders extends Component {
   state = {
@@ -40,7 +41,7 @@ class Orders extends Component {
     this.state.pajamaOrders.forEach((order) => {
       total += (order.quantity * order.pajama.price);
     });
-    return total;
+    return total.toFixed(2);
   }
 
   avgPerItem = () => {
@@ -60,18 +61,19 @@ class Orders extends Component {
     this.state.currentMonthOrders.forEach((order) => {
       total += (order.quantity * order.pajama.price);
     });
-    return total;
+    return total.toFixed(2);
   }
 
   render() {
     return (
-      <div>
+      <>
          <Container fluid>
                 <Row>
                     <Col xs={-1} id="sidebar-wrapper">
                       <Sidebar />
                     </Col>
-                    <Col xs={10} id="page-content-wrapper">
+                    <Col xs={0} id="page-content-wrapper">
+                      <div className="d-flex col-wrap justify-content-around">
                     <div className="w-25 m-3">
         <Card>
           <CardBody>
@@ -90,11 +92,13 @@ class Orders extends Component {
         </Card>
         </div>
         <ShipQueue />
+        </div>
+        <PastOrders />
                     </Col>
                 </Row>
             </Container>
 
-      </div>
+      </>
     );
   }
 }
