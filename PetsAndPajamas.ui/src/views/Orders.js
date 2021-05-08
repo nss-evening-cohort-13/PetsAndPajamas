@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import {
   Card, CardBody,
   CardTitle, CardSubtitle
 } from 'reactstrap';
+import Sidebar from '../components/Sidebar';
 import ShipQueue from '../components/ShipQueue';
 import pajamaOrderData from '../helpers/data/pajamaOrderData';
 import PastOrders from '../components/PastOrders';
@@ -67,6 +69,13 @@ class Orders extends Component {
       <div>
         <h1>Orders</h1>
         <div className="w-25 m-3">
+         <Container fluid>
+                <Row>
+                    <Col xs={-1} id="sidebar-wrapper">
+                      <Sidebar />
+                    </Col>
+                    <Col xs={10} id="page-content-wrapper">
+                    <div className="w-25 m-3">
         <Card>
           <CardBody>
         <CardTitle>Total Sales: ${this.totalSales()}</CardTitle>
@@ -85,7 +94,11 @@ class Orders extends Component {
         </div>
         <ShipQueue />
         <PastOrders />
+                    </Col>
+                </Row>
+            </Container>
 
+      </div>
       </div>
     );
   }
