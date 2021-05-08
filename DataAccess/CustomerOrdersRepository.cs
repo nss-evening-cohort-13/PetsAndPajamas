@@ -90,6 +90,78 @@ namespace PetsAndPajamas.DataAccess
             return orders;
         }
 
+        public IEnumerable<CartInfo> GetAllCompleted()
+        {
+            var sql = @"select
+	                        co.Id as OrderId,
+	                        co.OrderDate as NewOrderDate,
+	                        co.ShipDate as NewShipDate,
+	                        co.ShipAddress as NewShipAddress,
+	                        co.ShipCity as NewShipCity,
+	                        co.ShipState as NewShipState,
+	                        co.ShipZip as NewShipZip,
+	                        co.ShipCountry as NewShipCountry,
+	                        co.TotalCost as OrderTotalCost,
+	                        su.Id as UserId, 
+	                        su.FirstName as UserFirstName, 
+	                        su.LastName as UserLastName, 
+	                        su.EmailAddress as UserEmailAddress, 
+	                        pt.Type as OrderPaymentType,
+	                        pt.AccountNumber as OrderAccountNumber,
+	                        pt.CreditCardType as OrderCreditCard,
+                            pt.Id as PaymentId,
+                            p.*,
+                            po.*,
+                            pat.*,
+                            pet.*
+                        from CustomerOrder co
+                                join SiteUser su
+                                    on su.Id = co.UserId
+                                left join PaymentType pt
+                                    on pt.Id = co.PaymentId
+                                left join PajamaOrder po
+                                    on co.Id = po.OrderId
+							    left join Pajama p
+								    on p.Id = po.PajamaId
+							    left join PajamaType pat
+								    on pat.Id = p.PajamaTypeId
+							    left join PetType pet
+								    on pet.Id = p.PetTypeId
+                                WHERE co.IsCompleted = 1";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var carts = new Dictionary<int, CartInfo>();
+
+            var orders = db.Query<CartInfo, OrderPajama, PajamaOrder, PajamaType, PetType, CartInfo>(sql,
+                (cartInfo, orderPajama, pajamaOrder, pajamaType, petType) =>
+                {
+
+                    if (!carts.TryGetValue(cartInfo.OrderId, out var cart))
+                    {
+                        cart = cartInfo;
+                        cart.OrderPajamas = new List<OrderPajama>();
+                        carts.Add(cart.OrderId, cart);
+                    }
+
+                    if (orderPajama != null)
+                    {
+                        //map the pajama things
+                        orderPajama.PajamaType = pajamaType;
+                        orderPajama.PetType = petType;
+                        orderPajama.PajamaQuantity = pajamaOrder.Quantity;
+
+                        //map the order things
+                        cart.OrderPajamas.Add(orderPajama);
+                    }
+
+
+                    return cart;
+                }, splitOn: "Id")
+                .Distinct();
+            return orders;
+        }
+
         //Gets a customer order by the Id
         public IEnumerable<CartInfo> Get(string userId)
         {

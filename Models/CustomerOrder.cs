@@ -19,5 +19,6 @@ namespace PetsAndPajamas.Models
         public string ShipCountry { get; set; }
         public int PaymentId { get; set; }
         public decimal TotalCost { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }
