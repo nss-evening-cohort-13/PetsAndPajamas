@@ -33,7 +33,7 @@ class AdminProducts extends Component {
 
     return (
       <div className='products-div'>
-        <AddProductForm />
+        <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
         <div className='table-of-pajama-inventory'>
         <Container fluid>
                 <Row>
