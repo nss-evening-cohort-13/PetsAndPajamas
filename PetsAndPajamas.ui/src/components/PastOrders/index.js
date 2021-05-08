@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import moment from 'moment';
 import customerOrderData from '../../helpers/data/customerOrderData';
-import AppModal from '../AppModal/inventoryUpdate';
+import AppModal from '../AppModal';
 import PastOrderDetails from '../PastOrderDetails';
 
 class PastOrders extends Component {
