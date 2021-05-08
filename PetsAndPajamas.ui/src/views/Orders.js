@@ -66,7 +66,6 @@ class Orders extends Component {
     return (
       <div>
         <h1>Orders</h1>
-        <ShipQueue />
         <div className="w-25 m-3">
         <Card>
           <CardBody>
@@ -84,6 +83,7 @@ class Orders extends Component {
         </CardBody>
         </Card>
         </div>
+        <ShipQueue />
         <PastOrders />
 
       </div>
