@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import pajamaData from '../../helpers/data/pajamaData';
-import AppModal from '../AppModal/inventoryUpdate';
+import AppModal from '../AppModal';
 
 export default class TotalInventory extends Component {
     state = {
