@@ -41,7 +41,7 @@ class Orders extends Component {
     this.state.pajamaOrders.forEach((order) => {
       total += (order.quantity * order.pajama.price);
     });
-    return total;
+    return total.toFixed(2);
   }
 
   avgPerItem = () => {
@@ -61,7 +61,7 @@ class Orders extends Component {
     this.state.currentMonthOrders.forEach((order) => {
       total += (order.quantity * order.pajama.price);
     });
-    return total;
+    return total.toFixed(2);
   }
 
   render() {

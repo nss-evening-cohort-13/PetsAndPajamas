@@ -39,10 +39,10 @@ class PastOrders extends Component {
 
   render() {
     return (
-      <div>
+      <>
       <h3>Past Orders</h3>
-      <Table striped bordered hover size="sm">
-                    <thead>
+      <Table className="fixed-header" striped bordered hover size="sm">
+                    <thead className="past-order-table">
                         <tr>
                         <th>Order No.</th>
                         <th>Order Date</th>
@@ -50,11 +50,11 @@ class PastOrders extends Component {
                         <th>Order Details</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="past-order-table-body">
                       {this.renderCompletedOrders()}
                     </tbody>
                 </Table>
-                </div>
+                </>
     );
   }
 }
