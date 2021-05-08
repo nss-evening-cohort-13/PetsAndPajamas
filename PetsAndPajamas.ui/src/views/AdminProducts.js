@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Table } from 'reactstrap';
+import Sidebar from '../components/Sidebar';
 import pajamaData from '../helpers/data/pajamaData';
 import TotalInventory from '../components/TotalInventory';
 import AddProductForm from '../components/AddProductForm';
@@ -33,17 +35,26 @@ class AdminProducts extends Component {
       <div className='products-div'>
         <AddProductForm />
         <div className='table-of-pajama-inventory'>
-          <Table boardered>
-            <tbody>
-              <tr>
-                <td>
-                  {pajamas.length
-                    ? renderPajamas()
-                    : 'There are no pajamas in inventory.'}
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+        <Container fluid>
+                <Row>
+                    <Col xs={-1} id="sidebar-wrapper">
+                      <Sidebar />
+                    </Col>
+                    <Col xs={10} id="page-content-wrapper">
+        <Table boardered>
+          <tbody>
+            <tr>
+              <td>
+                {pajamas.length
+                  ? renderPajamas()
+                  : 'There are no pajamas in inventory.'}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+        </Col>
+                </Row>
+            </Container>
         </div>
       </div>
     );
