@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import pajamaData from '../../helpers/data/pajamaData';
 import AppModal from '../AppModal';
+import ProductForm from '../ProductForm';
 
 export default class TotalInventory extends Component {
     state = {
@@ -38,9 +39,10 @@ export default class TotalInventory extends Component {
                   <td>{title}</td>
                   <td>{inventory}</td>
                     <AppModal className='fas fa-edit fa-2x'
-                    title={'Update Inventory Item'}
-                    id={pajama.id}
-                    pajama={pajama}>
+                      title={'Update Inventory Item'}
+                      id={pajama.id}
+                      pajama={pajama}>
+                      { Object.keys(pajama).length && <ProductForm pajama={pajama} />}
                     </AppModal>
                 </tr>
               </tbody>

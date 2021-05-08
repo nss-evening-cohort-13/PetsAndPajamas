@@ -4,7 +4,7 @@ import { Table } from 'reactstrap';
 import Sidebar from '../components/Sidebar';
 import pajamaData from '../helpers/data/pajamaData';
 import TotalInventory from '../components/TotalInventory';
-import AddProductForm from '../components/AddProductForm';
+import ProductForm from '../components/ProductForm';
 
 class AdminProducts extends Component {
   state = {
@@ -33,7 +33,7 @@ class AdminProducts extends Component {
 
     return (
       <div className='products-div'>
-        <AddProductForm />
+        <ProductForm />
         <div className='table-of-pajama-inventory'>
         <Container fluid>
                 <Row>
