@@ -41,6 +41,7 @@ class Auth extends Component {
 
   logoutClickEvent = () => {
     firebase.auth().signOut();
+    window.location.reload();
   }
 
   renderAuthBtn = () => {

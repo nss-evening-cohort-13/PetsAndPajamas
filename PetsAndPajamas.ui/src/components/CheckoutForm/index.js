@@ -78,18 +78,18 @@ class CheckoutForm extends React.Component {
         petTypeId: pajama.petType.id,
         id: pajama.id
       };
-      const orderInfo = {
-        UserId: this.props.user.id,
-        OrderDate: date.tz('America/Chicago').format(),
-        ShipDate: date.add(2, 'days').tz('America/Chicago').format(),
-        TotalCost: 0.00,
-        IsCompleted: false
-      };
       const promise = pajamaData.updatePajama(pajama.id, newPajama);
-      const newOrderPromise = customerOrderData.createCustomerOrder(orderInfo);
       allUpdatePromises.push(promise);
-      allUpdatePromises.push(newOrderPromise);
     });
+    const orderInfo = {
+      UserId: this.props.user.id,
+      OrderDate: date.tz('America/Chicago').format(),
+      ShipDate: date.add(2, 'days').tz('America/Chicago').format(),
+      TotalCost: 0.00,
+      IsCompleted: false
+    };
+    const newOrderPromise = customerOrderData.createCustomerOrder(orderInfo);
+    allUpdatePromises.push(newOrderPromise);
     Promise.all(allUpdatePromises).catch((err) => console.warn(err));
 
     const { history, order } = this.props;
