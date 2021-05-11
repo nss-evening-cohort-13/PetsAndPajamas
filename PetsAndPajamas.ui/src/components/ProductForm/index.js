@@ -6,7 +6,7 @@ import { Form, Button } from 'react-bootstrap';
 import AppModal from '../AppModal';
 import pajamaData from '../../helpers/data/pajamaData';
 
-export default class ProductForm extends React.Component {
+export default class AddProductForm extends React.Component {
     state = {
       title: '',
       description: '',

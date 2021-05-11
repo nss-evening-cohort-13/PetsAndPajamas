@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import pajamaData from '../../helpers/data/pajamaData';
 import AppModal from '../AppModal';
-import ProductForm from '../ProductForm';
+import AddProductForm from '../AddProductForm';
 
 export default class TotalInventory extends Component {
     state = {
@@ -42,7 +42,7 @@ export default class TotalInventory extends Component {
                       title={'Update Inventory Item'}
                       id={pajama.id}
                       pajama={pajama}>
-                      { Object.keys(pajama).length && <ProductForm pajama={pajama} />}
+                      { Object.keys(pajama).length && <AddProductForm pajama={pajama} />}
                     </AppModal>
                 </tr>
               </tbody>
