@@ -15,6 +15,10 @@ class AdminProducts extends Component {
     this.getAllPajamaInventory();
   }
 
+  componentDidUpdate() {
+    this.getAllPajamaInventory();
+  }
+
   getAllPajamaInventory = () => {
     pajamaData.getAllPajamas()
       .then((response) => this.setState({
@@ -33,7 +37,7 @@ class AdminProducts extends Component {
 
     return (
       <div className='products-div'>
-        <AddProductForm />
+        <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
         <div className='table-of-pajama-inventory'>
         <Container fluid>
                 <Row>
