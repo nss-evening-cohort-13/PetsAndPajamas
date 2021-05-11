@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class ProfilePage extends Component {
+class OrderHistory extends Component {
   state = { }
 
   render() {
     return (
-      <h1>Profile Page</h1>
+      <h1>Order History</h1>
     );
   }
 }
 
-export default ProfilePage;
+export default OrderHistory;
