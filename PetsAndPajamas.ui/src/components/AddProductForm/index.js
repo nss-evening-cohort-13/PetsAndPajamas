@@ -6,7 +6,7 @@ import { Form, Button } from 'react-bootstrap';
 import AppModal from '../AppModal';
 import pajamaData from '../../helpers/data/pajamaData';
 
-export default class ProductForm extends React.Component {
+export default class AddProductForm extends React.Component {
     state = {
       title: '',
       description: '',
@@ -58,14 +58,12 @@ export default class ProductForm extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       pajamaData.addPajama(this.state);
-
-      this.props.handleUpdate();
     }
 
     render() {
       return (
             <>
-            <AppModal title='Add a Product'>
+            <AppModal title='Add/Update a Product'>
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="title">
                     <Form.Label>Title</Form.Label>

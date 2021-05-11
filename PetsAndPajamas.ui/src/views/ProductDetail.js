@@ -23,7 +23,9 @@ class ProductDetail extends Component {
     // eslint-disable-next-line react/prop-types
     const pajamaId = this.props.match.params.id;
     const { userId } = this.props;
-    this.getActiveOrder(pajamaId, userId);
+    if (this.props.user) {
+      this.getActiveOrder(pajamaId, userId);
+    }
     this.getPajama(pajamaId);
   }
 

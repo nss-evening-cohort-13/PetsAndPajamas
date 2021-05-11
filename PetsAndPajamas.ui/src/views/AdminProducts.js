@@ -4,7 +4,7 @@ import { Table } from 'reactstrap';
 import Sidebar from '../components/Sidebar';
 import pajamaData from '../helpers/data/pajamaData';
 import TotalInventory from '../components/TotalInventory';
-import ProductForm from '../components/ProductForm';
+import AddProductForm from '../components/AddProductForm';
 
 class AdminProducts extends Component {
   state = {
@@ -12,6 +12,10 @@ class AdminProducts extends Component {
   }
 
   componentDidMount() {
+    this.getAllPajamaInventory();
+  }
+
+  componentDidUpdate() {
     this.getAllPajamaInventory();
   }
 
@@ -33,7 +37,7 @@ class AdminProducts extends Component {
 
     return (
       <div className='products-div'>
-        <ProductForm />
+        <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
         <div className='table-of-pajama-inventory'>
         <Container fluid>
                 <Row>
