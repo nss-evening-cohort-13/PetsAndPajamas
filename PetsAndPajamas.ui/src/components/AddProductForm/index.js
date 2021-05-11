@@ -58,6 +58,8 @@ export default class AddProductForm extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       pajamaData.addPajama(this.state);
+
+      this.props.handleUpdate();
     }
 
     render() {
