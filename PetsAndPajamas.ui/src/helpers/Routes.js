@@ -23,7 +23,7 @@ export default function Routes({ user, realUser }) {
                 <Route exact path='/checkout' component={(props) => <Checkout userId={user.uid} {...props} />} />
                 <Route exact path='/dog-store' component={() => <DogStore />} />
                 <Route exact path='/' component={() => <Home />} />
-                <PrivateRoute exact path='order-history' component={OrderHistory} user={user} />
+                <PrivateRoute exact path='/order-history' component={OrderHistory} user={user} />
                 <Route exact path='/product-detail/:id' component={(props) => <ProductDetail userId={user.uid}{...props} user={user}/>} />
                 <PrivateRoute exact path='/profile-page' component={ProfilePage} user={user} />
                 <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
