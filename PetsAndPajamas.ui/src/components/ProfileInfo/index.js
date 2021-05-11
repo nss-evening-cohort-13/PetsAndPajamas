@@ -19,13 +19,22 @@ class ProfileInfo extends Component {
     const { user } = this.state;
     return (
       <>
-      <Card style={{ width: '50rem' }}>
+      <Card style={{ margin: 'auto', width: '50rem' }}>
   <Card.Body>
+  <div className="d-flex column-wrap justify-content-around">
+    <div>
     <Card.Title>{user.firstName} {user.lastName}</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
+    <img src={this.props.user.photoURL} alt={user.firstName + user.lastName}></img>
+    </div>
+      <div>
+      <p>Email: {user.emailAddress}</p>
+      <p>Phone: {user.phone}</p>
+      <p>Address: {user.address}</p>
+      <p>{user.city}, {user.state}</p>
+      <p>{user.zipCode}</p>
+      <p>{user.country}</p>
+      </div>
+      </div>
   </Card.Body>
 </Card>
       </>
