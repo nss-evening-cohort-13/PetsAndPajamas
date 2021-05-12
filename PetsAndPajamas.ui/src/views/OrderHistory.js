@@ -16,7 +16,7 @@ class OrderHistory extends Component {
                    </Col>
                    <Col xs={0} id="page-content-wrapper">
      <h1>Order History</h1>
-     <UserOrderHistory />
+     <UserOrderHistory user={this.props.user} />
      </Col>
                </Row>
            </Container>

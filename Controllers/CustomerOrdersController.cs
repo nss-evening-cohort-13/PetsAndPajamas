@@ -49,6 +49,19 @@ namespace PetsAndPajamas.Controllers
             return Ok(order);
         }
 
+        [HttpGet("all/{userId}")]
+        public IActionResult GetAllUserOrders(string userId)
+        {
+            var order = _repo.GetAllUserOrders(userId);
+
+            if (order == null)
+            {
+                return NotFound("This order id does not exist");
+            }
+
+            return Ok(order);
+        }
+
         [HttpGet("ship-queue/{todaysDate}")]
         public IActionResult GetShipQueue(DateTime todaysDate)
         {
