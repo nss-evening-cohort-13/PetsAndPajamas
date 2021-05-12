@@ -1,0 +1,26 @@
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import 'variables';
+@import './components/';
+@import './DogPage/';
+@import './components/index.scss';
+
+body {
+  background-color: white;
+  font-family: $headerFont;
+}
+
+.fa-shopping-cart {
+  color: white;
+  padding: 10px;
+}
+
+h1 {
+  font-family: $headerFont;
+  font-size: 48px;
+}
+
+a {
+  font-family: $headerFont;
+  font-weight: 500;
+  font-size: 30px;
+}

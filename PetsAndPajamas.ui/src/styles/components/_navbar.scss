@@ -1,0 +1,68 @@
+.navbar {
+  background-color: $secondary;
+  padding: .5%;
+}
+
+.navbar-links {
+  font-size: 20px;
+  padding: 0;
+}
+
+.navbar-logo {
+  max-width: 50%;
+  height: auto;
+}
+
+.navbar-brand {
+  width: 20%;
+}
+
+.cart-icon {
+  font-size: 150%;
+  margin-right: 1%;
+}
+
+.cart-icon:hover {
+  text-decoration: none;
+}
+
+.nav-font {
+  color: $tertiary !important;
+}
+
+.nav-font:hover {
+  color: $fourth !important;
+}
+
+.search-input {
+  border: none;
+  font-family: $bodyFont;
+}
+
+.search-input:focus {
+  border: none;
+  outline: none;
+}
+
+.Auth {
+  margin-left: 1%;
+}
+
+.auth-btn {
+  background-color: $fourth;
+  border: none;
+  height: 50%;
+  margin: 0px;
+  font-weight: 500;
+  border-radius: 5%;
+}
+
+.auth-btn:hover {
+  background-color: $fourth;
+  filter: brightness(90%)
+}
+
+.auth-btn:focus {
+  background-color: $fourth;
+  filter: brightness(90%);
+}
