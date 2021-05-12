@@ -33,6 +33,10 @@ const getCompletedOrders = () => new Promise((resolve, reject) => axios
   .then((response) => resolve(response.data))
   .catch((error) => reject(error)));
 
+const getAllUserOrders = (userId) => new Promise((resolve, reject) => axios.get(`${orderUrl}/all/${userId}`)
+  .then((response) => { resolve(response.data); })
+  .catch((error) => reject(error)));
+
 export default {
-  getByUserId, updateOrder, createCustomerOrder, getSingleOrder, getShipQueue, getCompletedOrders
+  getByUserId, updateOrder, createCustomerOrder, getSingleOrder, getShipQueue, getCompletedOrders, getAllUserOrders
 };
