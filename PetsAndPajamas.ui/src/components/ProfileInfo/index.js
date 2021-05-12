@@ -15,11 +15,20 @@ class ProfileInfo extends Component {
     });
   }
 
+  formatPhoneNumber(phoneNumberString) {
+    const cleaned = (`${phoneNumberString}`).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return `(${match[1]}) ${match[2]}-${match[3]}`;
+    }
+    return null;
+  }
+
   render() {
     const { user } = this.state;
     return (
       <>
-      <Card style={{ margin: 'auto', width: '50rem' }}>
+      <Card className="user-profile-card">
   <Card.Body>
   <div className="d-flex column-wrap justify-content-around">
     <div>
@@ -28,7 +37,7 @@ class ProfileInfo extends Component {
     </div>
       <div>
       <p>Email: {user.emailAddress}</p>
-      <p>Phone: {user.phone}</p>
+      <p>Phone: {this.formatPhoneNumber(user.phone)}</p>
       <p>Address: {user.address}</p>
       <p>{user.city}, {user.state}</p>
       <p>{user.zipCode}</p>

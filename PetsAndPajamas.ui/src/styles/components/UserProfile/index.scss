@@ -1,0 +1,15 @@
+.user-profile-card {
+  width: 50em;
+  background-color: $secondary;
+  background: linear-gradient(#FFD4C5, $secondary);
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  margin: 4em auto 4em auto;
+}
+
+.user-profile-card img {
+  margin-top: 2em;
+  border-radius: 50px
+}
