@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import UserSidebar from '../components/UserSidebar';
+import ProfileInfo from '../components/ProfileInfo';
 
 class ProfilePage extends Component {
   state = { }
@@ -14,7 +15,8 @@ class ProfilePage extends Component {
                       <UserSidebar />
                     </Col>
                     <Col xs={0} id="page-content-wrapper">
-      <h1>Profile Page</h1>
+      <h1>About You</h1>
+      <ProfileInfo user={this.props.user} />
       </Col>
                 </Row>
             </Container>
