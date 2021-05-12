@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import pajamaData from '../../helpers/data/pajamaData';
-import AppModal from '../AppModal';
-import AddProductForm from '../AddProductForm';
+import AddProductForm from '../ProductForm';
 
 export default class TotalInventory extends Component {
     state = {
@@ -21,7 +20,7 @@ export default class TotalInventory extends Component {
 
     render() {
       const {
-        pajama, image, inventory, title
+        image, inventory, title, pajama
       } = this.props;
       return (
      <Table>
@@ -38,12 +37,9 @@ export default class TotalInventory extends Component {
                   <img src={image} alt='' className='product-image'/>
                   <td>{title}</td>
                   <td>{inventory}</td>
-                    <AppModal className='fas fa-edit fa-2x'
-                      title={'Update Inventory Item'}
-                      id={pajama.id}
-                      pajama={pajama}>
-                      { Object.keys(pajama).length && <AddProductForm pajama={pajama} />}
-                    </AppModal>
+                  <div title={'Update Product'} buttonLabel={'Update Product'}>
+                       <AddProductForm pajama={pajama} handleUpdate={() => this.getAllPajamaInventory()} />
+                  </div>
                 </tr>
               </tbody>
      </Table>

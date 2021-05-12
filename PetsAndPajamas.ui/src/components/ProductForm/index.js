@@ -8,18 +8,18 @@ import pajamaData from '../../helpers/data/pajamaData';
 
 export default class AddProductForm extends React.Component {
     state = {
-      title: '',
-      description: '',
-      petTypeId: '',
-      pajamaTypeId: '',
-      size: '',
-      color: '',
-      pattern: '',
-      price: '',
-      inventory: '',
+      title: this.props.pajama?.title || '',
+      description: this.props.pajama?.description || '',
+      petTypeId: this.props.pajama?.petType.id || '',
+      pajamaTypeId: this.props.pajama?.pajamaType.id || '',
+      size: this.props.pajama?.size || '',
+      color: this.props.pajama?.color || '',
+      pattern: this.props.pajama?.pattern || '',
+      price: this.props.pajama?.price || '',
+      inventory: this.props.pajama?.inventory || '',
       dateCreated: moment().tz('America/Chicago').format(),
-      isActive: '',
-      image: ''
+      isActive: this.props.pajama?.isActive || '',
+      image: this.props.pajama?.image || ''
     }
 
     handleChange = (e) => {
@@ -55,17 +55,36 @@ export default class AddProductForm extends React.Component {
       }
     }
 
-    handleSubmit = (e) => {
-      e.preventDefault();
-      pajamaData.addPajama(this.state);
+       handleSubmit = (e) => {
+         e.preventDefault();
+         if (this.props.pajama.id === '') {
+           pajamaData.addPajama(this.state);
 
-      this.props.handleUpdate();
-    }
+           this.props.handleUpdate();
+         } else {
+           const updateP = {
+             id: this.props.pajama.id,
+             title: this.state.title,
+             description: this.state.description,
+             petTypeId: this.state.petTypeId,
+             pajamaTypeId: this.state.pajamaTypeId,
+             size: this.state.size,
+             color: this.state.color,
+             pattern: this.state.pattern,
+             price: this.state.price,
+             inventory: this.state.inventory,
+             dateCreated: this.state.dateCreated,
+             isActive: this.state.isActive,
+             image: this.state.image
+           };
+           pajamaData.updatePajama(this.props.pajama.id, updateP);
+         }
+       }
 
-    render() {
-      return (
+       render() {
+         return (
             <>
-            <AppModal title='Add a Product'>
+            <AppModal title='Add/Update Product'>
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="title">
                     <Form.Label>Title</Form.Label>
@@ -140,6 +159,6 @@ export default class AddProductForm extends React.Component {
             </Form>
             </AppModal>
             </>
-      );
-    }
+         );
+       }
 }
