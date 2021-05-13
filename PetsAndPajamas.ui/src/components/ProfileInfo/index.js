@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 import userData from '../../helpers/data/userData';
+import AppModal from '../AppModal';
+import UserForm from '../UserForm';
 
 class ProfileInfo extends Component {
   state = {
@@ -8,7 +10,11 @@ class ProfileInfo extends Component {
   }
 
   componentDidMount() {
-    userData.getUserByUid(this.props.user.uid).then((response) => {
+    this.getUserInfo(this.props.user.uid);
+  }
+
+  getUserInfo = (userId) => {
+    userData.getUserByUid(userId).then((response) => {
       this.setState({
         user: response[0]
       });
@@ -34,6 +40,10 @@ class ProfileInfo extends Component {
     <div>
     <Card.Title>{user.firstName} {user.lastName}</Card.Title>
     <img src={this.props.user.photoURL} alt={user.firstName + user.lastName}></img>
+    <AppModal
+    title={'Update Information'}>
+      <UserForm user={user}/>
+    </AppModal>
     </div>
       <div>
       <p>Email: {user.emailAddress}</p>
