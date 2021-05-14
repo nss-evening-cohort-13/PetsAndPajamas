@@ -21,9 +21,15 @@ class UserForm extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value,
-    });
+    if (e.target.id === 'zipCode') {
+      this.setState({
+        [e.target.id]: parseInt(e.target.value, 10),
+      });
+    } else {
+      this.setState({
+        [e.target.id]: e.target.value,
+      });
+    }
   }
 
   handleSubmit = (e) => {
