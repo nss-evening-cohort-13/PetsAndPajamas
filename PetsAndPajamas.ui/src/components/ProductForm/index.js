@@ -3,7 +3,6 @@ import React from 'react';
 import firebase from 'firebase';
 import moment from 'moment-timezone';
 import { Form, Button } from 'react-bootstrap';
-import AppModal from '../AppModal';
 import pajamaData from '../../helpers/data/pajamaData';
 
 export default class AddProductForm extends React.Component {
@@ -57,7 +56,7 @@ export default class AddProductForm extends React.Component {
 
        handleSubmit = (e) => {
          e.preventDefault();
-         if (this.props.pajama.id === '') {
+         if (!this.props.pajama) {
            pajamaData.addPajama(this.state);
 
            this.props.handleUpdate();
@@ -79,12 +78,12 @@ export default class AddProductForm extends React.Component {
            };
            pajamaData.updatePajama(this.props.pajama.id, updateP);
          }
+         this.props.toggle();
        }
 
        render() {
          return (
             <>
-            <AppModal title='Add/Update Product'>
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="title">
                     <Form.Label>Title</Form.Label>
@@ -157,7 +156,6 @@ export default class AddProductForm extends React.Component {
                     Add
                 </Button>
             </Form>
-            </AppModal>
             </>
          );
        }

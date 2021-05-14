@@ -43,7 +43,7 @@ class ProfileInfo extends Component {
     <AppModal
     className='mt-4'
     title={'Update Profile Information'}>
-      <UserForm user={user} />
+      <UserForm user={user} onUpdate={() => this.getUserInfo(this.props.user.uid)} />
     </AppModal>
     </div>
       <div>

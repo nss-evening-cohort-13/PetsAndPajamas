@@ -29,7 +29,11 @@ class UserForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    userData.updateUser(this.state.id, this.state);
+    userData.updateUser(this.state.id, this.state)
+      .then(() => {
+        this.props.onUpdate();
+      });
+    this.props.toggle();
   }
 
   render() {
