@@ -4,7 +4,7 @@ import { Table } from 'reactstrap';
 import Sidebar from '../components/Sidebar';
 import pajamaData from '../helpers/data/pajamaData';
 import TotalInventory from '../components/TotalInventory';
-import AddProductForm from '../components/AddProductForm';
+import AddProductForm from '../components/ProductForm';
 
 class AdminProducts extends Component {
   state = {
