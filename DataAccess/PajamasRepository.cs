@@ -167,7 +167,8 @@ namespace PetsAndPajamas.DataAccess
                             DateCreated = @DateCreated,
                             IsActive = @IsActive,
                             PajamaTypeId = @PajamaTypeId,
-                            PetTypeId = @PetTypeId
+                            PetTypeId = @PetTypeId,
+                            Image = @Image
                         Where Id = @id";
 
             db.Execute(sql, pajama);
