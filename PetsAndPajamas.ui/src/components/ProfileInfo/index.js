@@ -41,8 +41,9 @@ class ProfileInfo extends Component {
     <Card.Title>{user.firstName} {user.lastName}</Card.Title>
     <img src={this.props.user.photoURL} alt={user.firstName + user.lastName}></img>
     <AppModal
-    title={'Update Information'}>
-      <UserForm user={user}/>
+    className='mt-4'
+    title={'Update Profile Information'}>
+      <UserForm user={user} />
     </AppModal>
     </div>
       <div>

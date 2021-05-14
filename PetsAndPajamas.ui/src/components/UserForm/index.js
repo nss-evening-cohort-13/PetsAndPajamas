@@ -6,14 +6,18 @@ class UserForm extends Component {
   state = {
     firstName: this.props.user?.firstName,
     lastName: this.props.user?.lastName,
+    emailAddress: this.props.user?.emailAddress,
+    dateCreated: this.props.user?.dateCreated,
     address: this.props.user?.address,
     city: this.props.user?.city,
     state: this.props.user?.state,
     zipCode: this.props.user?.zipCode,
+    country: this.props.user?.country,
     phone: this.props.user?.phone,
     id: this.props.user?.id,
     admin: this.props.user?.admin,
-    isActive: this.props.user?.isActive
+    isActive: this.props.user?.isActive,
+    firebaseId: this.props.user?.firebaseId
   }
 
   handleChange = (e) => {
@@ -38,6 +42,10 @@ class UserForm extends Component {
       <Form.Group controlId='lastName'>
       <Form.Label>Last Name</Form.Label>
       <Form.Control type="text" onChange={this.handleChange} value={this.state.lastName} required />
+        </Form.Group>
+      <Form.Group controlId='emailAddress'>
+      <Form.Label>Email Address</Form.Label>
+      <Form.Control type="text" onChange={this.handleChange} value={this.state.emailAddress} required />
         </Form.Group>
       <Form.Group controlId='address'>
       <Form.Label>Street Address</Form.Label>
@@ -109,6 +117,10 @@ class UserForm extends Component {
             <Form.Group controlId="zipCode">
               <Form.Label>Zip Code</Form.Label>
               <Form.Control type="number" onChange={this.handleChange} value={this.state.zipCode} required />
+            </Form.Group>
+            <Form.Group controlId="country">
+              <Form.Label>Country</Form.Label>
+              <Form.Control type="text" onChange={this.handleChange} value={this.state.country} required />
             </Form.Group>
             <Form.Group controlId="phone">
               <Form.Label>Phone Number</Form.Label>
