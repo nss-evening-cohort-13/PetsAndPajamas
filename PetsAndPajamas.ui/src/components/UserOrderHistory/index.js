@@ -4,6 +4,7 @@ import { Table } from 'react-bootstrap';
 import moment from 'moment';
 import customerOrderData from '../../helpers/data/customerOrderData';
 import AppModal from '../AppModal';
+import PastOrderDetails from '../PastOrderDetails';
 
 class UserOrderHistory extends Component {
   state = {
@@ -31,7 +32,7 @@ class UserOrderHistory extends Component {
         id={order.orderId}
         order={order}
         >
-          {/* <PastOrderDetails order={order} /> */}
+          <PastOrderDetails order={order} />
         </AppModal>
         </td>
       </tr>;
