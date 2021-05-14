@@ -46,7 +46,6 @@ class AdminProducts extends Component {
                     </Col>
                     <Col xs={10} id="page-content-wrapper">
                     <AppModal
-                  className='mt-4'
                   title={'Add a Pajama'}>
         <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
         </AppModal>

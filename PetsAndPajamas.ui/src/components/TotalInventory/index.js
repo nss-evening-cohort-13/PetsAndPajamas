@@ -40,7 +40,6 @@ export default class TotalInventory extends Component {
                   <td>{inventory}</td>
                   <div title={'Update Product'} buttonLabel={'Update Product'}>
                   <AppModal
-                  className='mt-4'
                   title={'Update Pajama'}>
                        <AddProductForm pajama={pajama} handleUpdate={() => this.getAllPajamaInventory()} />
                        </AppModal>
