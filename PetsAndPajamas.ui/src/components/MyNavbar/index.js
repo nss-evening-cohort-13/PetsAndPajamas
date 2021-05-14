@@ -57,7 +57,7 @@ class MyNavbar extends Component {
               </Link>}
               </NavItem>
             </Nav>
-              <Link className="fas fa-shopping-cart fa-3x cart-icon nav-font" to='/cart'></Link>
+              {Object.keys(realUser).length > 0 && <Link className="fas fa-shopping-cart fa-3x cart-icon nav-font" to='/cart'></Link>}
             <SearchInput />
             <Auth />
           </Collapse>
