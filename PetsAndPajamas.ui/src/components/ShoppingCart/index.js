@@ -7,6 +7,7 @@ import { Table, Button } from 'react-bootstrap';
 import baseUrl from '../../helpers/config.json';
 import pajamaOrderData from '../../helpers/data/pajamaOrderData';
 import customerOrderData from '../../helpers/data/customerOrderData';
+import EmptyShoppingCart from '../EmptyShoppingCart';
 
 export default class ShoppingCart extends React.Component {
   state = {
@@ -91,8 +92,9 @@ export default class ShoppingCart extends React.Component {
       });
       renderTotal = total;
     }
-    return (
-        <div className="cartSummary">
+    return (<>
+    {order && order.orderPajamas && order.orderPajamas.length
+      ? <div className="cartSummary">
             <h1>Shopping Cart Summary</h1>
             <Table size="lg">
                 <thead>
@@ -117,6 +119,6 @@ export default class ShoppingCart extends React.Component {
                   <Button type="button">Continue To Checkout</Button>
                   </Link>}
         </div>
-    );
+      : <EmptyShoppingCart />} </>);
   }
 }
