@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import AboutUs from '../views/AboutUs';
 import Cart from '../views/Cart';
 import CatStore from '../views/CatStore';
@@ -18,9 +18,9 @@ export default function Routes({ user, realUser }) {
   return (
             <Switch>
                 <Route exact path='/about' component={() => <AboutUs />} />
-                <Route exact path='/cart' component={() => <Cart userId={user.uid} />} />
+                <PrivateRoute exact path='/cart' component={Cart} userId={user.uid} user={user} />
                 <Route exact path='/cat-store' component={() => <CatStore />} />
-                <Route exact path='/checkout' component={(props) => <Checkout userId={user.uid} {...props} />} />
+                <PrivateRoute exact path='/checkout' component={Checkout} userId={user.uid} user={user} />
                 <Route exact path='/dog-store' component={() => <DogStore />} />
                 <Route exact path='/' component={() => <Home />} />
                 <PrivateRoute exact path='/order-history' component={OrderHistory} user={user} />
@@ -45,11 +45,11 @@ const AdminRoute = ({
 };
 
 const PrivateRoute = ({
-  component: Component, user, realUser, ...rest
+  component: Component, user, userId, realUser, ...rest
 }) => {
-  const routeChecker = (route) => ((user)
-    ? (<Component {...route} user={user} />)
-    : (<h1>Please log in to view your user profile</h1>));
+  const routeChecker = (route) => ((user || userId)
+    ? (<Component {...route} user={user} userId={userId} />)
+    : (<Redirect to={{ pathname: '/', state: { from: route.location } }} />));
 
   return <Route {...rest} render={(props) => routeChecker(props) } />;
 };
