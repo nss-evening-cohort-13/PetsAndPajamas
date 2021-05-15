@@ -4,9 +4,8 @@ import { baseUrl } from '../config.json';
 const pajamaUrl = `${baseUrl}/pajamas`;
 
 const getSearchedPajamas = (searchTerm) => new Promise((resolve, reject) => axios
-  .get(`${pajamaUrl}`).then((response) => {
-    const searched = response.data.filter((pajama) => pajama.title.toLowerCase().includes(searchTerm));
-    resolve(searched);
+  .get(`${pajamaUrl}/search/${searchTerm}`).then((response) => {
+    resolve(response.data);
   }).catch((error) => reject(error)));
 
 const getSinglePajama = (pajamaId) => new Promise((resolve, reject) => axios.get(`${pajamaUrl}/${pajamaId}`).then((response) => {

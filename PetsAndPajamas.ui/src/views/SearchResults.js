@@ -40,7 +40,7 @@ class SearchResults extends Component {
      );
      return (
       <div className="dog-store-page">
-      <h1>Search Results</h1>
+      {results.length === 0 ? <h1>No products found</h1> : <h1>Search Results</h1>}
       <div className="dog-store-body">
         </div>
         <div className="product-cards-container">

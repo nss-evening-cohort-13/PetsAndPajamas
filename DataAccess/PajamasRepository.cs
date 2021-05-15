@@ -105,6 +105,31 @@ namespace PetsAndPajamas.DataAccess
             return pajamas;
         }
 
+        public IEnumerable<Pajama> GetSearched(string term)
+        {
+            var sql = @"select * from Pajama p
+                            left join PajamaType pat
+                                on pat.Id = p.PajamaTypeId
+                            left join PetType pet
+                                on pet.Id = p.PetTypeId
+                        WHERE p.color like '%' + @searchTerm + '%'
+                        OR p.size like '%' + @searchTerm + '%'
+                        OR p.description like '%' + @searchTerm + '%'
+                        OR p.title like '%' + @searchTerm + '%'";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var pajamas = db.Query<Pajama, PajamaType, PetType, Pajama>(sql,
+                (pajama, pajamaType, petType) =>
+                {
+                    pajama.PajamaType = pajamaType;
+                    pajama.PetType = petType;
+
+                    return pajama;
+                }, new { searchTerm = term }, splitOn: "Id");
+            return pajamas;
+        }
+
         public IEnumerable<Pajama> Get(int id)
         {
             var sql = @"select * from Pajama p
