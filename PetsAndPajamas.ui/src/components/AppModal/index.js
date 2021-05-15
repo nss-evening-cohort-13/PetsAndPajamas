@@ -18,7 +18,7 @@ const AppModal = (props) => {
       <Modal isOpen={modal} toggle={toggle}
       className='modal-dialog-centered modal-lg'>
         <ModalHeader toggle={toggle}>{props.title}</ModalHeader>
-          <ModalBody>{props.children}</ModalBody>
+          <ModalBody>{React.cloneElement(props.children, { toggle })}</ModalBody>
       </Modal>
     </div>
   );
