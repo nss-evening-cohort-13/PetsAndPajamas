@@ -22,7 +22,7 @@ export default class AddProductForm extends React.Component {
     }
 
     handleChange = (e) => {
-      if (e.target.id === 'image') {
+      if (e.target.id === 'filename') {
         this.setState({
           image: ''
         });
@@ -95,7 +95,10 @@ export default class AddProductForm extends React.Component {
                 </Form.Group>
                 <Form.Group controlId="image">
                     <Form.Label>Image</Form.Label>
-                    <Form.Control type="file" onChange={this.handleChange} required/>
+                    <Form.Control type="url" onChange={this.handleChange} value={this.state.image} required/>
+                </Form.Group>
+                <Form.Group controlId="filename">
+                    <Form.Control type="file" onChange={this.handleChange} />
                 </Form.Group>
                 <Form.Group controlId="petTypeId">
                     <Form.Label>Pet</Form.Label>
