@@ -18,7 +18,7 @@ export default function Routes({ user, realUser }) {
   return (
             <Switch>
                 <Route exact path='/about' component={() => <AboutUs />} />
-                <Route exact path='/cart' component={() => <Cart userId={user.uid} />} />
+                <PrivateRoute exact path='/cart' component={Cart} userId={user.uid} user={user} />
                 <Route exact path='/cat-store' component={() => <CatStore />} />
                 <PrivateRoute exact path='/checkout' component={Checkout} userId={user.uid} user={user} />
                 <Route exact path='/dog-store' component={() => <DogStore />} />
