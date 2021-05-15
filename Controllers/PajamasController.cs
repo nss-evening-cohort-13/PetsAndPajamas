@@ -27,6 +27,14 @@ namespace PetsAndPajamas.Controllers
             return Ok(pajamas);
         }
 
+        [HttpGet("search/{term}")]
+        public IActionResult GetSearchedPajamas(string term)
+        {
+            var pajamas = _repo.GetSearched(term);
+
+            return Ok(pajamas);
+        }
+
         [HttpGet("new")]
         public IActionResult GetNewPajamas()
         {
