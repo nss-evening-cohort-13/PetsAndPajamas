@@ -145,13 +145,7 @@ class ProductDetail extends Component {
           <p>Size: {thisPajama.size}</p>
           <p className='ml-5'>Color: {thisPajama.color}</p>
           </div>
-          <p className='mb-2'>Quantity</p>
-          <div className='d-flex justify-content-center'>
-          <Select className='w-50'
-            options={options}
-            onChange={(e) => this.setState({ quantity: e.value })}
-            label='Quantity'/>
-            </div>
+
             {this.props.user === false
               ? <button className='btn btn-secondary mt-2' onClick={this.loginClickEvent}>
                 Login to purchase products
@@ -160,18 +154,24 @@ class ProductDetail extends Component {
             {clicked ? (
             <Button className='btn btn-secondary' disabled>Pajama Added to Cart!</Button>
             )
-              : <Button className='mt-3' color='success' onClick={() => {
-                if (thisPajama.inventory >= quantity) {
-                  if (pajamaOrder.length) {
-                    this.updatePajamaQuantity(thisPajama.id, {
-                      id: pajamaOrder[0].id, orderId: pajamaOrder[0].orderId, pajamaId: pajamaOrder[0].pajamaId, quantity: pajamaOrder[0].quantity += quantity
-                    });
-                  } else {
-                    this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
+              : <><p className='mb-2'>Quantity</p>
+              <div className='d-flex justify-content-center'>
+              <Select className='w-50'
+                options={options}
+                onChange={(e) => this.setState({ quantity: e.value })}
+                label='Quantity'/>
+                </div><Button className='mt-3' color='success' onClick={() => {
+                  if (thisPajama.inventory >= quantity) {
+                    if (pajamaOrder.length) {
+                      this.updatePajamaQuantity(thisPajama.id, {
+                        id: pajamaOrder[0].id, orderId: pajamaOrder[0].orderId, pajamaId: pajamaOrder[0].pajamaId, quantity: pajamaOrder[0].quantity += quantity
+                      });
+                    } else {
+                      this.addPajamaToCart({ orderId: order.orderId, pajamaId: pajama[0].id, quantity });
+                    }
+                    this.deactivateButton();
                   }
-                  this.deactivateButton();
-                }
-              }}>Add to Cart</Button>
+                }}>Add to Cart</Button></>
             }
             {thisPajama.inventory < quantity && <p className='text-danger'>Only {thisPajama.inventory} left in stock. Please update the quantity.</p>}</>}
 

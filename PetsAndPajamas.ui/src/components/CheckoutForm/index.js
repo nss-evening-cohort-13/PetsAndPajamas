@@ -76,7 +76,8 @@ class CheckoutForm extends React.Component {
         isActive: pajama.isActive,
         pajamaTypeId: pajama.pajamaType.id,
         petTypeId: pajama.petType.id,
-        id: pajama.id
+        id: pajama.id,
+        image: pajama.image
       };
       const promise = pajamaData.updatePajama(pajama.id, newPajama);
       allUpdatePromises.push(promise);

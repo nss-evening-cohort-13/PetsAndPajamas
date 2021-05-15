@@ -35,6 +35,7 @@ class Auth extends Component {
           };
           customerOrderData.createCustomerOrder(orderInfo);
         });
+        window.location.reload();
       }
     });
   };
