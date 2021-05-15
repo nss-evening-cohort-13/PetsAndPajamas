@@ -45,10 +45,10 @@ const AdminRoute = ({
 };
 
 const PrivateRoute = ({
-  component: Component, user, realUser, ...rest
+  component: Component, user, userId, realUser, ...rest
 }) => {
-  const routeChecker = (route) => ((user)
-    ? (<Component {...route} user={user} />)
+  const routeChecker = (route) => ((user || userId)
+    ? (<Component {...route} user={user} userId={userId} />)
     : (<Redirect to={{ pathname: '/', state: { from: route.location } }} />));
 
   return <Route {...rest} render={(props) => routeChecker(props) } />;
