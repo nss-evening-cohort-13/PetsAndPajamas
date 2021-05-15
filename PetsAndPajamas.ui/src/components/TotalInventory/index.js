@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import pajamaData from '../../helpers/data/pajamaData';
 import AddProductForm from '../ProductForm';
+import AppModal from '../AppModal';
 
 export default class TotalInventory extends Component {
     state = {
@@ -38,7 +39,10 @@ export default class TotalInventory extends Component {
                   <td>{title}</td>
                   <td>{inventory}</td>
                   <div title={'Update Product'} buttonLabel={'Update Product'}>
+                  <AppModal
+                  title={'Update Pajama'}>
                        <AddProductForm pajama={pajama} handleUpdate={() => this.getAllPajamaInventory()} />
+                       </AppModal>
                   </div>
                 </tr>
               </tbody>

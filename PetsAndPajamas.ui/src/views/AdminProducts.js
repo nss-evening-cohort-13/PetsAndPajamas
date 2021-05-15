@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar';
 import pajamaData from '../helpers/data/pajamaData';
 import TotalInventory from '../components/TotalInventory';
 import AddProductForm from '../components/ProductForm';
+import AppModal from '../components/AppModal';
 
 class AdminProducts extends Component {
   state = {
@@ -37,7 +38,6 @@ class AdminProducts extends Component {
 
     return (
       <div className='products-div'>
-        <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
         <div className='table-of-pajama-inventory'>
         <Container fluid>
                 <Row>
@@ -45,6 +45,10 @@ class AdminProducts extends Component {
                       <Sidebar />
                     </Col>
                     <Col xs={10} id="page-content-wrapper">
+                    <AppModal
+                  title={'Add a Pajama'}>
+        <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
+        </AppModal>
         <Table boardered>
           <tbody>
             <tr>
