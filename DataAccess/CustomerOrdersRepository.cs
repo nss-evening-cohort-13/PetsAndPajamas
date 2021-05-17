@@ -278,7 +278,7 @@ namespace PetsAndPajamas.DataAccess
 								    on pat.Id = p.PajamaTypeId
 							    left join PetType pet
 								    on pet.Id = p.PetTypeId
-                        WHERE su.FirebaseId = @userId
+                        WHERE su.FirebaseId = @userId AND co.isCompleted = 1
                         ORDER BY NewShipDate DESC";
 
             using var db = new SqlConnection(ConnectionString);
