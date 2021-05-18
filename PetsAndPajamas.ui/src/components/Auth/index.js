@@ -34,8 +34,8 @@ class Auth extends Component {
             IsCompleted: false
           };
           customerOrderData.createCustomerOrder(orderInfo);
+          window.location.reload();
         });
-        window.location.reload();
       }
     });
   };
