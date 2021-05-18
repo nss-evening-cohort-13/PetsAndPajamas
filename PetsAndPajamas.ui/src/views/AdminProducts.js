@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Table } from 'reactstrap';
 import Sidebar from '../components/Sidebar';
 import pajamaData from '../helpers/data/pajamaData';
-import TotalInventory from '../components/TotalInventory';
 import AddProductForm from '../components/ProductForm';
 import AppModal from '../components/AppModal';
+import TotalInventory from '../components/TotalInventory';
 
 class AdminProducts extends Component {
   state = {
@@ -28,14 +27,6 @@ class AdminProducts extends Component {
   }
 
   render() {
-    const { pajamas } = this.state;
-
-    const renderPajamas = () => (
-      pajamas.map((pajama) => (
-        <TotalInventory key={pajama.id} pajama={pajama} image={pajama.image} title={pajama.title} inventory={pajama.inventory} />
-      ))
-    );
-
     return (
       <div className='products-div'>
         <div className='table-of-pajama-inventory'>
@@ -49,17 +40,7 @@ class AdminProducts extends Component {
                   title={'Add a Pajama'}>
         <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
         </AppModal>
-        <Table boardered>
-          <tbody>
-            <tr>
-              <td>
-                {pajamas.length
-                  ? renderPajamas()
-                  : 'There are no pajamas in inventory.'}
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+        <TotalInventory />
         </Col>
                 </Row>
             </Container>

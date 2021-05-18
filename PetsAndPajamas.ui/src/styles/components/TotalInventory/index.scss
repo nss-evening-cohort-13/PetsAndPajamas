@@ -1,3 +1,32 @@
 .product-image {
   width: 8vw;
 }
+
+
+.inventory-fixed-header thead {
+  background-color: #5f847d;
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 12 px 15px;
+}
+
+.inventory-table-body tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.inventory-table-body tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.inventory-table-data tbody tr {
+  text-align: center;
+}
+
+.btn.btn-secondary {
+  background-color: #e4745e;
+}
