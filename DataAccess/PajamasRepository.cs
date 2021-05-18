@@ -68,7 +68,9 @@ namespace PetsAndPajamas.DataAccess
                                 on pat.Id = p.PajamaTypeId
                             left join PetType pet
                                 on pet.Id = p.PetTypeId
-                        where pet.Type = 'Dog' AND p.Inventory > 0";
+                        where pet.Type = 'Dog'
+                        AND p.Inventory > 0
+                        AND p.IsActive = 'true'";
 
             using var db = new SqlConnection(ConnectionString);
 
@@ -90,7 +92,9 @@ namespace PetsAndPajamas.DataAccess
                                 on pat.Id = p.PajamaTypeId
                             left join PetType pet
                                 on pet.Id = p.PetTypeId
-                        where pet.Type = 'Cat' AND p.Inventory > 0";
+                        where pet.Type = 'Cat'
+                        AND p.Inventory > 0
+                        AND p.IsActive = 'true'";
 
             using var db = new SqlConnection(ConnectionString);
 
