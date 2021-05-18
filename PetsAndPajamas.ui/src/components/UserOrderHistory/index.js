@@ -25,7 +25,7 @@ class UserOrderHistory extends Component {
         <td>{order.orderId}</td>
         <td>{moment(order.newOrderDate).format('M/D/YY')}</td>
         <td>{moment(order.newShipDate).format('M/D/YY')}</td>
-        <td>${totalSales}</td>
+        <td>${totalSales.toFixed(2)}</td>
         {moment(order.newShipDate).isBefore() ? <td>Completed</td> : <td>Pending</td>}
         <td><AppModal
         title={'View Order'}
