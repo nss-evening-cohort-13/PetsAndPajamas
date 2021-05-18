@@ -152,7 +152,7 @@ export default class AddProductForm extends React.Component {
                 </Form.Group>
                 <Form.Group controlId="price">
                     <Form.Label>Price</Form.Label>
-                    <Form.Control type='number' min='0.01' onChange={this.handleChange} value={this.state.price} required/>
+                    <Form.Control type='number' min='0' onChange={this.handleChange} value={this.state.price} required/>
                 </Form.Group>
                 <Form.Group controlId="inventory">
                     <Form.Label>Inventory</Form.Label>
