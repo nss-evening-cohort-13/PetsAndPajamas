@@ -51,7 +51,6 @@ class Orders extends Component {
       total += (order.quantity * order.pajama.price);
       totalQuantity += order.quantity;
     });
-    console.log(this.state.pajamaOrders.length);
     const average = total / totalQuantity;
     return average.toFixed(2);
   }
