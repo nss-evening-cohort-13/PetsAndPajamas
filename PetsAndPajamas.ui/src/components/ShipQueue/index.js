@@ -33,14 +33,14 @@ export default class ShipQueue extends React.Component {
             <div className='ship-queue-container'>
                 <h3>Shipping Queue</h3>
                 <Table striped bordered hover size="sm">
-                    <thead>
+                    <thead className="ship-queue-table">
                         <tr>
                         <th>Order No.</th>
                         <th>Est. Ship Date</th>
                         <th>Total Quantity</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="ship-queue-table-body">
                         {this.renderShipQueue()}
                     </tbody>
                 </Table>

@@ -45,12 +45,12 @@ class AdminProducts extends Component {
                       <Sidebar />
                     </Col>
                     <Col xs={10} id="page-content-wrapper">
-                    <AppModal
+                    <AppModal className="add-pajama-button"
                   title={'Add a Pajama'}>
         <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
         </AppModal>
-        <Table boardered>
-          <tbody>
+        <Table className="total-inventory-table" bordered>
+          <tbody className="total-inventory-table-body">
             <tr>
               <td>
                 {pajamas.length
