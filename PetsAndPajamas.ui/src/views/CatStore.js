@@ -51,7 +51,7 @@ export default class CatStore extends React.Component {
   render() {
     return (
       <div className="store-page">
-          <h1 className="store-category-h1 h1-tint">Cats</h1>
+          <h1 className="store-category-h1-cat">Cat Pajamas</h1>
           <div className="store-body">
             <div className="accordion-container">
               <FilterAccordion pajamas={this.state.pajamas} filterProducts={this.filterProducts} />
