@@ -127,7 +127,8 @@ namespace PetsAndPajamas.DataAccess
 								    on pat.Id = p.PajamaTypeId
 							    left join PetType pet
 								    on pet.Id = p.PetTypeId
-                                WHERE co.IsCompleted = 1";
+                                WHERE co.IsCompleted = 1
+                                ORDER BY co.OrderDate DESC";
 
             using var db = new SqlConnection(ConnectionString);
 
