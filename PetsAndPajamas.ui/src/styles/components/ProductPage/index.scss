@@ -1,0 +1,91 @@
+.store-page {
+    // margin: 3%;
+}
+
+.store-body {
+    margin-top: 2%;
+    display: flex;
+    margin: 3%;
+}
+
+.store-category-h1 {
+    background-image:     linear-gradient(
+        rgba(0, 104, 104, 0.5), 
+        rgba(0, 104, 104, 0.5)
+      ), url('https://media1.popsugar-assets.com/files/thumbor/CHvWKKvDIpAqhQZ62ylPNGG8txo/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2018/08/28/939/n/24155406/6471e6251429e0c3_lauren-kay-632247-unsplash/i/anything-cuter-than-cat-paw.jpg');
+    background-size: cover;
+    background-position: 0 64%;
+    padding: 4%;
+    color: $favColor;
+    text-transform: uppercase;
+    letter-spacing: .75em;
+    font-size: 7vh;
+    font-weight: 900;
+}
+
+.accordion-container {
+    width: 15%;
+    flex: 1;
+    text-align: left;
+}
+
+.product-accordion {
+    border: none;
+}
+
+.accordion-header {
+    background-color: white;
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.accordion-hover:hover {
+    cursor: pointer;
+}
+
+.checkboxes-container {
+    // text-align: left;
+}
+
+.single-checkbox {
+    margin-right: 5%;
+}
+
+.product-cards-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0 0 0 5%;
+    flex: 6;
+}
+
+.card-container {
+    width: 30%;
+    margin: 1%;
+    display: flex;
+    text-align: left;
+    font-family: $bodyFont;
+}
+
+.product-card {
+    border: none;
+}
+
+.product-card-img {
+    width: 20vw;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.product-card-body {
+    padding: 5% 0 0 0;
+}
+
+.product-name {
+    font-size: 1em;
+}
+
+.product-price {
+    font-size: .95em;
+}
