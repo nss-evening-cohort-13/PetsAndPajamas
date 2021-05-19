@@ -25,7 +25,7 @@ class PastOrders extends Component {
     return <tr key={order.orderId}>
       <td>{order.orderId}</td>
       <td>{moment(order.newOrderDate).format('M/D/YY')}</td>
-      <td>${totalSales}</td>
+      <td>${totalSales.toFixed(2)}</td>
       <td><AppModal
       title={'Order Details'}
       id={order.orderId}
@@ -46,7 +46,7 @@ class PastOrders extends Component {
                         <tr>
                         <th>Order No.</th>
                         <th>Order Date</th>
-                        <th>Total Sales</th>
+                        <th>Order Total</th>
                         <th>Order Details</th>
                         </tr>
                     </thead>

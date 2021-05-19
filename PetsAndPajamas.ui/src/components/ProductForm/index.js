@@ -13,11 +13,11 @@ export default class AddProductForm extends React.Component {
       pajamaTypeId: this.props.pajama?.pajamaType.id || '',
       size: this.props.pajama?.size || '',
       color: this.props.pajama?.color || '',
-      pattern: this.props.pajama?.pattern || '',
+      pattern: String(this.props.pajama?.pattern) || '',
       price: this.props.pajama?.price || '',
       inventory: this.props.pajama?.inventory || '',
       dateCreated: moment().tz('America/Chicago').format(),
-      isActive: this.props.pajama?.isActive || '',
+      isActive: String(this.props.pajama?.isActive) || '',
       image: this.props.pajama?.image || ''
     }
 
@@ -43,10 +43,6 @@ export default class AddProductForm extends React.Component {
         this.setState({
           [e.target.id]: parseFloat(e.target.value, 10),
         });
-      } else if (e.target.id === 'isActive' || e.target.id === 'pattern') {
-        this.setState({
-          [e.target.id]: Boolean(e.target.value),
-        });
       } else {
         this.setState({
           [e.target.id]: e.target.value,
@@ -56,8 +52,23 @@ export default class AddProductForm extends React.Component {
 
        handleSubmit = (e) => {
          e.preventDefault();
+
          if (!this.props.pajama) {
-           pajamaData.addPajama(this.state);
+           const addP = {
+             title: this.state.title,
+             description: this.state.description,
+             petTypeId: this.state.petTypeId,
+             pajamaTypeId: this.state.pajamaTypeId,
+             size: this.state.size,
+             color: this.state.color,
+             pattern: this.state.pattern === 'true' && true,
+             price: this.state.price,
+             inventory: this.state.inventory,
+             dateCreated: this.state.dateCreated,
+             isActive: this.state.isActive === 'true' && true,
+             image: this.state.image
+           };
+           pajamaData.addPajama(addP);
 
            this.props.handleUpdate();
          } else {
@@ -69,11 +80,11 @@ export default class AddProductForm extends React.Component {
              pajamaTypeId: this.state.pajamaTypeId,
              size: this.state.size,
              color: this.state.color,
-             pattern: this.state.pattern,
+             pattern: this.state.pattern === 'true' && true,
              price: this.state.price,
              inventory: this.state.inventory,
              dateCreated: this.state.dateCreated,
-             isActive: this.state.isActive,
+             isActive: this.state.isActive === 'true' && true,
              image: this.state.image
            };
            pajamaData.updatePajama(this.props.pajama.id, updateP);
@@ -141,11 +152,11 @@ export default class AddProductForm extends React.Component {
                 </Form.Group>
                 <Form.Group controlId="price">
                     <Form.Label>Price</Form.Label>
-                    <Form.Control type='number' onChange={this.handleChange} value={this.state.price} required/>
+                    <Form.Control type='number' min='0.01' step='0.01' onChange={this.handleChange} value={this.state.price} required/>
                 </Form.Group>
                 <Form.Group controlId="inventory">
                     <Form.Label>Inventory</Form.Label>
-                    <Form.Control type='number' onChange={this.handleChange} value={this.state.inventory} required/>
+                    <Form.Control type='number' min='0' onChange={this.handleChange} value={this.state.inventory} required/>
                 </Form.Group>
                 <Form.Group controlId="isActive">
                     <Form.Label>Available</Form.Label>
