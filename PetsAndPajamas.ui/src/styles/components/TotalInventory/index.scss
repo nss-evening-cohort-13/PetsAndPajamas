@@ -10,19 +10,47 @@
 
 .total-inventory-table-body {
   display: block;
-  height: 80vh;
+  height: 70vh;
   overflow: auto;
   width: 100%;
 }
 
 .total-inventory-table th {
-  width: 100vw;
+  width: 25vw;
 }
 
 .total-inventory-table-body td {
-  width: 100vw;
+  width: 25vw;
 }
 
 .add-pajama-button {
-  margin: 10px 0px 10px 10vw;
+  margin: 10px 0px 10px 0px;
+}
+
+.inventory-fixed-header thead {
+  background-color: #5f847d;
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 12px 15px;
+}
+
+.inventory-table-body tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.inventory-table-body tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.inventory-table-data tbody tr {
+  text-align: center;
+}
+
+.btn.btn-secondary {
+  background-color: #e4745e;
 }
