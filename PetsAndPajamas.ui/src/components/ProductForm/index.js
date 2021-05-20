@@ -167,7 +167,7 @@ export default class AddProductForm extends React.Component {
                     </Form.Control>
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Add
+                    Submit
                 </Button>
             </Form>
             </>
