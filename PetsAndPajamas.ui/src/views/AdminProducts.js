@@ -11,14 +11,6 @@ class AdminProducts extends Component {
     pajamas: [],
   }
 
-  componentDidMount() {
-    this.getAllPajamaInventory();
-  }
-
-  componentDidUpdate() {
-    this.getAllPajamaInventory();
-  }
-
   getAllPajamaInventory = () => {
     pajamaData.getAllPajamas()
       .then((response) => this.setState({

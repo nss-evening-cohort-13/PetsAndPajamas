@@ -13,6 +13,10 @@ export default class TotalInventory extends Component {
       this.getAllPajamaInventory();
     }
 
+    componentDidUpdate() {
+      this.getAllPajamaInventory();
+    }
+
     getAllPajamaInventory = () => {
       pajamaData.getAllPajamas().then((response) => this.setState({
         pajamas: response,
