@@ -22,6 +22,7 @@ export default class AddProductForm extends React.Component {
     }
 
     handleChange = (e) => {
+      e.preventDefault();
       if (e.target.id === 'filename') {
         this.setState({
           image: ''
@@ -114,7 +115,7 @@ export default class AddProductForm extends React.Component {
                 <Form.Group controlId="petTypeId">
                     <Form.Label>Pet</Form.Label>
                     <Form.Control as="select" onChange={this.handleChange} value={this.state.petTypeId} required>
-                        <option value="" selected disabled hidden>Select a pet</option>
+                        <option value="" defaultValue disabled hidden>Select a pet</option>
                         <option value="2">Dog</option>
                         <option value="1">Cat</option>
                     </Form.Control>
@@ -122,7 +123,7 @@ export default class AddProductForm extends React.Component {
                 <Form.Group controlId="pajamaTypeId">
                     <Form.Label>Pajama Type</Form.Label>
                     <Form.Control as="select" onChange={this.handleChange} value={this.state.pajamaTypeId} required>
-                        <option value="" selected disabled hidden>Select a pajama type</option>
+                        <option value="" defaultValue disabled hidden>Select a pajama type</option>
                         <option value="1">Full Body</option>
                         <option value="2">Half Body</option>
                         <option value="8">Booties</option>
@@ -132,7 +133,7 @@ export default class AddProductForm extends React.Component {
                 <Form.Group controlId="size">
                     <Form.Label>Size</Form.Label>
                     <Form.Control as="select" onChange={this.handleChange} value={this.state.size} required>
-                        <option value="" selected disabled hidden>Select a size</option>
+                        <option value="" defaultValue disabled hidden>Select a size</option>
                         <option>Small</option>
                         <option>Medium</option>
                         <option>Large</option>
@@ -145,7 +146,7 @@ export default class AddProductForm extends React.Component {
                 <Form.Group controlId="pattern">
                     <Form.Label>Pattern</Form.Label>
                     <Form.Control as="select" onChange={this.handleChange} value={this.state.pattern} required>
-                        <option value="" selected disabled hidden>Select an option</option>
+                        <option value="" defaultValue disabled hidden>Select an option</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
                     </Form.Control>
@@ -161,7 +162,7 @@ export default class AddProductForm extends React.Component {
                 <Form.Group controlId="isActive">
                     <Form.Label>Available</Form.Label>
                     <Form.Control as="select" onChange={this.handleChange} value={this.state.isActive} required>
-                        <option value="" selected disabled hidden>Select availability</option>
+                        <option value="" defaultValue disabled hidden>Select availability</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
                     </Form.Control>

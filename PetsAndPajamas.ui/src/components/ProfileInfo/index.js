@@ -39,7 +39,7 @@ class ProfileInfo extends Component {
   <div className="d-flex column-wrap justify-content-around">
     <div>
     <Card.Title>{user.firstName} {user.lastName}</Card.Title>
-    <img src={this.props.user.photoURL} alt={user.firstName + user.lastName}></img>
+    <img src={this.props.user.photoURL} alt={`${user.firstName} ${user.lastName}`}></img>
     <AppModal
     className='mt-4'
     title={'Update Profile Information'}>

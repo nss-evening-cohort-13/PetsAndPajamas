@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 import moment from 'moment-timezone';
 
 class PastOrderDetails extends Component {
-  renderOrderDetails = () => this.props.order.orderPajamas.map((op) => <tr key={op.Id}>
+  renderOrderDetails = () => this.props.order.orderPajamas.map((op) => <tr key={this.props.order.orderId}>
               <td>{op.title}</td>
               <td>${op.price}</td>
               <td>{op.pajamaQuantity}</td>

@@ -35,15 +35,13 @@ export default class TotalInventory extends Component {
          </thead>
               <tbody>
                 <tr>
-                  <img src={image} alt='' className='product-image'/>
+                  <td><img src={image} alt='' className='product-image'/></td>
                   <td>{title}</td>
                   <td>{inventory}</td>
-                  <div title={'Update Product'} buttonLabel={'Update Product'}>
-                  <AppModal
+                  <td><AppModal
                   title={'Update Pajama'}>
                        <AddProductForm pajama={pajama} handleUpdate={() => this.getAllPajamaInventory()} />
-                       </AppModal>
-                  </div>
+                       </AppModal></td>
                 </tr>
               </tbody>
      </Table>

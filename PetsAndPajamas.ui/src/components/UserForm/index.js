@@ -68,7 +68,7 @@ class UserForm extends Component {
         <Form.Group controlId="state">
             <Form.Label>State</Form.Label>
               <Form.Control as="select" onChange={this.handleChange} value={this.state.state} required >
-                <option value="" selected disabled hidden>Choose state</option>
+                <option value="" defaultValue disabled hidden>Choose state</option>
                 <option>AL</option>
                 <option>AK</option>
                 <option>AS</option>
