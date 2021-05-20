@@ -105,7 +105,7 @@ class CheckoutForm extends React.Component {
             <Form.Group controlId="paymentType">
               <Form.Label>Payment Type</Form.Label>
               <Form.Control as="select" onChange={this.handleChange} value={this.state.paymentType} required>
-                <option value="" selected disabled hidden>Choose card type</option>
+                <option value="" defaultValue disabled hidden>Choose card type</option>
                 <option>Visa</option>
                 <option>Mastercard</option>
                 <option>American Express</option>
@@ -120,7 +120,7 @@ class CheckoutForm extends React.Component {
             <Form.Group as={Col} controlId="expMonth">
               <Form.Label>Expiration Month</Form.Label>
               <Form.Control as="select" onChange={this.handleChange} value={this.state.expMonth} required>
-                <option value="" selected disabled hidden>Month</option>
+                <option value="" defaultValue disabled hidden>Month</option>
                 <option>01</option>
                 <option>02</option>
                 <option>03</option>
@@ -138,7 +138,7 @@ class CheckoutForm extends React.Component {
             <Form.Group as={Col} controlId="expYear">
             <Form.Label>Expiration Year</Form.Label>
               <Form.Control as="select" onChange={this.handleChange} value={this.state.expYear} required>
-                <option value="" selected disabled hidden>Year</option>
+                <option value="" defaultValue disabled hidden>Year</option>
                 <option>2021</option>
                 <option>2022</option>
                 <option>2023</option>
@@ -168,7 +168,7 @@ class CheckoutForm extends React.Component {
             <Form.Group as={Col} controlId="shipState">
             <Form.Label>State</Form.Label>
               <Form.Control as="select" onChange={this.handleChange} value={this.state.state} required >
-                <option value="" selected disabled hidden>Choose state</option>
+                <option value="" defaultValue disabled hidden>Choose state</option>
                 <option>AL</option>
                 <option>AK</option>
                 <option>AS</option>

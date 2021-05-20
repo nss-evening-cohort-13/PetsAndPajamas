@@ -41,7 +41,7 @@ class PastOrders extends Component {
     return (
       <>
       <h3>Past Orders</h3>
-      <Table className="fixed-header" striped bordered hover size="sm">
+      <Table striped bordered hover size="sm">
                     <thead className="past-order-table">
                         <tr>
                         <th>Order No.</th>

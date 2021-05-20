@@ -25,6 +25,7 @@ namespace PetsAndPajamas.DataAccess
                                 on pat.Id = p.PajamaTypeId
                             join PetType pet
                                 on pet.Id = p.PetTypeId
+                            WHERE p.IsActive = 'true'
 							order by p.DateCreated desc";
 
             using var db = new SqlConnection(ConnectionString);

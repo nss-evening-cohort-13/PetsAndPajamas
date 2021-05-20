@@ -3,3 +3,24 @@
     text-align: left;
     display: inline-block;
 }
+
+.ship-queue-table-body {
+    display: block;
+    height: 150px;
+    overflow: auto;
+    width: 100%;
+}
+
+.ship-queue-table {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.ship-queue-table-body td {
+    width: 7vw;
+}
+
+.ship-queue-table th {
+    width: 7vw;
+}
