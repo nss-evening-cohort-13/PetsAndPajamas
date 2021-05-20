@@ -5,7 +5,7 @@ export default class AccordionCheckbox extends React.Component {
     const { category, quantity, filterProducts } = this.props;
     return (
             <div className="checkbox-div">
-            <input type="checkbox" className="single-checkbox" value={category.type} onChange={(e) => filterProducts(e)}></input>
+            <input type="checkbox" className="single-checkbox accordion-hover" value={category.type} onChange={(e) => filterProducts(e)}></input>
             <label>{category.type} ({quantity})</label>
             </div>
     );
