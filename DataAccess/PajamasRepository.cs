@@ -1,67 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using PetsAndPajamas.Models;
-using Dapper;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-
-namespace PetsAndPajamas.DataAccess
-{
-    public class PajamasRepository
-    {
-        readonly string ConnectionString;
-
-        public PajamasRepository(IConfiguration config)
-        {
-            ConnectionString = config.GetConnectionString("PetsAndPajamas");
-        }
-
-        public IEnumerable<Pajama> GetNew()
-        {
-            var sql = @"select top 20 * from Pajama p
-                            join PajamaType pat
-                                on pat.Id = p.PajamaTypeId
-                            join PetType pet
-                                on pet.Id = p.PetTypeId
-							order by p.DateCreated desc";
-
-            using var db = new SqlConnection(ConnectionString);
-
-            var pajamas = db.Query<Pajama, PajamaType, PetType, Pajama>(sql,
-                (pajama, pajamaType, petType) =>
-                {
-                    pajama.PajamaType = pajamaType;
-                    pajama.PetType = petType;
-
-                    return pajama;
-                }, splitOn: "Id");
-            return pajamas;
-        }
-
-        public IEnumerable<Pajama> GetAll()
-        {
-            var sql = @"select * from Pajama p
-                            left join PajamaType pat
-                                on pat.Id = p.PajamaTypeId
-                            left join PetType pet
-                                on pet.Id = p.PetTypeId";
-
-            using var db = new SqlConnection(ConnectionString);
-
-            var pajamas = db.Query<Pajama, PajamaType, PetType, Pajama>(sql,
-                (pajama, pajamaType, petType) =>
-                {
-                    pajama.PajamaType = pajamaType;
-                    pajama.PetType = petType;
-
-                    return pajama;
-                }, splitOn: "Id");
-            return pajamas;
-=======
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -158,51 +95,6 @@ namespace PetsAndPajamas.DataAccess
                         where pet.Type = 'Cat'
                         AND p.Inventory > 0
                         AND p.IsActive = 'true'";
-
-            using var db = new SqlConnection(ConnectionString);
-
-            var pajamas = db.Query<Pajama, PajamaType, PetType, Pajama>(sql,
-                (pajama, pajamaType, petType) =>
-                {
-                    pajama.PajamaType = pajamaType;
-                    pajama.PetType = petType;
-
-                    return pajama;
-                }, splitOn: "Id");
-            return pajamas;
->>>>>>> ef73fecc1698cbef6707ef0b04c85e6c45a6a369
-        }
-
-        public IEnumerable<Pajama> GetAllDogPajamas()
-        {
-            var sql = @"select * from Pajama p
-	                        left join PajamaType pat
-                                on pat.Id = p.PajamaTypeId
-                            left join PetType pet
-                                on pet.Id = p.PetTypeId
-                        where pet.Type = 'Dog' AND p.Inventory > 0";
-
-            using var db = new SqlConnection(ConnectionString);
-
-            var pajamas = db.Query<Pajama, PajamaType, PetType, Pajama>(sql,
-                (pajama, pajamaType, petType) =>
-                {
-                    pajama.PajamaType = pajamaType;
-                    pajama.PetType = petType;
-
-                    return pajama;
-                }, splitOn: "Id");
-            return pajamas;
-        }
-
-        public IEnumerable<Pajama> GetAllCatPJs()
-        {
-            var sql = @"select * from Pajama p
-	                        left join PajamaType pat
-                                on pat.Id = p.PajamaTypeId
-                            left join PetType pet
-                                on pet.Id = p.PetTypeId
-                        where pet.Type = 'Cat' AND p.Inventory > 0";
 
             using var db = new SqlConnection(ConnectionString);
 
@@ -312,3 +204,5 @@ namespace PetsAndPajamas.DataAccess
         }
     }
 }
+
+

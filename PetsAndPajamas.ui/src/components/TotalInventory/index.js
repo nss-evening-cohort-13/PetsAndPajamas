@@ -19,6 +19,16 @@ export default class TotalInventory extends Component {
       }));
     }
 
+    handleSubmit = (e) => {
+      e.preventDefault();
+
+      pajamaData.updatePajama(this.pajama.id, this.state)
+        .then(() => {
+          this.props.onSubmit();
+        });
+      this.props.toggle();
+    }
+
     renderPajamaInventory = () => this.state.pajamas.map((pajama) => <tr key={pajama.id}>
         <img src={pajama.image} alt='' className='product-image' />
         <td>{pajama.title}</td>
@@ -28,7 +38,7 @@ export default class TotalInventory extends Component {
         id={pajama.id}
         pajama={pajama}
         >
-          <AddProductForm pajama={pajama} onSubmit={() => this.getAllPajamaInventory()} />
+          <AddProductForm pajama={pajama} />
         </AppModal></td>
       </tr>)
 
