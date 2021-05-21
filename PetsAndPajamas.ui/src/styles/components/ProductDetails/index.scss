@@ -1,0 +1,21 @@
+.product-detail-header {
+ background-color: $sixth;
+ color: $favColor;
+}
+
+.pajama-in-stock {
+  color: green;
+  font-weight: bold;
+}
+
+.pajama-detail-img {
+  max-width: 30%;
+  max-height: 50vh;
+}
+
+.product-detail-container {
+  border-top: solid black 1px;
+  border-bottom: solid black 1px;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
