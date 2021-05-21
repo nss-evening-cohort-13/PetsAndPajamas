@@ -39,9 +39,9 @@ class PastOrders extends Component {
 
   render() {
     return (
-      <>
-      <h3>Past Orders</h3>
-      <Table striped bordered hover size="sm">
+      <div className="dashboard-card">
+      <h3 className="dashboard-card-title">Past Orders</h3>
+      <Table striped hover size="sm">
                     <thead className="past-order-table">
                         <tr>
                         <th>Order No.</th>
@@ -54,7 +54,7 @@ class PastOrders extends Component {
                       {this.renderCompletedOrders()}
                     </tbody>
                 </Table>
-                </>
+                </div>
     );
   }
 }

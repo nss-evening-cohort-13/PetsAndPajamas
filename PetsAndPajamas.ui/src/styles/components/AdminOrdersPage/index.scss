@@ -1,0 +1,66 @@
+.admin-orders-page {
+  background-color: $sixth;
+}
+
+.dashboard-card {
+  background-color: white;
+  border-radius: 7px;
+  margin-top: 1.5%;
+  padding: 1%;
+  margin-bottom: 2%;
+}
+
+.total-sales-card {
+  width: 120%;
+  margin-top: 2%;
+  height: 93%;
+  display: flex;
+}
+
+.dashboard-title {
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgb(83, 83, 83);
+  font-size: 120%;
+}
+
+.dashboard-card-title {
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgb(83, 83, 83);
+  text-align: left;
+}
+
+.large-reporting {
+  font-weight: 800;
+  font-size: 375%;
+  font-family: $bodyFont;
+}
+
+.small-reporting {
+  font-weight: 600;
+  font-size: 200%;
+  font-family: $bodyFont;
+}
+
+.past-order-table th {
+  width: 25vw;
+  border: none;
+}
+
+.past-order-table {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.past-order-table-body {
+  display: block;
+  height: 30vh;
+  overflow: auto;
+  width: 100%;
+}
+
+.past-order-table-body td {
+  width: 25vw;
+}

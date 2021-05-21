@@ -2,25 +2,26 @@
     background-color: white;
     text-align: left;
     display: inline-block;
-}
-
-.ship-queue-table-body {
-    display: block;
-    height: 150px;
-    overflow: auto;
-    width: 100%;
+    width: 60%;
+    margin-bottom: 1%;
 }
 
 .ship-queue-table {
     display: block;
-    height: 100%;
+}
+
+.ship-queue-table-body {
+    display: block;
+    height: 20vh;
+    overflow: auto;
     width: 100%;
 }
 
 .ship-queue-table-body td {
-    width: 7vw;
+    width: 20vw;
 }
 
 .ship-queue-table th {
-    width: 7vw;
+    width: 20vw;
+    border: none;
 }
