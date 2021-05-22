@@ -32,7 +32,7 @@ class MyNavbar extends Component {
           <Collapse isOpen={isOpen} navbar>
             <Nav className='mr-auto' navbar>
             <NavbarBrand>
-                <img className='navbar-logo' src='https://i.imgur.com/YWID0CA.png' alt='logo'></img>
+                <Link to='/'><img className='navbar-logo' src='https://i.imgur.com/YWID0CA.png' alt='logo' ></img></Link>
               </NavbarBrand>
               <NavItem>
                 <Link className="mt-1 mr-3 nav-link navbar-links nav-font" to='/about'>About Us</Link>
