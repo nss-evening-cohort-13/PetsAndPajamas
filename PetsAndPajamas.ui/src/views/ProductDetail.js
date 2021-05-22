@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Spinner } from 'reactstrap';
 import Select from 'react-select';
 import firebase from 'firebase';
 import axios from 'axios';
@@ -129,11 +129,13 @@ class ProductDetail extends Component {
     return (
       <>
       { loading ? (
-        <div><h2>Loading...</h2></div>
+        <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
       ) : (
       <div>
-          <h1 className='m-5'>{thisPajama.title}</h1>
-          <div className='m-5 d-flex column-wrap justify-content-center'>
+          <h1 className='product-detail-header'>{thisPajama.title}</h1>
+          <div className='product-detail-container m-5 d-flex column-wrap justify-content-center'>
           <img className='pajama-detail-img' src={thisPajama.image} alt={thisPajama.title}></img>
           <div className='w-50 ml-5 mt-5'>
           <p>{thisPajama.description}</p>
@@ -156,7 +158,7 @@ class ProductDetail extends Component {
             )
               : <><p className='mb-2'>Quantity</p>
               <div className='d-flex justify-content-center'>
-              <Select className='w-50'
+              <Select className='w-25'
                 options={options}
                 onChange={(e) => this.setState({ quantity: e.value })}
                 label='Quantity'/>

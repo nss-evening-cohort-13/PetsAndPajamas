@@ -14,12 +14,14 @@ class PastOrderDetails extends Component {
   render() {
     const { order } = this.props;
     return (
-      <>
-      <h3>Customer: {order.userFirstName} {order.userLastName}</h3>
-      <h3>Order number: {order.orderId}</h3>
-      <h3>Order date: {moment(order.newOrderDate).format('MMMM D, YYYY')}</h3>
-      <h3>Ship date: {moment(order.newShipDate).format('MMMM D, YYYY')}</h3>
-      <h3>Status: {moment(order.newShipDate).isBefore() ? 'Completed' : 'Pending'}</h3>
+      <div className="past-order-details-div">
+        <div className="info-div">
+      <h3 className="details-info"><strong>Customer:</strong> {order.userFirstName} {order.userLastName}</h3>
+      <h3 className="details-info"><strong>Order number:</strong> {order.orderId}</h3>
+      <h3 className="details-info"><strong>Order date:</strong> {moment(order.newOrderDate).format('MMMM D, YYYY')}</h3>
+      <h3 className="details-info"><strong>Ship date:</strong> {moment(order.newShipDate).format('MMMM D, YYYY')}</h3>
+      <h3 className="details-info"><strong>Status:</strong> {moment(order.newShipDate).isBefore() ? 'Completed' : 'Pending'}</h3>
+        </div>
       <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
@@ -33,7 +35,7 @@ class PastOrderDetails extends Component {
                       {this.renderOrderDetails()}
                     </tbody>
                 </Table>
-                </>
+                </div>
     );
   }
 }

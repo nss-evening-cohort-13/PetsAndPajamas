@@ -65,7 +65,7 @@ class Orders extends Component {
 
   render() {
     return (
-      <>
+      <div className="admin-orders-page">
          <Container fluid>
                 <Row>
                     <Col xs={-1} id="sidebar-wrapper">
@@ -74,17 +74,18 @@ class Orders extends Component {
                     <Col xs={0} id="page-content-wrapper">
                       <div className="d-flex col-wrap justify-content-around">
                     <div className="w-25 m-3">
-        <Card>
+        <Card className="dashboard-card total-sales-card">
           <CardBody>
-        <CardTitle>Total Sales: ${this.totalSales()}</CardTitle>
+        <CardTitle className="dashboard-title mt-2">Total Sales</CardTitle>
+        <CardSubtitle className="large-reporting">${this.totalSales()}</CardSubtitle>
         <div className="d-flex row-wrap justify-content-center">
           <div className="m-3">
-        <CardSubtitle className="mb-2">This Month</CardSubtitle>
-        <CardSubtitle>${this.monthlySales()}</CardSubtitle>
+        <CardSubtitle className="mb-2 dashboard-title mt-3">This Month</CardSubtitle>
+        <CardSubtitle className="small-reporting">${this.monthlySales()}</CardSubtitle>
         </div>
         <div className="m-3">
-        <CardSubtitle className="mb-2">Average Per Item</CardSubtitle>
-        <CardSubtitle>${this.avgPerItem()}</CardSubtitle>
+        <CardSubtitle className="mb-2 dashboard-title mt-3">Average Per Item</CardSubtitle>
+        <CardSubtitle className="small-reporting">${this.avgPerItem()}</CardSubtitle>
         </div>
         </div>
         </CardBody>
@@ -97,7 +98,7 @@ class Orders extends Component {
                 </Row>
             </Container>
 
-      </>
+      </div>
     );
   }
 }
