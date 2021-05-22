@@ -7,7 +7,8 @@ import AccordianCheckbox from '../AccordionCheckbox';
 
 export default class FilterAccordion extends React.Component {
     state = {
-      categories: []
+      categories: [],
+      categoryToggled: true
     }
 
     componentDidMount() {
@@ -28,15 +29,21 @@ export default class FilterAccordion extends React.Component {
       return group.length;
     }
 
+    togglePlusMinus = () => {
+      this.setState({
+        categoryToggled: !this.state.categoryToggled
+      });
+    }
+
     render() {
       const { categories } = this.state;
       const { filterProducts } = this.props;
       return (
         <>
             <Accordion defaultActiveKey="0">
-                <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="0">
-                        Category <i className="fas fa-plus"></i>
+                <Card className="product-accordion">
+                    <Accordion.Toggle as={Card.Header} className="accordion-header" eventKey="0" onClick={this.togglePlusMinus}>
+                        Category {this.state.categoryToggled ? <i className="fas fa-minus accordion-hover"></i> : <i className="fas fa-plus accordion-hover"></i>}
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                         <Card.Body className="checkboxes-container">

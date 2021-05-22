@@ -49,10 +49,9 @@ export default class DogStore extends React.Component {
 
   render() {
     return (
-      <div className="dog-store-page">
-        <h1>Dog Pajamas</h1>
-        <div className="dog-store-body">
-        </div>
+      <div className="store-page">
+        <h1 className="store-category-h1-dog">Dog Pajamas</h1>
+        <div className="store-body">
         <div className="accordion-container">
            <FilterAccordion pajamas={this.state.pajamas} filterProducts={this.filterProducts} />
          </div>
@@ -60,6 +59,7 @@ export default class DogStore extends React.Component {
           {this.state.isChecked.length === 0
             ? this.state.pajamas.map((pajama) => <ProductCard key={pajama.id} pajama={pajama} />)
             : this.state.isChecked.map((pajama) => <ProductCard key={pajama.id} pajama={pajama} />)}
+        </div>
         </div>
       </div>
     );
