@@ -114,7 +114,7 @@ export default class ShoppingCart extends React.Component {
                 {renderPajamas}
             </tbody>
             </Table>
-            <h3 className="cart-total">Cart Total: ${renderTotal}</h3>
+            <h3 className="cart-total">Cart Total: ${renderTotal.toFixed(2)}</h3>
               { this.props.userId === undefined ? <button className='btn btn-secondary mt-2'
                                                           onClick={this.loginClickEvent}>
                                                           Login to purchase products
