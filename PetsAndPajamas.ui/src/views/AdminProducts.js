@@ -28,7 +28,7 @@ class AdminProducts extends Component {
                       <Sidebar />
                     </Col>
                     <Col xs={10} id="page-content-wrapper">
-                    <AppModal className="add-pajama-button"
+                    <AppModal
                   title={'Add a Pajama'}>
         <AddProductForm handleUpdate={() => this.getAllPajamaInventory()} />
         </AppModal>
