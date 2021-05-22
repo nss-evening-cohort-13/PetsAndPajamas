@@ -18,7 +18,7 @@ C#, .Net, Dapper, Sql Server, React, SCSS, Firebase, React Bootstrap
 
 ## Details
 
-![Image](https://i.imgur.com/YmNeLel.png)
+![Image](https://i.imgur.com/TOWnrII.png)
 
 Upon visiting Pets and Pajamas, a user is able to browse the available products and view information about the store. In order to purchase a product,
 the user must create an account. After an account is created, the user is able to add products to their cart, purchase the products in their cart, and
@@ -29,4 +29,4 @@ view and update their profile information.
 An Admin user is able to add and update products and view sales and order information. The Admin user can view total sales, all past orders, orders 
 that need to be shipped, average price per product, and sales for the current month.
 
-![Image](https://i.imgur.com/rDHrRkE.png)
+![Image](https://i.imgur.com/Kzk6vhl.png)
