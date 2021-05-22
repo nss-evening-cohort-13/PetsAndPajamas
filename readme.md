@@ -24,9 +24,10 @@ Upon visiting Pets and Pajamas, a user is able to browse the available products 
 the user must create an account. After an account is created, the user is able to add products to their cart, purchase the products in their cart, and
 view and update their profile information.
 
-![Image](https://i.imgur.com/SmLhnWo.gif)
+![Image](https://i.imgur.com/t6WDCl1.gif)
 
 An Admin user is able to add and update products and view sales and order information. The Admin user can view total sales, all past orders, orders 
 that need to be shipped, average price per product, and sales for the current month.
 
 ![Image](https://i.imgur.com/Kzk6vhl.png)
+
