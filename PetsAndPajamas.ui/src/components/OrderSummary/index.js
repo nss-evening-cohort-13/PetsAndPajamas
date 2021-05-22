@@ -40,7 +40,7 @@ export default class OrderSummary extends React.Component {
               {renderPajamas}
             </tbody>
           </Table>
-          <h3 className="total-line">Amount Due: ${renderTotal}</h3>
+          <h3 className="total-line">Amount Due: ${renderTotal.toFixed(2)}</h3>
         </div>
     );
   }

@@ -70,7 +70,10 @@ export default class ShoppingCart extends React.Component {
     let renderPajamas;
     if (order && Object.keys(order).length !== 0) {
       renderPajamas = order.orderPajamas.map((p) => <tr key={p.id} >
-            <td className="product-td"><img src={p.image} alt={p.description} className="summary-img"></img><p>{p.title}</p></td>
+            <td className="cart-image">
+            <img src={p.image} alt='' className="summary-img"></img>
+            </td>
+            <td>{p.title}</td>
             <td>{p.size}</td>
             <td>{p.price}</td>
             <td>{p.pajamaQuantity}</td>
@@ -96,9 +99,10 @@ export default class ShoppingCart extends React.Component {
     {order && order.orderPajamas && order.orderPajamas.length
       ? <div className="cartSummary">
             <h1>Shopping Cart Summary</h1>
-            <Table size="lg">
-                <thead>
+            <Table className="shopping-cart-fixed-header">
+                <thead className="shopping-cart-header">
                     <tr>
+                        <th></th>
                         <th>Item</th>
                         <th>Size</th>
                         <th>Unit Price</th>
@@ -106,11 +110,11 @@ export default class ShoppingCart extends React.Component {
                         <th>Item Total</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="shopping-cart-body shopping-cart-table">
                 {renderPajamas}
             </tbody>
             </Table>
-            <h3 className="cart-total">Cart Total: ${renderTotal}</h3>
+            <h3 className="cart-total">Cart Total: ${renderTotal.toFixed(2)}</h3>
               { this.props.userId === undefined ? <button className='btn btn-secondary mt-2'
                                                           onClick={this.loginClickEvent}>
                                                           Login to purchase products

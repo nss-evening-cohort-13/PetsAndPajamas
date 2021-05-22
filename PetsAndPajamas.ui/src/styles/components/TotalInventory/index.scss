@@ -34,11 +34,6 @@
   font-weight: bold;
 }
 
-.inventory-table th,
-.inventory-table td {
-  padding: 12px 15px;
-}
-
 .inventory-table-body tbody tr {
   border-bottom: 1px solid #dddddd;
 }
@@ -52,5 +47,5 @@
 }
 
 .btn.btn-secondary {
-  background-color: #e4745e;
+  background-color: $fourth;
 }
